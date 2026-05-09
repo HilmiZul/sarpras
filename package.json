@@ -1,0 +1,23 @@
+{
+  "name": "sarpras",
+  "version": "1.0-dev",
+  "author": "Zul Hilmi",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "bootstrap": "^5.3.8",
+    "bootstrap-icons": "^1.13.1",
+    "nuxt": "^3.21.2",
+    "pocketbase": "^0.26.8",
+    "vue": "^3.5.32",
+    "vue-router": "^5.0.4",
+    "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz"
+  }
+}
