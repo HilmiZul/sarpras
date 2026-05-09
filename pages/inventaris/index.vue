@@ -3,7 +3,7 @@
     <div class="card-header fw-bold bg-transparent">
       INVENTARIS
       <span v-if="role == 'sarpras'" class="float-end">
-        <NuxtLink to="/inventaris/tambah" class="btn btn-primary btn-sm me-2"><i class="bi bi-plus"></i> Tambah baru</NuxtLink>
+        <NuxtLink to="/inventaris/tambah" class="btn btn-primary me-2"><i class="bi bi-plus"></i> Tambah baru</NuxtLink>
       </span>
       <div class="fw-normal text-muted">Aset dan Bahan</div>
     </div>

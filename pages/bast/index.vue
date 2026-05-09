@@ -3,7 +3,7 @@
     <div class="card-header fw-bold bg-transparent">
       BERITA ACARA
       <span v-if="role == 'sarpras'" class="float-end">
-        <button class="btn btn-primary btn-sm me-2" data-bs-toggle="modal" data-bs-target="#baru-ba"><i class="bi bi-plus"></i> Buat baru</button>
+        <button class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#baru-ba"><i class="bi bi-plus"></i> Buat baru</button>
       </span>
       <div class="fw-normal text-muted">Riwayat dan Arsip Berita Acara</div>
 

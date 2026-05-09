@@ -3,7 +3,7 @@
     <div class="card-header fw-bold bg-transparent">
       BARANG
       <span v-if="role == 'sarpras'" class="float-end">
-        <NuxtLink to="/barang" class="btn btn-dark btn-sm me-2">Kembali</NuxtLink>
+        <NuxtLink to="/inventaris" class="btn btn-dark me-2">Kembali</NuxtLink>
       </span>
       <div class="fw-normal text-muted">Tambah baru</div>
     </div>
