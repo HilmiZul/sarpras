@@ -1,9 +1,9 @@
 <template>
   <div class="card mt-2">
     <div class="card-header fw-bold bg-transparent">
-      BARANG
+      <span class="fs-5">ASET / TAMBAH</span>
       <span v-if="role == 'sarpras'" class="float-end">
-        <NuxtLink to="/inventaris" class="btn btn-dark me-2">Kembali</NuxtLink>
+        <NuxtLink to="/inventaris/aset" class="btn btn-dark me-2">Kembali</NuxtLink>
       </span>
       <div class="fw-normal text-muted">Tambah baru</div>
     </div>
@@ -35,7 +35,7 @@
             </div>
 
             <button class="btn btn-primary">Kirim</button>
-            <NuxtLink to="/barang" class="btn btn-outline-dark ms-2">Kembali</NuxtLink>
+            <NuxtLink to="/inventaris/aset" class="btn btn-outline-dark ms-2">Kembali</NuxtLink>
           </form>
 
         </div>

@@ -1,11 +1,11 @@
 <template>
   <div class="card mt-2">
     <div class="card-header fw-bold bg-transparent">
-      <span class="fs-5">ASET</span>
+      <span class="fs-5">BAHAN</span>
       <span v-if="role == 'sarpras'" class="float-end">
-        <NuxtLink to="/inventaris/tambah" class="btn btn-primary me-2"><i class="bi bi-plus"></i> Tambah baru</NuxtLink>
+        <NuxtLink to="/inventaris/bahan/tambah" class="btn btn-primary me-2"><i class="bi bi-plus"></i> Tambah baru</NuxtLink>
       </span>
-      <div class="fw-normal text-muted">Inventaris Aset</div>
+      <div class="fw-normal text-muted">Inventaris Bahan</div>
     </div>
 
     <div class="card-body">

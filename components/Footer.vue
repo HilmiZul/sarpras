@@ -1,7 +1,7 @@
 <template>
   <footer class="text-center text-muted m-4 p-2">
     <div>v{{ version }}</div>
-    &copy; 2026 - {{ currYear }}. Sarpras SMKN 4 Tasikmalaya.
+    &copy; 2026 - {{ currYear }}. Cooked by {{ author }}.
   </footer>
 </template>
 
@@ -11,6 +11,7 @@ import { useRuntimeConfig } from 'nuxt/app';
 const currYear = new Date().getFullYear()
 const config = useRuntimeConfig()
 const version = config.public.appVersion
+const author = config.public.author
 </script>
 
 

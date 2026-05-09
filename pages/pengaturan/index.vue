@@ -1,7 +1,7 @@
 <template>
   <div class="card mt-2">
     <div class="card-header fw-bold bg-transparent">
-      PENGATURAN
+      <span class="fs-5">PENGATURAN</span>
       <div class="fw-normal text-muted">Aplikasi dan Personalisasi</div>
     </div>
 
@@ -30,7 +30,7 @@
               <form @submit.prevent="updatePengaturanJabatan" >
                 <div class="mb-4">
                   <label for="kepala_sekolah" class="fw-bold mb-2">Kepala Sekolah</label>
-                  <input v-model="form.kepala_sekolah" type="text" id="kepala_sekolah" placeholder="Nama lengkap kepala sekolah dengan gelar" class="form-control form-control-lg" autofocus required />
+                  <input v-model="form.kepala_sekolah" type="text" id="kepala_sekolah" placeholder="Nama lengkap kepala sekolah dengan gelar" class="form-control form-control-lg" required />
                 </div>
 
                 <div class="mb-4">

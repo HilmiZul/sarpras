@@ -1,7 +1,7 @@
 <template>
   <div class="card mt-2">
     <div class="card-header fw-bold bg-transparent">
-      KIB
+      <span class="fs-5">KIB</span>
       <div class="fw-normal text-muted">Kartu Inventaris Barang</div>
     </div>
 

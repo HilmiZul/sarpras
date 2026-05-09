@@ -20,9 +20,17 @@
               </div>
             </li>
 
-            <li class="nav-item">
-              <NuxtLink class="nav-link active" :activeClass="activeClass" to="/inventaris">INVENTARIS</NuxtLink>
+            <!-- <li class="nav-item"> -->
+            <!--   <NuxtLink class="nav-link active" :activeClass="activeClass" to="/inventaris">INVENTARIS</NuxtLink> -->
+            <!-- </li> -->
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" :activeClass="activeClass" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">INVENTARIS</a>
+              <div class="dropdown-menu mt-3 rounded-0">
+                <NuxtLink class="nav-link" :activeClass="activeClass" to="/inventaris/aset">Aset</NuxtLink>
+                <NuxtLink class="nav-link" :activeClass="activeClass" to="/inventaris/bahan">Bahan</NuxtLink>
+              </div>
             </li>
+
 
             <li v-if="role == 'sarpras'" class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" :activeClass="activeClass" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">LAPORAN</a>
