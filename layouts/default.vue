@@ -85,4 +85,8 @@ table.table thead th {
 .hand {
   cursor: pointer;
 }
+
+textarea {
+  field-sizing: content;
+}
 </style>

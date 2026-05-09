@@ -12,11 +12,11 @@
             <li v-if="role == 'sarpras'" class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" :activeClass="activeClass" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">MASTER</a>
               <div class="dropdown-menu mt-3 rounded-0">
+                <NuxtLink class="nav-link" :activeClass="activeClass" to="/master/tahun-pengadaan">Tahun Pengadaan</NuxtLink>
                 <NuxtLink class="nav-link" :activeClass="activeClass" to="/master/unit-kerja">Unit Kerja</NuxtLink>
-                <NuxtLink class="nav-link" :activeClass="activeClass" to="/master/rincian-aset">Rincian Aset</NuxtLink>
+                <NuxtLink class="nav-link" :activeClass="activeClass" to="/master/rincian-aset">Rincian Barang</NuxtLink>
                 <NuxtLink class="nav-link" :activeClass="activeClass" to="/master/sumber-aset">Sumber Perolehan</NuxtLink>
                 <NuxtLink class="nav-link" :activeClass="activeClass" to="/master/satuan-aset">Satuan</NuxtLink>
-                <NuxtLink class="nav-link" :activeClass="activeClass" to="/master/merek-aset">Merek</NuxtLink>
               </div>
             </li>
 

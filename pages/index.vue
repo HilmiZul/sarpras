@@ -1,7 +1,7 @@
 <template>
   <div class="card mt-2">
     <div class="card-body">
-      <h2>hola, <strong>{{ unit.pemegang }} / {{ unit.jabatan_unit_kerja }}</strong>!</h2>
+      <h5>hola, <strong>{{ unit.pemegang }} / {{ unit.jabatan_unit_kerja }}</strong>!</h5>
     </div>
   </div>
 </template>

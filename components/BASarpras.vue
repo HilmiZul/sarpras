@@ -167,9 +167,3 @@
   </div>
 </template>
 
-
-<style scoped>
-li > .nav-link.active {
-  background-color: #dfdfdf
-}
-</style>

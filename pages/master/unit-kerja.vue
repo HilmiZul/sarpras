@@ -1,7 +1,7 @@
 <template>
   <div class="card mt-2">
     <div class="card-header fw-bold bg-transparent">
-      MASTER UNIT KERJA
+      UNIT KERJA
       <span class="float-end">
         <button @click="() => isSuccess = false" class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#tambah-unit-kerja"><i class="bi bi-plus"></i> Tambah</button>
       </span>
@@ -164,7 +164,7 @@
               </div>
 
               <div class="modal-body">
-                Yakin hapus Unit Kerja <strong>{{ formUpdate.ruangan }}</strong>?
+                Yakin hapus Unit Kerja: <strong>{{ formUpdate.ruangan }}</strong>?
               </div>
 
               <div class="modal-footer">
@@ -221,6 +221,7 @@ useHead({
 
 const client = usePbClient()
 const user = usePbUser()
+const role = user?.user.value.role
 const items = ref([])
 const isLoading = ref(true)
 const isSuccess = ref(false)
@@ -244,6 +245,7 @@ const formUpdate = ref({
   "nip_unit_kerja": ""
 })
 
+if(role != 'sarpras') navigateTo('/')
 
 async function getItems(loading=true) {
   isLoading.value = loading

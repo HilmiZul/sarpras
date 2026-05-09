@@ -15,14 +15,6 @@
         </div>
 
         <div class="col-md-1">
-          <select v-model="filter.jenis_aset" name="filterJenisAset" id="filterJenisAset" class="form-select">
-            <option value="">Jenis Aset</option>
-            <option value="aset">Aset</option>
-            <option value="bahan">Bahan</option>
-          </select>
-        </div>
-
-        <div class="col-md-1">
           <select v-model="filter.tahun" name="filterTahun" id="filterTahun" class="form-select">
             <option value="">Tahun</option>
             <option value="2026">2026</option>
