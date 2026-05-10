@@ -1,7 +1,20 @@
-# SARPRAS.
+## ⚠️ Under Development!
 
-Mega side-project Inventarisir Sarpras. Semua aset dan bahan tercatat termasuk pengelola unit kerja.
-Aplikasi ini akan memangkas project KabengRPL yang pernah dibuat.
+Mega side-project Inventaris. Semua aset dan bahan tercatat dan terkelola termasuk unit kerja.
+(Kemungkinan) aplikasi ini akan menghapus project Kabeng.
+
+## Fitur
+
+- Multi role user management
+- Kelola Aset dan Bahan
+- BAST
+  - KCD
+  - Unit Kerja
+- KIB
+- Unit Kerja
+  - Penyebaran aset ke lokasi dalam unit kerja
+  - Peminjaman alat (aset)
+
 
 ## Setup
 
