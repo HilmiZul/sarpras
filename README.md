@@ -1,6 +1,6 @@
 ## ⚠️ Under Development!
 
-Mega side-project Inventaris. Semua aset dan bahan tercatat dan terkelola termasuk unit kerja.
+Another (mega) side-project! Semua aset dan bahan tercatat dan terkelola termasuk unit kerja.
 (Kemungkinan) aplikasi ini akan menghapus project Kabeng.
 
 ## Fitur
@@ -14,6 +14,7 @@ Mega side-project Inventaris. Semua aset dan bahan tercatat dan terkelola termas
 - Unit Kerja
   - Penyebaran aset ke lokasi dalam unit kerja
   - Peminjaman alat (aset)
+  - KIR
 
 
 ## Setup
