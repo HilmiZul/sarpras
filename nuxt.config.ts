@@ -32,7 +32,7 @@ export default defineNuxtConfig({
       author: pkg.author,
 		},
 	},
-  vite: { // these options are passed to ViteJS
+  vite: {
     assetsInclude: ['**/*.xlsx'], // xlsx file should be treated as assets
 
     // plugins: [

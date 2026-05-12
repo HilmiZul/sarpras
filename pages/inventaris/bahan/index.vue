@@ -1,7 +1,7 @@
 <template>
   <div class="card mt-2">
     <div class="card-header fw-bold bg-transparent">
-      <span class="fs-5">BAHAN</span>
+      <span class="fs-5">{{ route.path.toUpperCase().replace('/', ' ') }}</span>
       <span v-if="role == 'sarpras'" class="float-end">
         <NuxtLink to="/inventaris/bahan/tambah" class="btn btn-primary me-2"><i class="bi bi-plus"></i> Tambah baru</NuxtLink>
       </span>
@@ -188,6 +188,7 @@ useHead({
 });
 const user = usePbUser();
 const role = user?.user.value.role;
+const route = useRoute()
 
 const filter = ref({
   keyword: "",

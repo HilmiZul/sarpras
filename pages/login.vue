@@ -2,7 +2,7 @@
   <div class="row mt-5 justify-content-center">
     <div class="col-md-3">
 
-      <div class="card border-0 rounded-3 shadow-lg">
+      <div class="card rounded-4">
         <div class="card-body p-4">
           <form @submit.prevent="handleLogin">
             <div class="mb-4">
@@ -21,7 +21,7 @@
             </div>
 
             <div class="d-grid gap-2 mt-5">
-              <button :disabled="isLoading" class="btn btn-outline-primary btn-lg p-3">
+              <button :disabled="isLoading" class="btn btn-dark btn-lg p-3">
                 <span v-if="isLoading">tunggu bentar</span>
                 <span v-else><i class="bi bi-send"></i> Masuk</span>
               </button>

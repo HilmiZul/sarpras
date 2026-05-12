@@ -3,8 +3,9 @@
     <div class="container-fluid martop">
       <div class="row justify-content-center">
         <div class="col-md-3">
-          <div class="text-center p-3 fs-3 fw-bold bg-primary text-white rounded-3">
-            SARPRAS<span class="text-warning">.</span> <div class="fw-normal small">SMKN 4 Tasikmalaya</div>
+          <div class="text-center p-3  fw-bold bg-primary text-white rounded-4">
+            <span class="fs-3">SARPRAS</span> <sub class="text-warning">&bull;</sub> 
+            <div class="fw-normal">SMKN 4 Tasikmalaya</div>
           </div>
         </div>
         <div class="col-md-12">
@@ -35,11 +36,13 @@ html, body {
 }
 
 .martop {
-  margin-top: 70px;
+  margin-top: 50px;
 }
 
 .card {
   border-radius: 0;
+  border-color: rgba(127, 127, 127);
+  box-shadow: rgba(127, 127, 127) 3px 3px 0 !important;
 }
 
 table tbody {
@@ -58,7 +61,7 @@ table.table thead th {
 
 .form-control,
 .form-control:focus {
-  border-color: #158cba;
-  box-shadow: #158cba 3px 3px 0 !important;
+  border-color: rgba(127, 127, 127);
+  box-shadow: rgba(127, 127, 127) 3px 3px 0 !important;
 }
 </style>

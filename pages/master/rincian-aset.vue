@@ -1,7 +1,7 @@
 <template>
   <div class="card mt-2">
     <div class="card-header fw-bold bg-transparent">
-      <span class="fs-5">RINCIAN BARANG</span>
+      <span class="fs-5">{{ route.path.toUpperCase().replace('/', ' ').replace('-', ' ') }}</span>
       <span class="float-end">
         <button @click="() => isSuccess = false" class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#tambah-rincian-aset"><i class="bi bi-plus"></i> Tambah</button>
       </span>
@@ -33,8 +33,13 @@
                 </div>
 
                 <div class="mb-4">
-                  <label for="merek" class="mb-2">Merek/Tipe</label>
-                  <textarea v-model="form.merek" id="merek" class="form-control form-control-lg" placeholder="contoh: Krisbow, Apple, BenQ, etc." required></textarea>
+                  <label for="kodering_aset" class="mb-2">Kodering Aset</label>
+                  <input v-model="form.kodering_aset" id="kodering_aset" class="form-control form-control-lg" type="text" placeholder="contoh: 1.2.3.4.5..." required>
+                </div>
+
+                <div class="mb-4">
+                  <label for="nama_rekening_aset" class="mb-2">Kodering Aset</label>
+                  <input v-model="form.nama_rekening_aset" id="nama_rekening_aset" class="form-control form-control-lg" type="text" placeholder="contoh: Umum" required>
                 </div>
 
                 <button class="btn btn-primary"><i class="bi bi-save"></i> Simpan</button>
@@ -55,7 +60,7 @@
           </div>
 
           <div class="col-md-2">
-            <button class="btn btn-primary">Cari</button>
+            <button class="btn btn-dark">Cari</button>
             <button @click="resetItem()" type="reset" class="btn btn-outline-dark ms-2">reset</button>
           </div>
 
@@ -76,6 +81,11 @@
         <div class="fs-5">Pencarian tidak ditemukan.</div>
       </div>
 
+      <div v-else-if="!isLoading && items.totalItems < 1" class="text-center text-muted p-5 fw-bold">
+        <i class="bi bi-database fs-2"></i>
+        <div class="fs-5">Belum Tersedia.</div>
+      </div>
+
       <!-- display list item disini -->
       <div v-else>
         <ul v-for="item in items.items" :key="item.id" class="list-group list-group-flush">
@@ -88,8 +98,8 @@
             <div class="text-muted">Nama Barang</div>
             <div class="fw-bold fs-5 mb-2">{{ item.nama_barang }}</div>
 
-            <div class="text-muted">Merek</div>
-            <div v-if="item.merek" class="fw-bold fs-5">{{ item.merek }}</div>
+            <div class="text-muted">Nama Rekening Aset</div>
+            <div v-if="item.nama_rekening_aset" class="fw-bold fs-5">{{ item.nama_rekening_aset }}</div>
             <div v-else class="text-muted">&#8212;</div>
           </li>
         </ul>
@@ -133,8 +143,13 @@
                   </div>
 
                   <div class="mb-4">
-                    <label for="update_merek" class="mb-2">Merek/Tipe</label>
-                    <textarea v-model="formUpdate.merek" id="update_merek" class="form-control form-control-lg" placeholder="contoh: Krisbow, Apple, BenQ, etc." required></textarea>
+                    <label for="update_kodering_aset" class="mb-2 fw-bold">Kodering Aset</label>
+                    <input v-model="formUpdate.kodering_aset" id="update_kodering_aset" class="form-control form-control-lg" type="text" placeholder="contoh: 1.2.3.4.5..." required>
+                  </div>
+
+                  <div class="mb-4">
+                    <label for="update_nama_rekening_aset" class="mb-2 fw-bold">Nama Rekening Aset</label>
+                    <input v-model="formUpdate.nama_rekening_aset" id="update_nama_rekening_aset" class="form-control form-control-lg" type="text" placeholder="contoh: Umum" required>
                   </div>
 
                   <button class="btn btn-primary"><i class="bi bi-save"></i> Simpan</button>
@@ -185,6 +200,7 @@ useHead({
   desc: "Applikasi Inventaris Aset dan Bahan — SMKN 4 Tasikmalaya."
 })
 
+const route = useRoute()
 const client = usePbClient()
 const user = usePbUser()
 const role = user?.user.value.role
@@ -200,13 +216,15 @@ const isMovingPage = ref(false)
 const form = ref({
   "kode_barang": "",
   "nama_barang": "",
-  "merek": ""
+  "kodering_aset": "",
+  "nama_rekening_aset": "",
 })
 
 const formUpdate = ref({
   "kode_barang": "",
   "nama_barang": "",
-  "merek": ""
+  "kodering_aset": "",
+  "nama_rekening_aset": "",
 })
 
 if(role != 'sarpras') navigateTo('/')
@@ -217,7 +235,7 @@ async function getItems(loading=true) {
 
   let filter = ``
   if(keyword.value) {
-    filter = `kode_barang~"${keyword.value}" || nama_barang~"${keyword.value}" || merek~"${keyword.value}"`
+    filter = `kode_barang~"${keyword.value}" || nama_barang~"${keyword.value}" || nama_rekening_aset~"${keyword.value}"`
     isActiveSearch.value = true
   }
 
@@ -239,7 +257,7 @@ async function loadMore(page, loading=true) {
 
   let filter = ``
   if(keyword.value) {
-    filter = `kode_barang~"${keyword.value}" || nama_barang~"${keyword.value}" || merek~"${keyword.value}"`
+    filter = `kode_barang~"${keyword.value}" || nama_barang~"${keyword.value}" || nama_rekening_aset~"${keyword.value}"`
     isActiveSearch.value = true
   }
 
@@ -275,7 +293,8 @@ async function addNewItem() {
     isSuccess.value = true
     form.value.kode_barang = ''
     form.value.nama_barang = ''
-    form.value.merek = ''
+    form.value.kodering_aset = ''
+    form.value.nama_rekening_aset = ''
 
     getItems(false)
   }

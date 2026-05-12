@@ -1,7 +1,7 @@
 <template>
   <div class="card mt-2">
     <div class="card-header fw-bold bg-transparent">
-      <span class="fs-5">TAHUN PENGADAAN</span>
+      <span class="fs-5">{{ route.path.toUpperCase().replace('/', ' ').replace('-', ' ') }}</span>
       <span class="float-end">
         <button @click="() => isSuccess = false" class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#tambah-tahun"><i class="bi bi-plus"></i> Tambah</button>
       </span>
@@ -45,7 +45,7 @@
           </div>
 
           <div class="col-md-2">
-            <button class="btn btn-primary">Cari</button>
+            <button class="btn btn-dark">Cari</button>
             <button @click="resetItem()" type="reset" class="btn btn-outline-dark ms-2">reset</button>
           </div>
 
@@ -61,12 +61,12 @@
         <hr>
       </div>
 
-      <div v-else-if="!isLoading && isActiveSearch && items.totalItems < 1" class="text-center text-muted p-5 fw-bold">
+      <div v-else-if="!isLoading && isActiveSearch && items?.totalItems < 1" class="text-center text-muted p-5 fw-bold">
         <i class="bi bi-search fs-2"></i>
         <div class="fs-5">Pencarian tidak ditemukan.</div>
       </div>
 
-      <div v-else-if="!isLoading && items.totalItems < 1" class="text-center text-muted p-5 fw-bold">
+      <div v-else-if="!isLoading && items?.totalItems < 1" class="text-center text-muted p-5 fw-bold">
         <i class="bi bi-database fs-2"></i>
         <div class="fs-5">Belum Tersedia.</div>
       </div>
@@ -162,13 +162,14 @@ useHead({
   desc: "Applikasi Inventaris Aset dan Bahan — SMKN 4 Tasikmalaya."
 })
 
+const route = useRoute()
 const client = usePbClient()
 const user = usePbUser()
 const role = user?.user.value.role
 const items = ref([])
 const isLoading = ref(true)
 const isSuccess = ref(false)
-const perPage = 30
+const perPage = 5
 const keyword = ref()
 const id_item = ref()
 const isActiveSearch = ref(false)

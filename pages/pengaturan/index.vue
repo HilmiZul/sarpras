@@ -15,6 +15,10 @@
           <a v-if="role == 'unit'" class="nav-link active" data-bs-toggle="tab" href="#personalisasi" aria-selected="true" role="tab">Personalisasi</a>
           <a v-else class="nav-link" data-bs-toggle="tab" href="#personalisasi" aria-selected="true" role="tab">Personalisasi</a>
         </li>
+
+        <li class="nav-item" role="presentation">
+          <a class="nav-link" data-bs-toggle="tab" href="#password" aria-selected="true" role="tab">Password</a>
+        </li>
       </ul>
 
       <div id="myTabContent" class="tab-content">
@@ -66,13 +70,16 @@
         </div>
 
         <div v-if="role == 'sarpras'" class="tab-pane show" id="personalisasi" role="tabpanel">
-          Ubah password
+          nama dan avatar
         </div>
 
         <div v-if="role == 'unit'" class="tab-pane active show" id="personalisasi" role="tabpanel">
-          Ubah password
+          nama dan avatar
         </div>
 
+        <div class="tab-pane show" id="password" role="tabpanel">
+          Ubah password
+        </div>
       </div>
     </div>
 

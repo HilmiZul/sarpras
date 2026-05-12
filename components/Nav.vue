@@ -14,8 +14,8 @@
               <div class="dropdown-menu mt-3 rounded-0">
                 <NuxtLink class="nav-link" :activeClass="activeClass" to="/master/tahun-pengadaan">Tahun Pengadaan</NuxtLink>
                 <NuxtLink class="nav-link" :activeClass="activeClass" to="/master/unit-kerja">Unit Kerja</NuxtLink>
-                <NuxtLink class="nav-link" :activeClass="activeClass" to="/master/rincian-aset">Rincian Barang</NuxtLink>
-                <NuxtLink class="nav-link" :activeClass="activeClass" to="/master/sumber-aset">Sumber Perolehan</NuxtLink>
+                <NuxtLink class="nav-link" :activeClass="activeClass" to="/master/rincian-aset">Rincian Aset</NuxtLink>
+                <NuxtLink class="nav-link" :activeClass="activeClass" to="/master/sumber-aset">Sumber Aset</NuxtLink>
                 <NuxtLink class="nav-link" :activeClass="activeClass" to="/master/satuan-aset">Satuan</NuxtLink>
               </div>
             </li>

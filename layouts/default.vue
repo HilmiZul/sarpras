@@ -37,6 +37,8 @@ html, body {
 
 .card {
   border-radius: 0;
+  border-color: rgba(127, 127, 127);
+  box-shadow: rgba(127, 127, 127) 3px 3px 0 !important;
 }
 
 table tbody {
@@ -64,14 +66,18 @@ table.table thead th {
 
 .modal .modal-dialog .modal-content {
   border-radius: 0 !important;
+  border-color: rgba(127, 127, 127) !important;
+  box-shadow: rgba(127, 127, 127) 3px 3px 0 !important;
 }
 
 .form-control,
 .form-control:focus,
 .form-select,
 .form-select:focus {
-  border-color: #158cba;
-  box-shadow: #158cba 3px 3px 0 !important;
+  border-color: rgba(127, 127, 127);
+  box-shadow: rgba(127, 127, 127) 3px 3px 0 !important;
+  /* border-color: #158cba; */
+  /* box-shadow: #158cba 3px 3px 0 !important; */
 }
 
 .list-group .list-group-item {

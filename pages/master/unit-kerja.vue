@@ -1,7 +1,7 @@
 <template>
   <div class="card mt-2">
     <div class="card-header fw-bold bg-transparent">
-      <span class="fs-5">UNIT KERJA</span>
+      <span class="fs-5">{{ route.path.toUpperCase().replace('/', ' ').replace('-', ' ') }}</span>
       <span class="float-end">
         <button @click="() => isSuccess = false" class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#tambah-unit-kerja"><i class="bi bi-plus"></i> Tambah</button>
       </span>
@@ -23,8 +23,13 @@
 
               <form @submit.prevent="addNewItem">
                 <div class="mb-4">
+                  <label for="kode_lokasi" class="mb-2">Kode Lokasi</label>
+                  <input v-model="form.kode_lokasi" type="text" id="kode_lokasi" class="form-control form-control-lg" placeholder="nama ruangan" required />
+                </div>
+
+                <div class="mb-4">
                   <label for="ruangan" class="mb-2">Ruangan</label>
-                  <input v-model="form.ruangan" type="text" id="ruangan" class="form-control form-control-lg" placeholder="nama ruangan" autofocus required />
+                  <input v-model="form.ruangan" type="text" id="ruangan" class="form-control form-control-lg" placeholder="nama ruangan" required />
                 </div>
 
                 <div class="mb-4">
@@ -60,7 +65,7 @@
           </div>
 
           <div class="col-md-2">
-            <button class="btn btn-primary">Cari</button>
+            <button class="btn btn-dark">Cari</button>
             <button @click="resetItem()" type="reset" class="btn btn-outline-dark ms-2">reset</button>
           </div>
 
@@ -81,12 +86,19 @@
         <div class="fs-5">Pencarian tidak ditemukan.</div>
       </div>
 
+      <div v-else-if="!isLoading && items.totalItems < 1" class="text-center text-muted p-5 fw-bold">
+        <i class="bi bi-database fs-2"></i>
+        <div class="fs-5">Belum Tersedia.</div>
+      </div>
+
       <div v-else>
         <ul v-for="item in items.items" :key="item.id" class="list-group list-group-flush">
           <li @click="setModalItem(item)" class="list-group-item hand" data-bs-toggle="modal" data-bs-target="#update-unit-kerja">
             <!-- <button data-bs-toggle="modal" data-bs-target="#hapus-item" class="btn btn-danger float-end"><i class="bi bi-trash"></i> Hapus</button> -->
 
             <div class="fw-bold fs-5"><i class="bi bi-buildings"></i> {{ item.ruangan }}</div>
+
+            <div class="fw-bold text-muted">{{ item.kode_lokasi }}</div>
 
             <div class="fw-bold text-muted">{{ item.jabatan_unit_kerja }}</div>
 
@@ -125,6 +137,11 @@
                 </div>
 
                 <form @submit.prevent="updateItem">
+                  <div class="mb-4">
+                    <label for="update_kode_lokasi" class="fw-bold mb-2">Kode Lokasi</label>
+                    <input v-model="formUpdate.kode_lokasi" type="text" id="update_kode_lokasi" class="form-control form-control-lg" placeholder="nama ruangan" required />
+                  </div>
+
                   <div class="mb-4">
                     <label for="update_ruangan" class="fw-bold mb-2">Ruangan</label>
                     <input v-model="formUpdate.ruangan" type="text" id="update_ruangan" class="form-control form-control-lg" placeholder="nama ruangan" autofocus required />
@@ -219,6 +236,7 @@ useHead({
   desc: "Applikasi Inventaris Aset dan Bahan — SMKN 4 Tasikmalaya."
 })
 
+const route = useRoute()
 const client = usePbClient()
 const user = usePbUser()
 const role = user?.user.value.role
@@ -232,6 +250,7 @@ const isActiveSearch = ref(false)
 const isMovingPage = ref(false)
 
 const form = ref({
+  "kode_lokasi": "",
   "ruangan": "",
   "pemegang": "",
   "jabatan_unit_kerja": "",
@@ -239,6 +258,7 @@ const form = ref({
 })
 
 const formUpdate = ref({
+  "kode_lokasi": "",
   "ruangan": "",
   "pemegang": "",
   "jabatan_unit_kerja": "",
@@ -308,6 +328,7 @@ async function addNewItem() {
 
   if(res) {
     isSuccess.value = true
+    form.value.kode_lokasi = ''
     form.value.ruangan = ''
     form.value.pemegang = ''
     form.value.jabatan_unit_kerja = ''

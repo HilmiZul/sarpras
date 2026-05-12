@@ -1,7 +1,7 @@
 <template>
   <div class="card mt-2">
     <div class="card-header fw-bold bg-transparent">
-      <span class="fs-5">SUMBER DANA ASET</span>
+      <span class="fs-5">{{ route.path.toUpperCase().replace('/', ' ').replace('-', ' ') }}</span>
       <span class="float-end">
         <button @click="() => isSuccess = false" class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#tambah-sumber-perolehan"><i class="bi bi-plus"></i> Tambah</button>
       </span>
@@ -45,7 +45,7 @@
           </div>
 
           <div class="col-md-2">
-            <button class="btn btn-primary">Cari</button>
+            <button class="btn btn-dark">Cari</button>
             <button @click="resetItem()" type="reset" class="btn btn-outline-dark ms-2">reset</button>
           </div>
 
@@ -157,6 +157,7 @@ useHead({
   desc: "Applikasi Inventaris Aset dan Bahan — SMKN 4 Tasikmalaya."
 })
 
+const route = useRoute()
 const client = usePbClient()
 const user = usePbUser()
 const role = user?.user.value.role
