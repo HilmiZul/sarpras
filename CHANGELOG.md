@@ -1,6 +1,7 @@
 ## dev (13 Mei 2026)
 - Fix multiple filter
-- create new composable for more flexibility multiple filter
+- Create new composable for more flexibility multiple filter
+- Add plugin multiple select
 
 ## dev (12 Mei 2026)
 
