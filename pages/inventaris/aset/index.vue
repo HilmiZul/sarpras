@@ -33,6 +33,9 @@
 
               <div class="text-muted">Unit Kerja</div>
               <div class="fw-bold text-muted mb-2">{{ aset.expand.unit_kerja.ruangan }}</div>
+
+              <button @click="setModalBarang(aset)" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#rincian">Lihat</button>
+              <NuxtLink :to="`/inventaris/aset/edit/${aset.id}`" class="btn btn-outline-dark btn-sm ms-2">Edit</NuxtLink>
             </div>
             <span class="badge fs-6 text-bg-dark rounded-pill me-2">{{ aset.expand.sumber_aset.nama_sumber }}</span>
             <span class="badge fs-6 text-bg-dark rounded-pill me-2">{{ aset.expand.tahun_pengadaan.tahun }}</span>
@@ -76,7 +79,7 @@
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
           <div class="modal-content">
             <div class="modal-header fw-bold">
-              AC Split
+              {{ asset?.triwulan }}
               <button class="btn-close" label="Close" data-bs-dismiss="modal"></button>
             </div>
 
@@ -103,9 +106,10 @@
               </div>
             </div>
 
-            <!-- <div class="modal-footer"> -->
-            <!--   <button class="btn btn-dark">Buat berita acara</button> -->
-            <!-- </div> -->
+            <div class="modal-footer">
+              <button class="btn btn-danger">Hapus</button>
+            </div>
+
           </div>
         </div>
       </div>
@@ -146,6 +150,7 @@ const assets = ref([])
 const isMovingPage = ref(false)
 const isActiveSearch = ref(false)
 const currentFilter = ref()
+const asset = ref({})
 
 async function fetchOrLoadMoreData(filter="", page="", loading=true) {
   isLoading.value = loading
@@ -233,6 +238,10 @@ async function loadMore(page, loading=true) {
 const handleFilterChange = (filterStr) => {
   fetchOrLoadMoreData(filterStr)
   currentFilter.value = filterStr // ngasih tau kalo sedang difilter, ini akan dilempar ke tombol loadmore
+}
+
+function setModalBarang(aset) {
+  asset.value = aset
 }
 
 onMounted(() => {
