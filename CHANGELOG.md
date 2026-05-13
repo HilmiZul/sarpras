@@ -1,3 +1,7 @@
+## dev (13 Mei 2026)
+- Fix multiple filter
+- create new composable for more flexibility multiple filter
+
 ## dev (12 Mei 2026)
 
 - ⚠️ BUG ALERT! FIX LATER!
