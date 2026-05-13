@@ -15,68 +15,110 @@
 
             <div class="mb-4">
               <label for="tahun_pengadaan" class="fw-bold">Tahun Pengadaan</label>
-              <select v-model="form.tahun_pengadaan" class="form-select" name="tahun_pengadaan" id="tahun_pengadaan" required>
-                <option value="">Pilih Tahun</option>
-                <option v-for="tahun in list_tahun_pengadaan" :key="tahun.id" :value="`${tahun.id}`">{{ tahun.tahun }}</option>
-              </select>
+              <!-- <select v-model="form.tahun_pengadaan" class="form-select" name="tahun_pengadaan" id="tahun_pengadaan" required> -->
+              <!--   <option value="">Pilih Tahun</option> -->
+              <!--   <option v-for="tahun in list_tahun_pengadaan" :key="tahun.id" :value="`${tahun.id}`">{{ tahun.tahun }}</option> -->
+              <!-- </select> -->
+              <div>
+                {{ list_tahun_pengadaan?.find(list_tahun => list_tahun.id === form.tahun_pengadaan)?.tahun }}
+              </div>
+              <multiselect
+                v-model="form.tahun_pengadaan"
+                :options="list_tahun_pengadaan"
+                :modelValue="String"
+                :clear-on-select="false"
+                :custom-label="({tahun}) => `${tahun}`"
+                track-by="tahun"
+                label="tahun"
+                id="tahun_pengadaan"
+                placeholder="Pilih satu"
+                required>
+                <template v-slot:singleLabel="{ option }">{{ option.tahun }}</template>
+              </multiselect>
             </div>
 
             <div class="mb-4">
               <label for="triwulan" class="fw-bold">Triwulan</label>
-              <select v-model="form.triwulan" class="form-select" name="triwulan" id="triwulan" required>
-                <option value="">Pilih TW</option>
-                <option value="tw-1">TW-1</option>
-                <option value="tw-2">TW-2</option>
-                <option value="tw-3">TW-3</option>
-                <option value="tw-4">TW-4</option>
-              </select>
+              <!-- <select v-model="form.triwulan" class="form-select" name="triwulan" id="triwulan" required> -->
+              <!--   <option value="">Pilih TW</option> -->
+              <!--   <option value="tw-1">TW-1</option> -->
+              <!--   <option value="tw-2">TW-2</option> -->
+              <!--   <option value="tw-3">TW-3</option> -->
+              <!--   <option value="tw-4">TW-4</option> -->
+              <!-- </select> -->
+              <multiselect
+                v-model="form.triwulan"
+                :options="['tw-1', 'tw-2', 'tw-3', 'tw-4']"
+                :modelValue="String"
+                :clear-on-select="false"
+                id="triwulan"
+                placeholder="Pilih satu"
+                required>
+                <template v-slot:singleLabel="{ option }">{{ option.toUpperCase() }}</template>
+              </multiselect>
             </div>
 
             <div class="mb-4">
               <label for="no_sp2d" class="fw-bold">No. SP2D</label>
-              <input v-model="form.no_sp2d"class="form-control" id="no_sp2d" type="text" placeholder="___" required />
+              <input v-model="form.no_sp2d"class="form-control form-control-lg" id="no_sp2d" type="text" placeholder="___" required />
             </div>
 
             <div class="mb-4">
               <label for="sumber_aset" class="fw-bold">Sumber Perolehan</label>
-              <select v-model="form.sumber_aset"class="form-select" name="sumber_aset" id="sumber_aset">
-                <option value="">Pilih Sumber Dana</option>
-                <option v-for="sumber in list_sumber_aset" :key="sumber.id" :value="`${sumber.id}`">{{ sumber.nama_sumber }}</option>
-              </select>
+              <!-- <select v-model="form.sumber_aset"class="form-select" name="sumber_aset" id="sumber_aset"> -->
+              <!--   <option value="">Pilih Sumber Dana</option> -->
+              <!--   <option v-for="sumber in list_sumber_aset" :key="sumber.id" :value="`${sumber.id}`">{{ sumber.nama_sumber }}</option> -->
+              <!-- </select> -->
+              <div>
+                {{ list_sumber_aset?.find(list_sumber => list_sumber.id === form.sumber_aset)?.nama_sumber }}
+              </div>
+              <multiselect
+                v-model="form.sumber_aset"
+                :options="list_sumber_aset"
+                :modelValue="String"
+                :clear-on-select="false"
+                :custom-label="({nama_sumber}) => `${nama_sumber}`"
+                track-by="nama_sumber"
+                label="nama_sumber"
+                id="sumber_aset"
+                placeholder="Pilih satu"
+                required>
+                <template v-slot:singleLabel="{ option }">{{ option.nama_sumber }}</template>
+              </multiselect>
             </div>
 
             <div class="mb-4">
               <label for="kodering_belanja" class="fw-bold">Kodering Belanja</label>
-              <input v-model="form.kodering_belanja" class="form-control" id="kodering_belanja" type="text" placeholder="1.2.345.678..." required />
+              <input v-model="form.kodering_belanja" class="form-control form-control-lg" id="kodering_belanja" type="text" placeholder="1.2.345.678..." required />
             </div>
 
             <div class="mb-4">
               <label for="no_spk" class="fw-bold">No.SPK/Faktur/Kuitansi</label>
-              <input v-model="form.no_spk" class="form-control" id="no_spk" type="text" placeholder="___/____/___/___" required />
+              <input v-model="form.no_spk" class="form-control form-control-lg" id="no_spk" type="text" placeholder="___/____/___/___" required />
             </div>
 
             <div class="mb-4">
               <label for="no_ba_spj" class="fw-bold">No.BA Penerimaan SPJ</label>
-              <input v-model="form.no_ba_spj" class="form-control" id="no_ba_spj" type="text" placeholder="___/____/___/___" required />
+              <input v-model="form.no_ba_spj" class="form-control form-control-lg" id="no_ba_spj" type="text" placeholder="___/____/___/___" required />
             </div>
 
             <div class="mb-4">
               <label for="tgl_ba_spj" class="fw-bold">Tanggal BA Penerimaan SPJ</label>
-              <input v-model="form.tgl_ba_spj" class="form-control" id="tgl_ba_spj" type="date" required />
+              <input v-model="form.tgl_ba_spj" class="form-control form-control-lg" id="tgl_ba_spj" type="date" required />
             </div>
 
             <div class="mb-4">
               <label for="nama_aset_barang" class="fw-bold">Nama/Judul Barang (seacra umum) <span class="text-muted">opsional</span></label>
-              <input v-model="form.nama_aset_barang" class="form-control" id="nama_aset_barang" type="text" placeholder="contoh: MacBook Air / boleh kosong" />
+              <input v-model="form.nama_aset_barang" class="form-control form-control-lg" id="nama_aset_barang" type="text" placeholder="contoh: MacBook Air / boleh kosong" />
             </div>
 
             <div class="mb-4">
               <label for="spesifikasi" class="fw-bold">Spesifikasi Barang (secara umum) <span class="text-muted">opsional</span></label>
-              <textarea v-model="form.spesifikasi" class="form-control" id="spesifikasi" type="text" placeholder="Spesifikasi lengkap jika ada..."></textarea>
+              <textarea v-model="form.spesifikasi" class="form-control form-control-lg" id="spesifikasi" type="text" placeholder="Spesifikasi lengkap jika ada..."></textarea>
             </div>
 
             <div class="form-check form-switch mb-4">
-              <input class="form-check-input form-check-lg" type="checkbox" id="lengkap" checked="true">
+              <input v-model="form.lengkap" class="form-check-input" type="checkbox" id="lengkap">
               <label class="form-check-label fw-bold" for="lengkap">Lengkap?</label>
             </div>
           </div>
@@ -84,66 +126,139 @@
           <div class="col-md-4">
             <div class="mb-4">
               <label for="rincian_aset" class="fw-bold">Kode Barang (rincian barang)</label>
-              <select v-model="form.rincian_aset" class="form-select" name="rincian_aset" id="rincian_aset" required>
-                <option value="">Pilih Kode/Nama Barang</option>
-                <option v-for="rincian_aset in list_rincian_aset" :key="rincian_aset.id" :value="`${rincian_aset.id}`">
-                  {{ rincian_aset.kode_barang }} / 
-                  {{ rincian_aset.nama_barang }}
-                </option>
-              </select>
+              <!-- <select v-model="form.rincian_aset" class="form-select" name="rincian_aset" id="rincian_aset" required> -->
+              <!--   <option value="">Pilih Kode/Nama Barang</option> -->
+              <!--   <option v-for="rincian_aset in list_rincian_aset" :key="rincian_aset.id" :value="`${rincian_aset.id}`"> -->
+              <!--     {{ rincian_aset.kode_barang }} /  -->
+              <!--     {{ rincian_aset.nama_barang }} -->
+              <!--   </option> -->
+              <!-- </select> -->
+              <div>
+                {{ list_rincian_aset?.find(list_rincian => list_rincian.id === form.rincian_aset)?.kode_barang }}
+              </div>
+              <multiselect
+                v-model="form.rincian_aset"
+                :options="list_rincian_aset"
+                :modelValue="String"
+                :clear-on-select="false"
+                :custom-label="({kode_barang, nama_barang}) => `${kode_barang} / ${nama_barang}`"
+                track-by="nama_barang"
+                label="nama_barang"
+                id="nama_barang"
+                placeholder="Pilih satu"
+                required>
+                <template v-slot:singleLabel="{ option }">{{ option.kode_barang }} / {{ option.nama_barang }}</template>
+              </multiselect>
             </div>
 
             <div class="mb-4">
               <label for="merek_tipe" class="fw-bold">Merek/Tipe</label>
-              <input v-model="form.merek_tipe" class="form-control" id="merek_tipe" type="text" placeholder="ketik merek/tipe" required />
+              <input v-model="form.merek_tipe" class="form-control form-control-lg" id="merek_tipe" type="text" placeholder="ketik merek/tipe" required />
             </div>
 
             <div class="mb-4">
               <label for="satuan_aset" class="fw-bold">Satuan</label>
-              <select v-model="form.satuan_aset" class="form-select" name="satuan_aset" id="satuan_aset" required>
-                <option value="">Pilih Satuan</option>
-                <option v-for="satuan in list_satuan_aset" :key="satuan.id" :value="`${satuan.id}`">{{ satuan.nama_satuan }}</option>
-              </select>
+              <!-- <select v-model="form.satuan_aset" class="form-select" name="satuan_aset" id="satuan_aset" required> -->
+              <!--   <option value="">Pilih Satuan</option> -->
+              <!--   <option v-for="satuan in list_satuan_aset" :key="satuan.id" :value="`${satuan.id}`">{{ satuan.nama_satuan }}</option> -->
+              <!-- </select> -->
+              <div>
+                {{ list_satuan_aset?.find(list_satuan => list_satuan.id === form.satuan_aset)?.nama_satuan }}
+              </div>
+              <multiselect
+                v-model="form.satuan_aset"
+                :options="list_satuan_aset"
+                :modelValue="String"
+                :clear-on-select="false"
+                :custom-label="({nama_satuan}) => `${nama_satuan}`"
+                track-by="nama_satuan"
+                label="nama_satuan"
+                id="nama_satuan"
+                placeholder="Pilih satu"
+                required>
+                <template v-slot:singleLabel="{ option }">{{ option.nama_satuan }}</template>
+              </multiselect>
             </div>
 
             <div class="mb-4">
               <label for="volume" class="fw-bold">Volume</label>
-              <input v-model="form.volume"class="form-control" id="volume" type="number" min="1" required />
+              <input v-model="form.volume"class="form-control form-control-lg" id="volume" type="number" min="1" required />
             </div>
 
             <div class="mb-4">
               <label for="harga_satuan" class="fw-bold">Harga Satuan (Rp)</label>
-              <input v-model="form.harga_satuan" class="form-control" id="harga_satuan" type="number" min="1" required />
+              <input v-model="form.harga_satuan" class="form-control form-control-lg" id="harga_satuan" type="number" min="1" required />
             </div>
+
+            <!-- <div class="mb-4"> -->
+            <!--   <label class="fw-bold">Nilai Perolehan (Rp)</label> -->
+            <!--   <input class="form-control" type="number" min="1" required readonly disabled /> -->
+            <!-- </div> -->
+
+            <!-- <div class="mb-4"> -->
+            <!--   <label for="kodering_aset" class="fw-bold">Kodering Aset</label> -->
+            <!--   <input v-model="form.kodering_aset" class="form-control" id="kodering_aset" type="text" placeholder="1.2.3..." required /> -->
+            <!-- </div> -->
+            <!---->
+            <!-- <div class="mb-4"> -->
+            <!--   <label for="nama_rekening_aset" class="fw-bold">Nama Rekening Aset</label> -->
+            <!--   <input v-model="form.nama_rekening_aset" class="form-control" id="nama_rekening_aset" type="text" placeholder="contoh: Umum" required /> -->
+            <!-- </div> -->
 
             <div class="mb-4">
               <label for="unit_kerja" class="fw-bold">Unit Kerja</label>
-              <select v-model="form.unit_kerja" class="form-select" name="unit_kerja" id="unit_kerja" required>
-                <option value="">Pilih Unit Kerja (Ruangan)</option>
-                <option v-for="unit in list_unit_kerja" :key="unit.id" :value="`${unit.id}`">{{ unit.ruangan }}</option>
-              </select>
+              <!-- <select v-model="form.unit_kerja" class="form-select" name="unit_kerja" id="unit_kerja" required> -->
+              <!--   <option value="">Pilih Unit Kerja (Ruangan)</option> -->
+              <!--   <option v-for="unit in list_unit_kerja" :key="unit.id" :value="`${unit.id}`">{{ unit.ruangan }}</option> -->
+              <!-- </select> -->
+              <div>
+                {{ list_unit_kerja?.find(list_unit => list_unit.id === form.unit_kerja)?.ruangan }}
+              </div>
+              <multiselect
+                v-model="form.unit_kerja"
+                :options="list_unit_kerja"
+                :modelValue="String"
+                :clear-on-select="false"
+                :custom-label="({ruangan}) => `${ruangan}`"
+                track-by="ruangan"
+                label="ruangan"
+                id="ruangan"
+                placeholder="Pilih satu"
+                required>
+                <template v-slot:singleLabel="{ option }">{{ option.ruangan }}</template>
+              </multiselect>
             </div>
 
             <div class="mb-4">
               <label for="keterangan" class="fw-bold">Keterangan (opsional)</label>
-              <textarea v-model="form.keterangan" class="form-control" id="keterangan" type="text" placeholder="Tulis keterngan apabila ada..."></textarea>
+              <textarea v-model="form.keterangan" class="form-control form-control-lg" id="keterangan" type="text" placeholder="Tulis keterngan apabila ada..."></textarea>
             </div>
 
             <div class="mb-4">
               <label for="foto_barang" class="fw-bold">Foto Barang (opsional)</label>
-              <input @change="compressFile" class="form-control" id="foto_barang" type="file" accept="image/png, image/jpeg, image/jpg" />
+              <input @change="compressFile" class="form-control form-control-lg" id="foto_barang" type="file" accept="image/png, image/jpeg, image/jpg" />
             </div>
 
             <div class="mb-4">
               <label for="kondisi" class="fw-bold">Kondisi</label>
-              <select v-model="form.kondisi" class="form-select" name="kondisi" id="kondisi" required>
-                <option value="B">Baik</option>
-                <option value="RR">Rusak Ringan</option>
-                <option value="RB">Rusak Berat</option>
-                <option value="Mutasi ke OPD Lain">Mutasi ke OPD Lain</option>
-                <option value="Pencatatan Ganda">Pencatatan Ganda</option>
-                <option value="Hilang">Hilang</option>
-              </select>
+              <!-- <select v-model="form.kondisi" class="form-select" name="kondisi" id="kondisi" required> -->
+              <!--   <option value="B">Baik</option> -->
+              <!--   <option value="RR">Rusak Ringan</option> -->
+              <!--   <option value="RB">Rusak Berat</option> -->
+              <!--   <option value="Mutasi ke OPD Lain">Mutasi ke OPD Lain</option> -->
+              <!--   <option value="Pencatatan Ganda">Pencatatan Ganda</option> -->
+              <!--   <option value="Hilang">Hilang</option> -->
+              <!-- </select> -->
+              <multiselect
+                v-model="form.kondisi"
+                :options="['B', 'RR', 'RB', 'Mutasi ke OPD Lain', 'Pencatatan Ganda', 'Hilang']"
+                :modelValue="String"
+                :clear-on-select="false"
+                id="kondisi"
+                placeholder="Pilih satu"
+                required>
+                <template v-slot:singleLabel="{ option }">{{ option }}</template>
+              </multiselect>
             </div>
 
           </div>
@@ -236,6 +351,11 @@ async function fetchData() {
 
 async function handleEdit() {
   form.value.nilai_perolehan = form.value.volume * form.value.harga_satuan
+  form.value.tahun_pengadaan = form.value.tahun_pengadaan.id
+  form.value.sumber_aset = form.value.sumber_aset.id
+  form.value.rincian_aset = form.value.rincian_aset.id
+  form.value.satuan_aset = form.value.satuan_aset.id
+  form.value.unit_kerja = form.value.unit_kerja.id
 
   let dateConvert = new Date(form.value.tgl_ba_spj)
   form.value.tgl_ba_spj = dateConvert.toISOString().split('T')[0]

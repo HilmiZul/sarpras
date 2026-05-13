@@ -38,7 +38,7 @@
                 </div>
 
                 <div class="mb-4">
-                  <label for="nama_rekening_aset" class="mb-2">Kodering Aset</label>
+                  <label for="nama_rekening_aset" class="mb-2">Nama Rekening Aset</label>
                   <input v-model="form.nama_rekening_aset" id="nama_rekening_aset" class="form-control form-control-lg" type="text" placeholder="contoh: Umum" required>
                 </div>
 

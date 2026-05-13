@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="sticky bg-white">
     <div class="row mb-3">
       <div class="col-md-1">
         <select v-model="filters.tahun" name="filterTahun" id="filterTahun" class="form-select">

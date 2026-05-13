@@ -34,12 +34,12 @@
               <div class="text-muted">Unit Kerja</div>
               <div class="fw-bold text-muted mb-2">{{ aset.expand.unit_kerja.ruangan }}</div>
 
-              <button @click="setModalBarang(aset)" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#rincian">Lihat</button>
-              <NuxtLink :to="`/inventaris/aset/edit/${aset.id}`" class="btn btn-outline-dark btn-sm ms-2">Edit</NuxtLink>
+              <button @click="setModalBarang(aset)" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#rincian"><i class="bi bi-arrow-up-right-square"></i> Lihat</button>
+              <NuxtLink :to="`/inventaris/aset/edit/${aset.id}`" class="btn btn-outline-dark ms-2"><i class="bi bi-pencil-square"></i> Edit</NuxtLink>
             </div>
             <span class="badge fs-6 text-bg-dark rounded-pill me-2">{{ aset.expand.sumber_aset.nama_sumber }}</span>
             <span class="badge fs-6 text-bg-dark rounded-pill me-2">{{ aset.expand.tahun_pengadaan.tahun }}</span>
-            <span class="badge fs-6 text-bg-dark rounded-pill">{{ aset.triwulan.toUpperCase() }}</span>
+            <span class="badge fs-6 text-bg-dark rounded-pill text-uppercase">{{ aset.triwulan }}</span>
           </li>
         </ol>
       </div>
@@ -68,42 +68,103 @@
       <!--         </td> -->
       <!--         <td>{{ aset.expand.sumber_aset.nama_sumber }}</td> -->
       <!--         <td>{{ aset.expand.tahun_pengadaan.tahun }}</td> -->
-      <!--         <td>{{ aset.triwulan.toUpperCase() }}</td> -->
+      <!--         <td class="text-uppercase">{{ aset.triwulan }}</td> -->
       <!--         <td>{{ aset.expand.unit_kerja.ruangan }}</td> -->
       <!--       </tr> -->
       <!--     </tbody> -->
       <!--   </table> -->
       <!-- </div> -->
 
-      <div class="modal" id="rincian" tabindex="-1">
+      <div v-if="asset" class="modal" id="rincian" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
           <div class="modal-content">
             <div class="modal-header fw-bold">
-              {{ asset?.triwulan }}
+              <span v-if="!asset?.lengkap" class="text-danger">Tidak lengkap</span> &nbsp;
+              {{ asset?.nama_aset_barang }} &nbsp; <span class="text-muted">({{ asset?.expand?.rincian_aset.nama_barang }})</span>
               <button class="btn-close" label="Close" data-bs-dismiss="modal"></button>
             </div>
 
             <div class="modal-body">
-              <div class="mb-3">
-                <label>Tahun</label>
-                <div class="fw-bold">2026</div>
+              <div class="row mb-3">
+                <div class="col-md-12">
+                  <span class="badge fs-6 text-bg-dark rounded-pill me-2">{{ asset?.expand?.sumber_aset.nama_sumber }}</span>
+                  <span class="badge fs-6 text-bg-dark rounded-pill me-2">{{ asset?.expand?.tahun_pengadaan.tahun }}</span>
+                  <span class="badge fs-6 text-bg-dark rounded-pill text-uppercase me-2">{{ asset?.triwulan }}</span>
+                  <span class="badge fs-6 text-bg-dark rounded-pill">{{ asset?.expand?.unit_kerja.ruangan }}</span>
+                </div>
               </div>
-              <div class="mb-3">
-                <label>Kode Ring</label>
-                <div class="fw-bold">123.098.9.567</div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label>No.SP2D</label>
+                    <div class="fw-bold">{{ asset?.no_sp2d }}</div>
+                  </div>
+                  <div class="mb-3">
+                    <label>Kodering Belanja</label>
+                    <div class="fw-bold">{{ asset?.kodering_belanja }}</div>
+                  </div>
+                  <div class="mb-3">
+                    <label>No.SPK/Faktur/Kuitansi</label>
+                    <div class="fw-bold">{{ asset?.no_spk }}</div>
+                  </div>
+                  <div class="mb-3">
+                    <label>BA SPJ</label>
+                    <div class="fw-bold">{{ asset?.no_ba_spj }}</div>
+                    <div class="fw-bold">{{ asset?.tgl_ba_spj }}</div>
+                  </div>
+                  <div class="mb-3">
+                    <label>Kode Barang</label>
+                    <div class="fw-bold">{{ asset?.expand?.rincian_aset.kode_barang }}</div>
+                  </div>
+                  <div class="mb-3">
+                    <label>Kodering Aset</label>
+                    <div class="fw-bold">{{ asset?.expand?.rincian_aset.kodering_aset }}</div>
+                  </div>
+                  <div class="mb-3">
+                    <label>Nama Rekening Aset</label>
+                    <div class="fw-bold">{{ asset?.expand?.rincian_aset.nama_rekening_aset }}</div>
+                  </div>
+                </div>
+
+                <div class="col-md-3">
+                  <div class="mb-3">
+                    <label>Merek</label>
+                    <div class="fw-bold">{{ asset?.merek_tipe }}</div>
+                  </div>
+                  <div class="mb-3">
+                    <label>Satuan</label>
+                    <div class="fw-bold">{{ asset?.expand?.satuan_aset.nama_satuan }}</div>
+                  </div>
+                  <div class="mb-3">
+                    <label>Volume</label>
+                    <div class="fw-bold">{{ asset?.volume }}</div>
+                  </div>
+                  <div class="mb-3">
+                    <label>Harga Satuan</label>
+                    <div class="fw-bold">{{ asset?.harga_satuan }}</div>
+                  </div>
+                  <div class="mb-3">
+                    <label>Nilai Perolehan</label>
+                    <div class="fw-bold">{{ asset?.nilai_perolehan }}</div>
+                  </div>
+                  <div class="mb-3">
+                    <label>Kondisi</label>
+                    <div class="fw-bold">{{ asset?.kondisi }}</div>
+                  </div>
+
+                  <div v-if="asset?.keterangan" class="mb-3">
+                    <label>Keterangan</label>
+                    <div class="fw-bold">{{ asset?.keterangan }}</div>
+                  </div>
+                </div>
+
+                <div v-if="asset?.spesifikasi" class="col-md-3">
+                  <label>Spesifikasi</label>
+                  <div class="fw-bold white-space">{{ asset?.spesifikasi }}</div>
+                </div>
               </div>
-              <div class="mb-3">
-                <label>Lokasi</label>
-                <div class="fw-bold">Perpustakaan</div>
-              </div>
-              <div class="mb-3">
-                <label>Tahun</label>
-                <div class="fw-bold">2026</div>
-              </div>
-              <div class="mb-3">
-                <label>Tahun</label>
-                <div class="fw-bold">2026</div>
-              </div>
+
             </div>
 
             <div class="modal-footer">
@@ -242,6 +303,27 @@ const handleFilterChange = (filterStr) => {
 
 function setModalBarang(aset) {
   asset.value = aset
+  
+  // format mata uang
+  let option = {
+    style: "currency",
+    currency: "IDR"
+  }
+  let harga_satuan = new Intl.NumberFormat("id-ID", option).format(asset.value.harga_satuan)
+  let nilai_perolehan = new Intl.NumberFormat("id-ID", option).format(asset.value.nilai_perolehan)
+
+  // pindahin ke asset.value
+  asset.value.harga_satuan = harga_satuan
+  asset.value.nilai_perolehan = nilai_perolehan
+
+
+  // format tanggal
+  let optionTgl = {
+    dateStyle: "full",
+  }
+  let raw_tgl_ba_spj = new Date(asset.value.tgl_ba_spj)
+  let tgl_ba_spj = new Intl.DateTimeFormat('id-ID', optionTgl).format(raw_tgl_ba_spj)
+  asset.value.tgl_ba_spj = tgl_ba_spj
 }
 
 onMounted(() => {

@@ -8,8 +8,10 @@ export default defineNuxtConfig({
   devtools: { enabled: false },
   css: [
     "~/assets/css/lumen.min.css",
-    "bootstrap-icons/font/bootstrap-icons.min.css"
+    "bootstrap-icons/font/bootstrap-icons.min.css",
+    "vue-multiselect/dist/vue-multiselect.min.css",
   ],
+  plugins: ['~/plugins/vue-multiselect.ts'],
   ssr: false,
   app: {
     head: {

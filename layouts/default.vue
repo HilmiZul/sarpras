@@ -95,4 +95,21 @@ table.table thead th {
 textarea {
   field-sizing: content;
 }
+
+.multiselect__tags {
+  border-color: rgba(127, 127, 127);
+  box-shadow: rgba(127, 127, 127) 3px 3px 0 !important;
+}
+
+.sticky {
+  position: sticky !important;
+  top: 50px;
+  left: 0;
+  z-index: 1;
+  padding-top: 1em;
+}
+
+.white-space {
+  white-space: pre-wrap;
+}
 </style>

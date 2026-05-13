@@ -19,5 +19,8 @@
     "vue": "^3.5.32",
     "vue-router": "^5.0.4",
     "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz"
+  },
+  "devDependencies": {
+    "vue-multiselect": "^3.5.0"
   }
 }
