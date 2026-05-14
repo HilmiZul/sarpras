@@ -330,7 +330,7 @@ const form = ref({
   "pejabat_penandatangan": ""
 })
 
-if(role != 'sarpras') navigateTo('/barang')
+if(role != 'sarpras') navigateTo('/inventaris/aset')
 
 
 async function fetchData() {

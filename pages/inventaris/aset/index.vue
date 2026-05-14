@@ -35,8 +35,9 @@
               <div class="fw-bold text-muted mb-2">{{ aset.expand.unit_kerja.ruangan }}</div>
 
               <button @click="setModalBarang(aset)" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#rincian"><i class="bi bi-arrow-up-right-square"></i> Lihat</button>
-              <NuxtLink :to="`/inventaris/aset/edit/${aset.id}`" class="btn btn-outline-dark ms-2"><i class="bi bi-pencil-square"></i> Edit</NuxtLink>
+              <NuxtLink v-if="role == 'sarpras'" :to="`/inventaris/aset/edit/${aset.id}`" class="btn btn-outline-dark ms-2"><i class="bi bi-pencil-square"></i> Edit</NuxtLink>
             </div>
+
             <span class="badge fs-6 text-bg-dark rounded-pill me-2">{{ aset.expand.sumber_aset.nama_sumber }}</span>
             <span class="badge fs-6 text-bg-dark rounded-pill me-2">{{ aset.expand.tahun_pengadaan.tahun }}</span>
             <span class="badge fs-6 text-bg-dark rounded-pill text-uppercase">{{ aset.triwulan }}</span>
@@ -168,7 +169,7 @@
             </div>
 
             <div class="modal-footer">
-              <button class="btn btn-danger">Hapus</button>
+              <div class="mb-2 text-muted fst-italic">diperbaharui pada {{ asset?.updated }}</div>
             </div>
 
           </div>
@@ -255,6 +256,37 @@ async function fetchOrLoadMoreData(filter="", page="", loading=true) {
     }
     else {
       assets.value = res
+
+      // format mata uang
+      let option = {
+        style: "currency",
+        currency: "IDR"
+      }
+      // format tanggal
+      let optionTgl = {
+        dateStyle: "full",
+      }
+      let optionTglUpdated = {
+        dateStyle: "full",
+        timeStyle: "short"
+      }
+
+      for(let i=0; i<assets.value.totalItems; i++) {
+        let harga_satuan = new Intl.NumberFormat("id-ID", option).format(assets.value.items[i].harga_satuan)
+        let nilai_perolehan = new Intl.NumberFormat("id-ID", option).format(assets.value.items[i].nilai_perolehan)
+
+        // pindahin ke asset.value
+        assets.value.items[i].harga_satuan = harga_satuan
+        assets.value.items[i].nilai_perolehan = nilai_perolehan
+
+        let raw_tgl_ba_spj = new Date(assets.value.items[i].tgl_ba_spj)
+        let raw_updated = new Date(assets.value.items[i].updated)
+        let tgl_ba_spj = new Intl.DateTimeFormat('id-ID', optionTgl).format(raw_tgl_ba_spj)
+        let updated = new Intl.DateTimeFormat('id-ID', optionTglUpdated).format(raw_updated)
+        assets.value.items[i].tgl_ba_spj = tgl_ba_spj
+        assets.value.items[i].updated = updated
+      }
+
       isLoading.value = false
     }
   }
@@ -303,27 +335,6 @@ const handleFilterChange = (filterStr) => {
 
 function setModalBarang(aset) {
   asset.value = aset
-  
-  // format mata uang
-  let option = {
-    style: "currency",
-    currency: "IDR"
-  }
-  let harga_satuan = new Intl.NumberFormat("id-ID", option).format(asset.value.harga_satuan)
-  let nilai_perolehan = new Intl.NumberFormat("id-ID", option).format(asset.value.nilai_perolehan)
-
-  // pindahin ke asset.value
-  asset.value.harga_satuan = harga_satuan
-  asset.value.nilai_perolehan = nilai_perolehan
-
-
-  // format tanggal
-  let optionTgl = {
-    dateStyle: "full",
-  }
-  let raw_tgl_ba_spj = new Date(asset.value.tgl_ba_spj)
-  let tgl_ba_spj = new Intl.DateTimeFormat('id-ID', optionTgl).format(raw_tgl_ba_spj)
-  asset.value.tgl_ba_spj = tgl_ba_spj
 }
 
 onMounted(() => {

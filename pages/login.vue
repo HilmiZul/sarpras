@@ -21,7 +21,7 @@
             </div>
 
             <div class="d-grid gap-2 mt-5">
-              <button :disabled="isLoading" class="btn btn-dark btn-lg p-3">
+              <button :disabled="isLoading" class="btn btn-primary btn-lg p-3">
                 <span v-if="isLoading">tunggu bentar</span>
                 <span v-else><i class="bi bi-send"></i> Masuk</span>
               </button>
