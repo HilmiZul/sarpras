@@ -1,3 +1,8 @@
+## dev (15 Mei 2026)
+
+- Display image if exist
+- Fix and improve validation
+
 ## dev (13 Mei 2026)
 - Fix multiple filter
 - Create new composable for more flexibility multiple filter
