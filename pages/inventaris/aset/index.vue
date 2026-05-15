@@ -27,6 +27,10 @@
       <div v-else class="mb-3">
         <ol v-for="aset in assets.items" :key="aset.id" class="list-group list-group-flush">
           <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="thumb-container">
+              <img v-if="aset.foto_barang" :src="`${host}/api/files/${aset.collectionId}/${aset.id}/${aset.foto_barang}`" :alt="aset.id" class="thumb-aset" />
+              <img v-else src="https://placehold.jp/120x120.png" alt="thumb" class="thumb-aset" />
+            </div>
             <div class="ms-2 me-auto">
               <div class="text-muted">Nama Barang</div>
               <div class="fs-5 fw-bold mb-2">{{ aset.expand.rincian_aset.nama_barang }} <span class="text-muted fw-normal">({{ aset.nama_aset_barang }})</span></div>
@@ -160,16 +164,25 @@
                   </div>
                 </div>
 
-                <div v-if="asset?.spesifikasi" class="col-md-3">
-                  <label>Spesifikasi</label>
-                  <div class="fw-bold white-space">{{ asset?.spesifikasi }}</div>
+                <div class="col-md-3">
+                  <div v-if="asset?.spesifikasi" class="mb-3">
+                    <label>Spesifikasi</label>
+                    <div class="fw-bold white-space">{{ asset?.spesifikasi }}</div>
+                  </div>
+
+                  <div class="thumb-container">
+                    <div class="thumb-aset">
+                      <img v-if="asset?.foto_barang" :src="`${host}/api/files/${asset?.collectionId}/${asset?.id}/${asset?.foto_barang}`" :alt="asset?.id" class="thumb-aset" />
+                      <img v-else src="https://placehold.jp/120x120.png" alt="thumb" class="thumb-aset" />
+                    </div>
+                  </div>
                 </div>
               </div>
 
             </div>
 
             <div class="modal-footer">
-              <div class="mb-2 text-muted fst-italic">diperbaharui pada {{ asset?.updated }}</div>
+              <div class="mb-2 text-muted fst-italic">diperbaharui {{ asset?.updated }}</div>
             </div>
 
           </div>
@@ -202,6 +215,8 @@ useHead({
   desc: "Applikasi Inventaris Aset dan Bahan — SMKN 4 Tasikmalaya.",
 });
 
+let config = useRuntimeConfig()
+let host = config.public.apiBaseUrl + ":" + config.public.apiPort
 const client = usePbClient()
 const user = usePbUser();
 const role = user?.user.value.role;
@@ -237,7 +252,7 @@ async function fetchData(filter="") {
   let res = await client.collection('aset').getList(1, perPage, {
     filter: filter,
     expand: `tahun_pengadaan, sumber_aset, rincian_aset, satuan_aset, unit_kerja`,
-    sort: `-tahun_pengadaan.tahun, triwulan`
+    sort: `-tahun_pengadaan.tahun, triwulan, unit_kerja.ruangan`
   })
 
   if(res) {
