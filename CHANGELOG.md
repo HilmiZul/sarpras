@@ -2,6 +2,8 @@
 
 - Display image if exist
 - Fix and improve validation
+- New image placeholder
+- New pages
 
 ## dev (13 Mei 2026)
 - Fix multiple filter
