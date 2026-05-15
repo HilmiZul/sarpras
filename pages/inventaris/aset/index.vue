@@ -35,7 +35,7 @@
               <div class="fw-bold text-muted mb-2">{{ aset.expand.unit_kerja.ruangan }}</div>
 
               <button @click="setModalBarang(aset)" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#rincian"><i class="bi bi-arrow-up-right-square"></i> Lihat</button>
-              <NuxtLink v-if="role == 'sarpras'" :to="`/inventaris/aset/edit/${aset.id}`" class="btn btn-outline-dark ms-2"><i class="bi bi-pencil-square"></i> Edit</NuxtLink>
+              <NuxtLink v-if="role == 'sarpras'" :to="`/inventaris/aset/edit/${aset.id}`" class="btn btn-dark ms-2"><i class="bi bi-pencil square"></i> Edit</NuxtLink>
             </div>
 
             <span class="badge fs-6 text-bg-dark rounded-pill me-2">{{ aset.expand.sumber_aset.nama_sumber }}</span>
@@ -143,11 +143,11 @@
                   </div>
                   <div class="mb-3">
                     <label>Harga Satuan</label>
-                    <div class="fw-bold">{{ asset?.harga_satuan }}</div>
+                    <div class="fw-bold">{{ asset?.harga_satuan || 0 }}</div>
                   </div>
                   <div class="mb-3">
                     <label>Nilai Perolehan</label>
-                    <div class="fw-bold">{{ asset?.nilai_perolehan }}</div>
+                    <div class="fw-bold">{{ asset?.nilai_perolehan || 0 }}</div>
                   </div>
                   <div class="mb-3">
                     <label>Kondisi</label>
@@ -177,7 +177,7 @@
       </div>
 
       <div v-if="!isLoading" class="text-center">
-        <button v-if="assets.totalItems" :disabled="isMovingPage || assets.page >= assets.totalPages" @click="fetchOrLoadMoreData(currentFilter, assets.page + 1, true)" class="btn btn-primary">
+        <button v-if="assets.totalItems" :disabled="isMovingPage || assets.page >= assets.totalPages" @click="loadMore(currentFilter, true)" class="btn btn-primary">
           <span v-if="assets.page >= assets.totalPages">Semua sudah dimuat</span>
           <span v-else>Muat lagi <i class="bi bi-arrow-down"></i></span>
         </button>
@@ -214,8 +214,8 @@ const isActiveSearch = ref(false)
 const currentFilter = ref()
 const asset = ref({})
 
-async function fetchOrLoadMoreData(filter="", page="", loading=true) {
-  isLoading.value = loading
+async function fetchData(filter="") {
+  isLoading.value = true
   isActiveSearch.value = false
 
   // check role dan advance filter/search
@@ -234,89 +234,97 @@ async function fetchOrLoadMoreData(filter="", page="", loading=true) {
     else isActiveSearch.value = false
   }
 
-  let currentPage
-  if(page) currentPage = page
-
-  let res = await client.collection('aset').getList(currentPage, perPage, {
+  let res = await client.collection('aset').getList(1, perPage, {
     filter: filter,
     expand: `tahun_pengadaan, sumber_aset, rincian_aset, satuan_aset, unit_kerja`,
     sort: `-tahun_pengadaan.tahun, triwulan`
   })
 
   if(res) {
-    if(page) {
-      assets.value.page = res.page
-      assets.value.perPage = res.perPage
-      assets.value.totalPages = res.totalPages
-      assets.value.totalItems = res.totalItems
-      assets.value.items = assets.value.items.concat(res.items)
+    // response utama/filter pertama dilakukan
+    assets.value = res
 
-      isMovingPage.value = false
-      isLoading.value = false
+    // format mata uang
+    let option = {
+      style: "currency",
+      currency: "IDR"
     }
-    else {
-      assets.value = res
-
-      // format mata uang
-      let option = {
-        style: "currency",
-        currency: "IDR"
-      }
-      // format tanggal
-      let optionTgl = {
-        dateStyle: "full",
-      }
-      let optionTglUpdated = {
-        dateStyle: "full",
-        timeStyle: "short"
-      }
-
-      for(let i=0; i<assets.value.totalItems; i++) {
-        let harga_satuan = new Intl.NumberFormat("id-ID", option).format(assets.value.items[i].harga_satuan)
-        let nilai_perolehan = new Intl.NumberFormat("id-ID", option).format(assets.value.items[i].nilai_perolehan)
-
-        // pindahin ke asset.value
-        assets.value.items[i].harga_satuan = harga_satuan
-        assets.value.items[i].nilai_perolehan = nilai_perolehan
-
-        let raw_tgl_ba_spj = new Date(assets.value.items[i].tgl_ba_spj)
-        let raw_updated = new Date(assets.value.items[i].updated)
-        let tgl_ba_spj = new Intl.DateTimeFormat('id-ID', optionTgl).format(raw_tgl_ba_spj)
-        let updated = new Intl.DateTimeFormat('id-ID', optionTglUpdated).format(raw_updated)
-        assets.value.items[i].tgl_ba_spj = tgl_ba_spj
-        assets.value.items[i].updated = updated
-      }
-
-      isLoading.value = false
+    // format tanggal
+    let optionTgl = {
+      dateStyle: "full",
     }
+    let optionTglUpdated = {
+      dateStyle: "full",
+      timeStyle: "short"
+    }
+
+    for(let i=0; i<res.items.length; i++) {
+      assets.value.items[i].harga_satuan = new Intl.NumberFormat("id-ID", option).format(res.items[i]?.harga_satuan)
+      assets.value.items[i].nilai_perolehan = new Intl.NumberFormat("id-ID", option).format(res.items[i]?.nilai_perolehan)
+
+      let raw_tgl_ba_spj = new Date(res.items[i].tgl_ba_spj)
+      let raw_updated = new Date(res.items[i].updated)
+      assets.value.items[i].tgl_ba_spj = new Intl.DateTimeFormat('id-ID', optionTgl).format(raw_tgl_ba_spj)
+      assets.value.items[i].updated = new Intl.DateTimeFormat('id-ID', optionTglUpdated).format(raw_updated)
+    }
+
+    isLoading.value = false
   }
 }
 
-async function loadMore(page, loading=true) {
+async function loadMore(filter="", loading=true) {
   isLoading.value = loading
   isMovingPage.value = true
   isActiveSearch.value = false
-
-  // formFilter menyimpan value dari opsi dan saerch type
-  // queryFilter: query clause. defaulnya kosong untuk role sarpras. dan diisi unit_kerja sesuai role unit_kerja
-  let queryFilter = ``
+  let page = assets.value.page + 1
 
   // check role dan advance filter/search
   if(role == 'unit') {
-    queryFilter = `unit_kerja="${user?.user.value.unit_kerja}"` 
+    if(filter) {
+      filter = filter + ` && unit_kerja="${user?.user.value.unit_kerja}"` 
+      isActiveSearch.value = true
+    } else {
+      filter = `unit_kerja="${user?.user.value.unit_kerja}"`
+      isActiveSearch.value = false
+    }
   }
 
-  if(role == 'sarpras' || role == 'pimpinan') {
-    queryFilter = ``
+  else if(role == 'sarpras' || role == 'pimpinan') {
+    if(filter) isActiveSearch.value = true
+    else isActiveSearch.value = false
   }
+
 
   let res = await client.collection('aset').getList(page, perPage, {
-    filter: queryFilter,
+    filter: filter,
     expand: `tahun_pengadaan, sumber_aset, rincian_aset, satuan_aset, unit_kerja`,
     sort: `-tahun_pengadaan.tahun, triwulan`
   })
 
   if(res) {
+    // format mata uang
+    let option = {
+      style: "currency",
+      currency: "IDR"
+    }
+    // format tanggal
+    let optionTgl = {
+      dateStyle: "full",
+    }
+    let optionTglUpdated = {
+      dateStyle: "full",
+      timeStyle: "short"
+    }
+    for(let i=0; i<res.items.length; i++) {
+      res.items[i].harga_satuan = new Intl.NumberFormat("id-ID", option).format(res.items[i]?.harga_satuan)
+      res.items[i].nilai_perolehan = new Intl.NumberFormat("id-ID", option).format(res.items[i]?.nilai_perolehan)
+
+      let raw_tgl_ba_spj = new Date(res.items[i].tgl_ba_spj)
+      let raw_updated = new Date(res.items[i].updated)
+      res.items[i].tgl_ba_spj = new Intl.DateTimeFormat('id-ID', optionTgl).format(raw_tgl_ba_spj)
+      res.items[i].updated = new Intl.DateTimeFormat('id-ID', optionTglUpdated).format(raw_updated)
+    }
+
     assets.value.page = res.page
     assets.value.perPage = res.perPage
     assets.value.totalPages = res.totalPages
@@ -324,12 +332,13 @@ async function loadMore(page, loading=true) {
     assets.value.items = assets.value.items.concat(res.items)
 
     isMovingPage.value = false
+    isLoading.value = false
   }
 }
 
 // handle fetch data saat filter bar aktif
 const handleFilterChange = (filterStr) => {
-  fetchOrLoadMoreData(filterStr)
+  fetchData(filterStr)
   currentFilter.value = filterStr // ngasih tau kalo sedang difilter, ini akan dilempar ke tombol loadmore
 }
 
@@ -338,7 +347,7 @@ function setModalBarang(aset) {
 }
 
 onMounted(() => {
-  fetchOrLoadMoreData()
+  fetchData()
 })
 </script>
 
