@@ -9,10 +9,10 @@
     </div>
 
     <div class="card-body">
+
       <form @submit.prevent="handleEdit">
         <div class="row justify-content-center">
           <div class="col-md-4">
-
             <div class="mb-4">
               <label for="tahun_pengadaan" class="fw-bold">Tahun Pengadaan</label>
               <!-- <select v-model="form.tahun_pengadaan" class="form-select" name="tahun_pengadaan" id="tahun_pengadaan" required> -->
@@ -235,7 +235,7 @@
             </div>
 
             <div class="mb-4">
-              <label for="foto_barang" class="fw-bold">Foto Barang (opsional)</label>
+              <label for="foto_barang" class="fw-bold">Foto Barang <span class="text-danger">Maks. 5MB</span> <span class="text-muted">(opsional)</span></label>
               <input @change="compressFile" class="form-control form-control-lg" id="foto_barang" type="file" accept="image/png, image/jpeg, image/jpg" />
             </div>
 
@@ -288,6 +288,9 @@ useHead({
   title: "Edit Barang — SMKN 4 Tasikmalaya.",
   desc: "Applikasi Inventaris Aset dan Bahan — SMKN 4 Tasikmalaya."
 })
+
+let config = useRuntimeConfig()
+let host = config.public.apiBaseUrl + ":" + config.public.apiPort
 const user = usePbUser()
 const client = usePbClient()
 const role = user?.user.value.role

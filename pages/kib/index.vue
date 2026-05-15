@@ -1,7 +1,7 @@
 <template>
   <div class="card mt-2">
     <div class="card-header fw-bold bg-transparent">
-      <span class="fs-5">KIB</span>
+      <span class="fs-5">{{ route.path.toUpperCase().replace('/', ' ') }}</span>
       <div class="fw-normal text-muted">Kartu Inventaris Barang</div>
     </div>
 
@@ -23,4 +23,5 @@ useHead({
   desc: "Applikasi Inventaris Aset dan Bahan — SMKN 4 Tasikmalaya."
 })
 
+const route = useRoute()
 </script>

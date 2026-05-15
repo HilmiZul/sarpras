@@ -100,7 +100,7 @@
               <div class="modal-body">
                 <div v-if="isSuccess" class="alert alert-success alert-dismissible">
                   <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                  Berhasil ditambahkan!
+                  Berhasil disimpan!
                 </div>
 
                 <form @submit.prevent="updateItem">

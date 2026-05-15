@@ -15,10 +15,6 @@
 
             <div class="mb-4">
               <label for="tahun_pengadaan" class="fw-bold">Tahun Pengadaan</label>
-              <!-- <select v-model="form.tahun_pengadaan" class="form-select" name="tahun_pengadaan" id="tahun_pengadaan" required> -->
-              <!--   <option value="">Pilih Tahun</option> -->
-              <!--   <option v-for="tahun in list_tahun_pengadaan" :key="tahun.id" :value="`${tahun.id}`">{{ tahun.tahun }}</option> -->
-              <!-- </select> -->
               <multiselect
                 v-model="form.tahun_pengadaan"
                 :options="list_tahun_pengadaan"
@@ -36,13 +32,6 @@
 
             <div class="mb-4">
               <label for="triwulan" class="fw-bold">Triwulan</label>
-              <!-- <select v-model="form.triwulan" class="form-select" name="triwulan" id="triwulan" required> -->
-              <!--   <option value="">Pilih TW</option> -->
-              <!--   <option value="tw-1">TW-1</option> -->
-              <!--   <option value="tw-2">TW-2</option> -->
-              <!--   <option value="tw-3">TW-3</option> -->
-              <!--   <option value="tw-4">TW-4</option> -->
-              <!-- </select> -->
               <multiselect
                 v-model="form.triwulan"
                 :options="['tw-1', 'tw-2', 'tw-3', 'tw-4']"
@@ -62,10 +51,6 @@
 
             <div class="mb-4">
               <label for="sumber_aset" class="fw-bold">Sumber Perolehan</label>
-              <!-- <select v-model="form.sumber_aset"class="form-select" name="sumber_aset" id="sumber_aset"> -->
-              <!--   <option value="">Pilih Sumber Dana</option> -->
-              <!--   <option v-for="sumber in list_sumber_aset" :key="sumber.id" :value="`${sumber.id}`">{{ sumber.nama_sumber }}</option> -->
-              <!-- </select> -->
               <multiselect
                 v-model="form.sumber_aset"
                 :options="list_sumber_aset"
@@ -120,13 +105,6 @@
           <div class="col-md-4">
             <div class="mb-4">
               <label for="rincian_aset" class="fw-bold">Kode Barang (rincian barang)</label>
-              <!-- <select v-model="form.rincian_aset" class="form-select" name="rincian_aset" id="rincian_aset" required> -->
-              <!--   <option value="">Pilih Kode/Nama Barang</option> -->
-              <!--   <option v-for="rincian_aset in list_rincian_aset" :key="rincian_aset.id" :value="`${rincian_aset.id}`"> -->
-              <!--     {{ rincian_aset.kode_barang }} /  -->
-              <!--     {{ rincian_aset.nama_barang }} -->
-              <!--   </option> -->
-              <!-- </select> -->
               <multiselect
                 v-model="form.rincian_aset"
                 :options="list_rincian_aset"
@@ -178,27 +156,8 @@
               <input v-model="form.harga_satuan" class="form-control form-control-lg" id="harga_satuan" type="number" min="1" required />
             </div>
 
-            <!-- <div class="mb-4"> -->
-            <!--   <label class="fw-bold">Nilai Perolehan (Rp)</label> -->
-            <!--   <input class="form-control" type="number" min="1" required readonly disabled /> -->
-            <!-- </div> -->
-
-            <!-- <div class="mb-4"> -->
-            <!--   <label for="kodering_aset" class="fw-bold">Kodering Aset</label> -->
-            <!--   <input v-model="form.kodering_aset" class="form-control" id="kodering_aset" type="text" placeholder="1.2.3..." required /> -->
-            <!-- </div> -->
-            <!---->
-            <!-- <div class="mb-4"> -->
-            <!--   <label for="nama_rekening_aset" class="fw-bold">Nama Rekening Aset</label> -->
-            <!--   <input v-model="form.nama_rekening_aset" class="form-control" id="nama_rekening_aset" type="text" placeholder="contoh: Umum" required /> -->
-            <!-- </div> -->
-
             <div class="mb-4">
               <label for="unit_kerja" class="fw-bold">Unit Kerja</label>
-              <!-- <select v-model="form.unit_kerja" class="form-select" name="unit_kerja" id="unit_kerja" required> -->
-              <!--   <option value="">Pilih Unit Kerja (Ruangan)</option> -->
-              <!--   <option v-for="unit in list_unit_kerja" :key="unit.id" :value="`${unit.id}`">{{ unit.ruangan }}</option> -->
-              <!-- </select> -->
               <multiselect
                 v-model="form.unit_kerja"
                 :options="list_unit_kerja"
@@ -226,14 +185,6 @@
 
             <div class="mb-4">
               <label for="kondisi" class="fw-bold">Kondisi</label>
-              <!-- <select v-model="form.kondisi" class="form-select" name="kondisi" id="kondisi" required> -->
-              <!--   <option value="B">Baik</option> -->
-              <!--   <option value="RR">Rusak Ringan</option> -->
-              <!--   <option value="RB">Rusak Berat</option> -->
-              <!--   <option value="Mutasi ke OPD Lain">Mutasi ke OPD Lain</option> -->
-              <!--   <option value="Pencatatan Ganda">Pencatatan Ganda</option> -->
-              <!--   <option value="Hilang">Hilang</option> -->
-              <!-- </select> -->
               <multiselect
                 v-model="form.kondisi"
                 :options="['B', 'RR', 'RB', 'Mutasi ke OPD Lain', 'Pencatatan Ganda', 'Hilang']"
@@ -285,7 +236,7 @@ const list_sumber_aset = ref([])
 const list_rincian_aset = ref([])
 const list_satuan_aset = ref([])
 const list_unit_kerja = ref([])
-const pejabat_penandatangan = ref()
+const list_pejabat_penandatangan = ref()
 
 const isSending = ref(false)
 const isSuccess = ref(false)
@@ -325,6 +276,7 @@ async function buatBaru() {
   form.value.rincian_aset = form.value.rincian_aset.id
   form.value.satuan_aset = form.value.satuan_aset.id
   form.value.unit_kerja = form.value.unit_kerja.id
+  form.value.pejabat_penandatangan = list_pejabat_penandatangan
 
   let dateConvert = new Date(form.value.tgl_ba_spj)
   form.value.tgl_ba_spj = dateConvert.toISOString().split('T')[0]
@@ -343,10 +295,13 @@ async function buatBaru() {
 
 async function fetchByCollection(collection) {
   let sort = ``
+  let filter = ``
 
   // sort record
   if(collection == 'tahun_pengadaan') sort = `-tahun`
   if(collection == 'unit_kerja') sort = `ruangan`
+
+  if(collection == 'pejabat_penandatangan') filter = `id="uvsu9ltaotfcfte"`
 
   let res = await client.collection(collection).getFullList({
     sort: sort
@@ -372,6 +327,10 @@ async function fetchByCollection(collection) {
     if(collection == "unit_kerja") {
       list_unit_kerja.value = res
     }
+
+    if(collection == "pejabat_penandatangan") {
+      list_pejabat_penandatangan.value = res[0].id
+    }
   }
 }
 
@@ -388,6 +347,7 @@ onMounted(() => {
   fetchByCollection("rincian_aset")
   fetchByCollection("satuan_aset")
   fetchByCollection("unit_kerja")
+  fetchByCollection("pejabat_penandatangan")
 })
 </script>
 

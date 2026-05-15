@@ -29,9 +29,13 @@
           <li class="list-group-item d-flex justify-content-between align-items-start">
             <div class="thumb-container">
               <img v-if="aset.foto_barang" :src="`${host}/api/files/${aset.collectionId}/${aset.id}/${aset.foto_barang}`" :alt="aset.id" class="thumb-aset" />
-              <img v-else src="https://placehold.jp/120x120.png" alt="thumb" class="thumb-aset" />
+              <img v-else src="~/assets/img/placeholder.jpg" alt="thumb" class="thumb-aset" />
             </div>
             <div class="ms-2 me-auto">
+              <span v-if="aset.kondisi == 'RR'" class="badge fs-6 text-bg-warning rounded-pill mb-2"><i class="bi bi-tag"></i> Rusak Ringan</span>
+              <span v-else-if="aset.kondisi == 'RB'" class="badge fs-6 text-bg-warning rounded-pill mb-2"><i class="bi bi-tag"></i> Rusak Berat</span>
+              <span v-else-if="aset.kondisi == 'Hilang'" class="badge fs-6 text-bg-danger rounded-pill mb-2"><i class="bi bi-tag"></i> Hilang</span>
+
               <div class="text-muted">Nama Barang</div>
               <div class="fs-5 fw-bold mb-2">{{ aset.expand.rincian_aset.nama_barang }} <span class="text-muted fw-normal">({{ aset.nama_aset_barang }})</span></div>
 
@@ -84,7 +88,8 @@
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
           <div class="modal-content">
             <div class="modal-header fw-bold">
-              <span v-if="!asset?.lengkap" class="text-danger">Tidak lengkap</span> &nbsp;
+              <span v-if="asset?.kondisi == 'Hilang'" class="text-danger">[Hilanag] &nbsp;</span>
+              <span v-if="!asset?.lengkap" class="text-danger">Tidak lengkap &nbsp;</span>
               {{ asset?.nama_aset_barang }} &nbsp; <span class="text-muted">({{ asset?.expand?.rincian_aset.nama_barang }})</span>
               <button class="btn-close" label="Close" data-bs-dismiss="modal"></button>
             </div>
@@ -155,7 +160,12 @@
                   </div>
                   <div class="mb-3">
                     <label>Kondisi</label>
-                    <div class="fw-bold">{{ asset?.kondisi }}</div>
+                    <div class="fw-bold">
+                      <span v-if="asset?.kondisi == 'B'">Baik</span>
+                      <span v-else-if="asset?.kondisi == 'RR'" class="text-warning">Rusak Ringan</span>
+                      <span v-else-if="asset?.kondisi == 'RB'" class="text-warning">Rusak Berat</span>
+                      <span v-else-if="asset?.kondisi == 'Hilang'" class="text-danger">Hilang</span>
+                    </div>
                   </div>
 
                   <div v-if="asset?.keterangan" class="mb-3">
@@ -173,7 +183,7 @@
                   <div class="thumb-container">
                     <div class="thumb-aset">
                       <img v-if="asset?.foto_barang" :src="`${host}/api/files/${asset?.collectionId}/${asset?.id}/${asset?.foto_barang}`" :alt="asset?.id" class="thumb-aset" />
-                      <img v-else src="https://placehold.jp/120x120.png" alt="thumb" class="thumb-aset" />
+                      <img v-else src="~/assets/img/placeholder.jpg" alt="thumb" class="thumb-aset" />
                     </div>
                   </div>
                 </div>
