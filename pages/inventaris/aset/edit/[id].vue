@@ -125,7 +125,7 @@
 
           <div class="col-md-4">
             <div class="mb-4">
-              <label for="rincian_aset" class="fw-bold">Kode Barang (rincian barang)</label>
+              <label for="nama_barang" class="fw-bold">Kode Barang (rincian barang)</label>
               <!-- <select v-model="form.rincian_aset" class="form-select" name="rincian_aset" id="rincian_aset" required> -->
               <!--   <option value="">Pilih Kode/Nama Barang</option> -->
               <!--   <option v-for="rincian_aset in list_rincian_aset" :key="rincian_aset.id" :value="`${rincian_aset.id}`"> -->
@@ -157,7 +157,7 @@
             </div>
 
             <div class="mb-4">
-              <label for="satuan_aset" class="fw-bold">Satuan</label>
+              <label for="nama_satuan" class="fw-bold">Satuan</label>
               <!-- <select v-model="form.satuan_aset" class="form-select" name="satuan_aset" id="satuan_aset" required> -->
               <!--   <option value="">Pilih Satuan</option> -->
               <!--   <option v-for="satuan in list_satuan_aset" :key="satuan.id" :value="`${satuan.id}`">{{ satuan.nama_satuan }}</option> -->
@@ -206,7 +206,7 @@
             <!-- </div> -->
 
             <div class="mb-4">
-              <label for="unit_kerja" class="fw-bold">Unit Kerja</label>
+              <label for="ruangan" class="fw-bold">Unit Kerja</label>
               <!-- <select v-model="form.unit_kerja" class="form-select" name="unit_kerja" id="unit_kerja" required> -->
               <!--   <option value="">Pilih Unit Kerja (Ruangan)</option> -->
               <!--   <option v-for="unit in list_unit_kerja" :key="unit.id" :value="`${unit.id}`">{{ unit.ruangan }}</option> -->

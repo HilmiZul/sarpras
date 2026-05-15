@@ -108,10 +108,11 @@
         <ul v-for="(item, i) in items.items" :key="item.id" class="list-group list-group-flush">
           <li @click="setModalItem(item)" data-bs-toggle="modal" data-bs-target="#update" class="list-group-item d-flex justify-content-between align-items-start hand">
             <div class="ms-2 me-auto">
-              <div class="fw-bold text-muted mb-2">{{ item.username }}</div>
+              <div v-if="item?.expand.unit_kerja" class="text-muted">Unit Kerja</div>
+              <div class="fs-5 fw-bold text-muted mb-2">{{ item.username }}</div>
 
               <div v-if="item?.expand.unit_kerja" class="text-muted">Unit Kerja</div>
-              <div v-if="item?.expand?.unit_kerja" class="fw-bold text-muted mb-2">{{ item?.expand?.unit_kerja.ruangan }}</div>
+              <div v-if="item?.expand?.unit_kerja" class="fs-5 fw-bold text-muted mb-2">{{ item?.expand?.unit_kerja.ruangan }}</div>
             </div>
 
             <!-- <button data-bs-toggle="modal" data-bs-target="#hapus-item" class="btn btn-danger float-end"><i class="bi bi-trash"></i> Hapus</button> -->

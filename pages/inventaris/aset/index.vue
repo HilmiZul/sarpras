@@ -28,8 +28,10 @@
         <ol v-for="aset in assets.items" :key="aset.id" class="list-group list-group-flush">
           <li class="list-group-item d-flex justify-content-between align-items-start">
             <div class="thumb-container">
-              <img v-if="aset.foto_barang" :src="`${host}/api/files/${aset.collectionId}/${aset.id}/${aset.foto_barang}`" :alt="aset.id" class="thumb-aset" />
-              <img v-else src="~/assets/img/placeholder.jpg" alt="thumb" class="thumb-aset" />
+              <a @click="setModalBarang(aset)" data-bs-toggle="modal" data-bs-target="#rincian" class="hand">
+                <img v-if="aset.foto_barang" :src="`${host}/api/files/${aset.collectionId}/${aset.id}/${aset.foto_barang}`" :alt="aset.id" class="thumb-aset" />
+                <img v-else src="~/assets/img/placeholder.jpg" alt="thumb" class="thumb-aset" />
+              </a>
             </div>
             <div class="ms-2 me-auto">
               <span v-if="aset.kondisi == 'RR'" class="badge fs-6 text-bg-warning rounded-pill mb-2"><i class="bi bi-tag"></i> Rusak Ringan</span>
