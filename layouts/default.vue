@@ -112,4 +112,16 @@ textarea {
 .white-space {
   white-space: pre-wrap;
 }
+
+
+.thumb-container {
+  width: 120px;
+  height: 120px;
+}
+
+.thumb-container .thumb-aset {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 </style>
