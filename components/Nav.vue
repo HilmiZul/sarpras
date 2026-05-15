@@ -17,6 +17,7 @@
                 <NuxtLink class="nav-link" :activeClass="activeClass" to="/master/rincian-aset">Rincian Aset</NuxtLink>
                 <NuxtLink class="nav-link" :activeClass="activeClass" to="/master/sumber-aset">Sumber Aset</NuxtLink>
                 <NuxtLink class="nav-link" :activeClass="activeClass" to="/master/satuan-aset">Satuan</NuxtLink>
+                <NuxtLink class="nav-link" :activeClass="activeClass" to="/master/pejabat">Pejabat</NuxtLink>
               </div>
             </li>
 
@@ -58,6 +59,10 @@
 
             <li class="nav-item">
               <NuxtLink class="nav-link" :activeClass="activeClass" to="/kib">KIB</NuxtLink>
+            </li>
+
+            <li class="nav-item">
+              <NuxtLink class="nav-link" :activeClass="activeClass" to="/pengguna">PENGGUNA</NuxtLink>
             </li>
 
             <li class="nav-item">
