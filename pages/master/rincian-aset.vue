@@ -93,13 +93,13 @@
             <!-- <button data-bs-toggle="modal" data-bs-target="#hapus-item" class="btn btn-danger float-end"><i class="bi bi-trash"></i> Hapus</button> -->
 
             <div class="text-muted">Kode Barang</div>
-            <div class="fw-bold fs-5 mb-2">{{ item.kode_barang }}</div>
+            <div class="fw-bold text-muted fs-5 mb-2">{{ item.kode_barang }}</div>
 
             <div class="text-muted">Nama Barang</div>
-            <div class="fw-bold fs-5 mb-2">{{ item.nama_barang }}</div>
+            <div class="fw-bold text-muted fs-5 mb-2">{{ item.nama_barang }}</div>
 
             <div class="text-muted">Nama Rekening Aset</div>
-            <div v-if="item.nama_rekening_aset" class="fw-bold fs-5">{{ item.nama_rekening_aset }}</div>
+            <div v-if="item.nama_rekening_aset" class="fw-bold text-muted fs-5">{{ item.nama_rekening_aset }}</div>
             <div v-else class="text-muted">&#8212;</div>
           </li>
         </ul>

@@ -77,7 +77,7 @@
           <li @click="setModalItem(item)" class="list-group-item hand" data-bs-toggle="modal" data-bs-target="#update-tahun">
             <!-- <button data-bs-toggle="modal" data-bs-target="#hapus-item" class="btn btn-danger float-end"><i class="bi bi-trash"></i> Hapus</button> -->
 
-            <div class="fw-bold fs-5 mb-2">{{ item.tahun }}</div>
+            <div class="fw-bold text-muted fs-5 mb-2">{{ item.tahun }}</div>
           </li>
         </ul>
 
