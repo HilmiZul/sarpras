@@ -10,7 +10,7 @@
 
     <div class="card-body">
 
-      <FilterBar :role="role" :assets="assets" @filter-change="handleFilterChange" />
+      <FilterBar :role :assets @filter-change="handleFilterChange" />
 
       <LoadingPlaceholder v-if="isLoading" :col="12" :n="10" />
 
@@ -39,7 +39,7 @@
               <span v-else-if="aset.kondisi == 'Hilang'" class="badge fs-6 text-bg-danger rounded-pill mb-2"><i class="bi bi-tag"></i> Hilang</span>
 
               <div class="text-muted">Nama Barang</div>
-              <div class="fs-5 fw-bold mb-2">{{ aset.expand.rincian_aset.nama_barang }} <span class="text-muted fw-normal">({{ aset.nama_aset_barang }})</span></div>
+              <div class="fs-5 fw-bold text-muted mb-2">{{ aset.expand.rincian_aset.nama_barang }} <span class="text-muted fw-normal">({{ aset.nama_aset_barang }})</span></div>
 
               <div class="text-muted">Unit Kerja</div>
               <div class="fw-bold text-muted mb-2">{{ aset.expand.unit_kerja.ruangan }}</div>
@@ -89,14 +89,14 @@
       <div v-if="asset" class="modal" id="rincian" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
           <div class="modal-content">
-            <div class="modal-header fw-bold">
+            <div class="modal-header fw-bold text-muted">
               <span v-if="asset?.kondisi == 'Hilang'" class="text-danger">[Hilanag] &nbsp;</span>
               <span v-if="!asset?.lengkap" class="text-danger">Tidak lengkap &nbsp;</span>
-              {{ asset?.nama_aset_barang }} &nbsp; <span class="text-muted">({{ asset?.expand?.rincian_aset.nama_barang }})</span>
+              {{ asset?.nama_aset_barang }} &nbsp; <span class="text-muted fw-normal">({{ asset?.expand?.rincian_aset.nama_barang }})</span>
               <button class="btn-close" label="Close" data-bs-dismiss="modal"></button>
             </div>
 
-            <div class="modal-body">
+            <div class="modal-body text-muted">
               <div class="row mb-3">
                 <div class="col-md-12">
                   <span class="badge fs-6 text-bg-dark rounded-pill me-2">{{ asset?.expand?.sumber_aset.nama_sumber }}</span>
@@ -299,7 +299,7 @@ async function fetchData(filter="") {
   }
 }
 
-async function loadMore(filter="", loading=true) {
+async function loadMore(filter="", loading=false) {
   isLoading.value = loading
   isMovingPage.value = true
   isActiveSearch.value = false
