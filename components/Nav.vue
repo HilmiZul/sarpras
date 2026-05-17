@@ -2,7 +2,7 @@
   <div>
     <nav class="navbar navbar-expand-lg fixed-top bg-primary" data-bs-theme="dark">
       <div class="container-fluid">
-        <NuxtLink to="/" class="navbar-brand border border-1 border-white px-2 rounded-2"> sarpras<sup class="text-warning">&bull;</sup></NuxtLink>
+        <NuxtLink to="/" class="navbar-brand border border-1 border-white px-2 rounded-2 bg-white text-dark fw-bold"> sarpras<sup class="text-warning">&bull;</sup></NuxtLink>
         <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
           <i class="bi bi-list-nested"></i>
         </button>
@@ -10,14 +10,14 @@
         <div class="collapse navbar-collapse" id="navbarColor01">
           <ul class="navbar-nav fw-bold me-auto">
             <li v-if="role == 'sarpras'" class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" :activeClass="activeClass" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">MASTER</a>
+              <a class="nav-link dropdown-toggle" :activeClass="activeClass" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="bi bi-collection"></i> MASTER</a>
               <div class="dropdown-menu mt-3 rounded-0">
-                <NuxtLink class="nav-link" :activeClass="activeClass" to="/master/tahun-pengadaan">Tahun Pengadaan</NuxtLink>
-                <NuxtLink class="nav-link" :activeClass="activeClass" to="/master/unit-kerja">Unit Kerja</NuxtLink>
-                <NuxtLink class="nav-link" :activeClass="activeClass" to="/master/rincian-aset">Rincian Aset</NuxtLink>
-                <NuxtLink class="nav-link" :activeClass="activeClass" to="/master/sumber-aset">Sumber Aset</NuxtLink>
-                <NuxtLink class="nav-link" :activeClass="activeClass" to="/master/satuan-aset">Satuan</NuxtLink>
-                <NuxtLink class="nav-link" :activeClass="activeClass" to="/master/pejabat">Pejabat</NuxtLink>
+                <NuxtLink class="nav-link" :activeClass="activeClass" to="/master/tahun-pengadaan"><i class="bi bi-calendar3"></i> Tahun Pengadaan</NuxtLink>
+                <NuxtLink class="nav-link" :activeClass="activeClass" to="/master/unit-kerja"><i class="bi bi-person-workspace"></i> Unit Kerja</NuxtLink>
+                <NuxtLink class="nav-link" :activeClass="activeClass" to="/master/rincian-aset"><i class="bi bi-archive"></i> Rincian Aset</NuxtLink>
+                <NuxtLink class="nav-link" :activeClass="activeClass" to="/master/sumber-aset"><i class="bi bi-bank"></i> Sumber Aset</NuxtLink>
+                <NuxtLink class="nav-link" :activeClass="activeClass" to="/master/satuan-aset"><i class="bi bi-box-seam"></i> Satuan</NuxtLink>
+                <NuxtLink class="nav-link" :activeClass="activeClass" to="/master/pejabat"><i class="bi bi-person"></i> Pejabat</NuxtLink>
               </div>
             </li>
 
@@ -25,19 +25,19 @@
             <!--   <NuxtLink class="nav-link active" :activeClass="activeClass" to="/inventaris">INVENTARIS</NuxtLink> -->
             <!-- </li> -->
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" :activeClass="activeClass" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">INVENTARIS</a>
+              <a class="nav-link dropdown-toggle" :activeClass="activeClass" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="bi bi-boxes"></i> INVENTARIS</a>
               <div class="dropdown-menu mt-3 rounded-0">
-                <NuxtLink class="nav-link" :activeClass="activeClass" to="/inventaris/aset">Aset</NuxtLink>
-                <NuxtLink class="nav-link" :activeClass="activeClass" to="/inventaris/bahan">Bahan</NuxtLink>
+                <NuxtLink class="nav-link" :activeClass="activeClass" to="/inventaris/aset"><i class="bi bi-box2"></i> Aset</NuxtLink>
+                <NuxtLink class="nav-link" :activeClass="activeClass" to="/inventaris/bahan"><i class="bi bi-paint-bucket"></i> Bahan</NuxtLink>
               </div>
             </li>
 
 
             <li v-if="role == 'sarpras'" class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" :activeClass="activeClass" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">LAPORAN</a>
+              <a class="nav-link dropdown-toggle" :activeClass="activeClass" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="bi bi-table"></i> LAPORAN</a>
               <div class="dropdown-menu mt-3 rounded-0">
-                <NuxtLink class="nav-link" :activeClass="activeClass" to="/laporan/aset">Aset Bulanan</NuxtLink>
-                <NuxtLink class="nav-link" :activeClass="activeClass" to="/laporan/bahan">Bahan Bulanan</NuxtLink>
+                <NuxtLink class="nav-link" :activeClass="activeClass" to="/laporan/aset"><i class="bi bi-box2"></i> Aset Bulanan</NuxtLink>
+                <NuxtLink class="nav-link" :activeClass="activeClass" to="/laporan/bahan"><i class="bi bi-paint-bucket"></i> Bahan Bulanan</NuxtLink>
               </div>
             </li>
 
@@ -54,19 +54,19 @@
             <!-- </li> -->
 
             <li class="nav-item">
-              <NuxtLink class="nav-link" :activeClass="activeClass" to="/bast">BAST</NuxtLink>
+              <NuxtLink class="nav-link" :activeClass="activeClass" to="/bast"><i class="bi bi-envelope"></i> BAST</NuxtLink>
             </li>
 
             <li class="nav-item">
-              <NuxtLink class="nav-link" :activeClass="activeClass" to="/kib">KIB</NuxtLink>
+              <NuxtLink class="nav-link" :activeClass="activeClass" to="/kib"><i class="bi bi-card-text"></i> KIB</NuxtLink>
             </li>
 
             <li class="nav-item">
-              <NuxtLink class="nav-link" :activeClass="activeClass" to="/pengguna">PENGGUNA</NuxtLink>
+              <NuxtLink class="nav-link" :activeClass="activeClass" to="/pengguna"><i class="bi bi-people"></i> PENGGUNA</NuxtLink>
             </li>
 
             <li class="nav-item">
-              <NuxtLink class="nav-link" :activeClass="activeClass" to="/pengaturan">PENGATURAN</NuxtLink>
+              <NuxtLink class="nav-link" :activeClass="activeClass" to="/pengaturan"><i class="bi bi-sliders"></i> PENGATURAN</NuxtLink>
             </li>
 
             <!-- <li class="nav-item dropdown"> -->

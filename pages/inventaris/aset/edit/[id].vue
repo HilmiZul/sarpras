@@ -1,7 +1,7 @@
 <template>
   <div class="card mt-2">
     <div class="card-header fw-bold bg-transparent">
-      <span class="fs-5">{{ route.path.toUpperCase().replace('/', '') }}</span>
+      <span class="fs-5 text-muted">{{ form.nama_aset_barang }}</span>
       <span v-if="role == 'sarpras'" class="float-end">
         <NuxtLink to="/inventaris/aset" class="btn btn-dark me-2">Kembali</NuxtLink>
       </span>

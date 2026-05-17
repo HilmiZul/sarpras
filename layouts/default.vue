@@ -82,6 +82,7 @@ table.table thead th {
 
 .list-group .list-group-item {
   border-bottom: 2px solid rgba(127, 127, 127, .2) !important;
+  transition: .15s all ease-in-out;
 }
 
 .list-group .list-group-item:hover {
@@ -123,5 +124,12 @@ textarea {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.thumb-container .thumb-pengaturan-avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 20px;
 }
 </style>
