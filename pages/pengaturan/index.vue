@@ -51,8 +51,13 @@
           </div>
 
           <div class="row">
-            <form @submit.prevent="updatePassword">
-              <div class="col-md-3">
+            <div class="col-md-4">
+              <div class="alert alert-info">
+                <div class="fw-bold">Perhatikan!</div>
+                Anda akan diminta Login ulang apabila berhasil mengubah password.
+              </div>
+
+              <form @submit.prevent="updatePassword">
                 <div class="mb-4">
                   <label for="passwordLama" class="fw-bold mb-2">Password lama (saat ini)</label>
                   <input :disabled="isLoading" v-model="formPassword.oldPassword" class="form-control form-control-lg" id="passwordLama" type="password" placeholder="ketik password saat ini" required />
@@ -69,8 +74,8 @@
                 </div>
 
                 <button :disabled="isLoading || formPassword.oldPassword.length < 8 || formPassword.password.length < 8 || formPassword.passwordConfirm.length < 8" class="btn btn-primary">Simpan</button>
-              </div>
-            </form>
+              </form>
+            </div>
 
           </div>
         </div>
@@ -154,6 +159,11 @@ async function updatePassword() {
         isLoading.value = false
         isSuccess.value = true
         oldPasswordNotSame.value = false
+
+        // logout setelah ubah password
+        client.authStore.clear()
+        client.realtime.unsubscribe()
+        navigateTo('/login')
       }
     }
   } catch (error) {
