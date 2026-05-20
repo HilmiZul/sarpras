@@ -106,7 +106,7 @@ textarea {
   position: sticky !important;
   top: 50px;
   left: 0;
-  z-index: 1;
+  z-index: 99;
   padding-top: 1em;
 }
 
@@ -116,14 +116,24 @@ textarea {
 
 
 .thumb-container {
-  width: 120px;
-  height: 120px;
+  width: 130px;
+  height: 130px;
 }
 
-.thumb-container .thumb-aset {
+.thumb-avatar-container {
+  width: 100px;
+  height: 100px;
+}
+
+.thumb-container .thumb-aset,
+.thumb-avatar-container .thumb-avatar {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.thumb-preview-avatar {
+  width: 100%;
 }
 
 .thumb-container .thumb-pengaturan-avatar {
@@ -131,5 +141,73 @@ textarea {
   height: 100%;
   object-fit: cover;
   border-radius: 20px;
+}
+
+label {
+  color: rgba(33, 37, 41, 0.75) !important
+}
+
+.card .card-header.thumb-container {
+  width: 100%;
+  height: 200px;
+}
+
+.card .card-body.items {
+  height: 160px;
+  font-size: 14px;
+}
+
+.unit-kerja-container, 
+.kondisi-container {
+  position: relative;
+}
+
+.unit-kerja-container .unit-kerja {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 7px;
+  background-color: rgba(0, 0, 0, .7);
+  color: #fff;
+  z-index: 1;
+}
+
+.kondisi-container .kondisi {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 0;
+  padding: 7px;
+  color: #fff;
+  z-index: 1;
+}
+
+
+.thumb-overlay-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.thumb-overlay-container .thumb-overlay {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  background-color: rgba(0, 0, 0, .3);
+  transition: .2s all ease-in-out;
+}
+
+.thumb-overlay-container .thumb-overlay-hilang {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  background-color: rgba(255, 0, 0, .3);
+  transition: .2s all ease-in-out;
+}
+
+.thumb-overlay-container .thumb-overlay:hover {
+  background-color: transparent;
 }
 </style>
