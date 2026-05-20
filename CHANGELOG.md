@@ -1,3 +1,9 @@
+## dev (20  Mei 2026)
+
+- Switch display type: List / Grid (Inventaris Aset)
+- Update and add some lines of global style
+- Add new member of Nav Item
+
 ## dev (15 Mei 2026)
 
 - Display image if exist
