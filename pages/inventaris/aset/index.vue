@@ -1,7 +1,7 @@
 <template>
   <div class="card mt-2">
     <div class="card-header fw-bold bg-transparent">
-      <span class="fs-5">{{ route.path.toUpperCase().replace('/', ' ') }}</span>
+      <span class="fs-5 text-muted">{{ route.path.toUpperCase().replace('/', ' ') }}</span>
       <span v-if="role == 'sarpras'" class="float-end">
         <NuxtLink to="/inventaris/aset/tambah" class="btn btn-primary me-2"><i class="bi bi-plus"></i> Tambah baru</NuxtLink>
       </span>
@@ -11,6 +11,16 @@
     <div class="card-body">
 
       <FilterBar :role :assets @filter-change="handleFilterChange" />
+
+      <div class="mb-3">
+        <button @click="switchDisplayType('list')" v-if="display_type == 'grid'" class="btn btn-light">
+          <i class="bi bi-list"></i> List
+        </button>
+
+        <button @click="switchDisplayType('grid')" v-else class="btn btn-light">
+          <i class="bi bi-grid"></i> Grid
+        </button>
+      </div>
 
       <LoadingPlaceholder v-if="isLoading" :col="12" :n="10" />
 
@@ -24,36 +34,106 @@
         <div class="fs-5">Belum Tersedia.</div>
       </div>
 
-      <div v-else class="mb-3">
-        <ol v-for="aset in assets.items" :key="aset.id" class="list-group list-group-flush">
-          <li class="list-group-item d-flex justify-content-between align-items-start">
-            <div class="thumb-container">
-              <a @click="setModalBarang(aset)" data-bs-toggle="modal" data-bs-target="#rincian" class="hand">
-                <img v-if="aset.foto_barang" :src="`${host}/api/files/${aset.collectionId}/${aset.id}/${aset.foto_barang}`" :alt="aset.id" class="thumb-aset" />
-                <img v-else src="~/assets/img/placeholder.jpg" alt="thumb" class="thumb-aset" />
-              </a>
+      <!-- display list items -->
+      <!-- <div v-else class="mb-3"> -->
+      <!--   <ol v-for="aset in assets.items" :key="aset.id" class="list-group list-group-flush"> -->
+      <!--     <li class="list-group-item d-flex justify-content-between align-items-start py-4"> -->
+      <!--       <div class="thumb-container"> -->
+      <!--         <a @click="setModalBarang(aset)" data-bs-toggle="modal" data-bs-target="#rincian" class="hand"> -->
+      <!--           <img v-if="aset.foto_barang" :src="`${host}/api/files/${aset.collectionId}/${aset.id}/${aset.foto_barang}`" :alt="aset.id" class="thumb-aset" /> -->
+      <!--           <img v-else src="~/assets/img/placeholder.jpg" alt="thumb" class="thumb-aset" /> -->
+      <!--         </a> -->
+      <!--       </div> -->
+      <!--       <div class="ms-2 me-auto"> -->
+      <!--         <span v-if="aset.kondisi == 'RR'" class="badge fs-6 text-bg-warning rounded-pill mb-2"><i class="bi bi-tag"></i> Rusak Ringan</span> -->
+      <!--         <span v-else-if="aset.kondisi == 'RB'" class="badge fs-6 text-bg-warning rounded-pill mb-2"><i class="bi bi-tag"></i> Rusak Berat</span> -->
+      <!--         <span v-else-if="aset.kondisi == 'Hilang'" class="badge fs-6 text-bg-danger rounded-pill mb-2"><i class="bi bi-tag"></i> Hilang</span> -->
+      <!---->
+      <!--         <div class="text-muted">Nama Barang</div> -->
+      <!--         <div class="fs-5 fw-bold text-muted mb-2">{{ aset.expand.rincian_aset.nama_barang }} <span class="text-muted fw-normal">({{ aset.nama_aset_barang }})</span></div> -->
+      <!---->
+      <!--         <div class="text-muted">Unit Kerja</div> -->
+      <!--         <div class="fw-bold text-muted mb-2">{{ aset.expand.unit_kerja.ruangan }}</div> -->
+      <!---->
+      <!--         <button @click="setModalBarang(aset)" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#rincian"><i class="bi bi-arrow-up-right-square"></i> Lihat</button> -->
+      <!--         <NuxtLink v-if="role == 'sarpras'" :to="`/inventaris/aset/edit/${aset.id}`" class="btn btn-outline-dark ms-2"><i class="bi bi-pencil square"></i> Edit</NuxtLink> -->
+      <!--       </div> -->
+      <!---->
+      <!--       <span class="badge fs-6 text-bg-dark rounded-pill me-2">{{ aset.expand.sumber_aset.nama_sumber }}</span> -->
+      <!--       <span class="badge fs-6 text-bg-dark rounded-pill me-2">{{ aset.expand.tahun_pengadaan.tahun }}</span> -->
+      <!--       <span class="badge fs-6 text-bg-dark rounded-pill text-uppercase">{{ aset.triwulan }}</span> -->
+      <!--     </li> -->
+      <!--   </ol> -->
+
+        <div v-else class="row mb-3 justify-content-center">
+            <ol v-if="display_type == 'list'" v-for="aset in assets.items" :key="aset.id" class="list-group list-group-flush">
+              <li class="list-group-item d-flex justify-content-between align-items-start py-4">
+                <div class="thumb-container">
+                  <a @click="setModalBarang(aset)" data-bs-toggle="modal" data-bs-target="#rincian" class="hand">
+                    <img v-if="aset.foto_barang" :src="`${host}/api/files/${aset.collectionId}/${aset.id}/${aset.foto_barang}`" :alt="aset.id" class="thumb-aset" />
+                    <img v-else src="~/assets/img/placeholder.jpg" alt="thumb" class="thumb-aset" />
+                  </a>
+                </div>
+                <div class="ms-2 me-auto">
+                  <span v-if="aset.kondisi == 'RR'" class="badge fs-6 text-bg-warning rounded-pill mb-2"><i class="bi bi-tag"></i> Rusak Ringan</span>
+                  <span v-else-if="aset.kondisi == 'RB'" class="badge fs-6 text-bg-warning rounded-pill mb-2"><i class="bi bi-tag"></i> Rusak Berat</span>
+                  <span v-else-if="aset.kondisi == 'Hilang'" class="badge fs-6 text-bg-danger rounded-pill mb-2"><i class="bi bi-tag"></i> Hilang</span>
+
+                  <div class="text-muted">Nama Barang</div>
+                  <div class="fs-5 fw-bold text-muted mb-2">{{ aset.expand.rincian_aset.nama_barang }} <span class="text-muted fw-normal">({{ aset.nama_aset_barang }})</span></div>
+
+                  <div class="text-muted">Unit Kerja</div>
+                  <div class="fw-bold text-muted mb-2">{{ aset.expand.unit_kerja.ruangan }}</div>
+
+                  <button @click="setModalBarang(aset)" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#rincian"><i class="bi bi-arrow-up-right-square"></i> Lihat</button>
+                  <NuxtLink v-if="role == 'sarpras'" :to="`/inventaris/aset/edit/${aset.id}`" class="btn btn-outline-dark ms-2"><i class="bi bi-pencil square"></i> Edit</NuxtLink>
+                </div>
+
+                <span class="badge fs-6 text-bg-dark rounded-pill me-2">{{ aset.expand.sumber_aset.nama_sumber }}</span>
+                <span class="badge fs-6 text-bg-dark rounded-pill me-2">{{ aset.expand.tahun_pengadaan.tahun }}</span>
+                <span class="badge fs-6 text-bg-dark rounded-pill text-uppercase">{{ aset.triwulan }}</span>
+              </li>
+            </ol>
+
+            <div v-else v-for="(aset, i) in assets.items" :key="i" class="col-md-3">
+              <div class="card mb-4">
+                <div class="card-header thumb-container p-0 border-0">
+                  <div class="kondisi-container">
+                    <span v-if="aset.kondisi == 'RR'" class="kondisi badge fs-6 text-bg-warning mb-2"><i class="bi bi-tag"></i> Rusak Ringan</span>
+                    <span v-else-if="aset.kondisi == 'RB'" class="kondisi badge fs-6 text-bg-danger mb-2"><i class="bi bi-tag"></i> Rusak Berat</span>
+                    <span v-else-if="aset.kondisi == 'Hilang'" class="kondisi badge fs-6 text-bg-danger mb-2"><i class="bi bi-tag"></i> Hilang</span>
+                  </div>
+
+                  <a @click="setModalBarang(aset)" data-bs-toggle="modal" data-bs-target="#rincian" class="hand">
+                    <div class="thumb-overlay-container">
+                      <img v-if="aset.foto_barang" :src="`${host}/api/files/${aset.collectionId}/${aset.id}/${aset.foto_barang}`" :alt="aset.id" class="thumb-aset" />
+                      <img v-else src="~/assets/img/placeholder.jpg" alt="thumb" class="thumb-aset" />
+                      <div v-if="aset.kondisi == 'Hilang'" class="thumb-overlay-hilang"></div>
+                      <div v-else class="thumb-overlay"></div>
+                    </div>
+                  </a>
+                  <div class="unit-kerja-container">
+                    <div class="unit-kerja fw-bold mb-2">{{ aset.expand.unit_kerja.ruangan }}</div>
+                  </div>
+                </div>
+
+                <div class="card-body items">
+                  <div class="text-muted small mb-2">SPJ: {{ aset?.tgl_ba_spj }}</div>
+
+                  <div class="fw-bold text-muted mb-3">{{ aset.expand.rincian_aset.nama_barang }} <span class="text-muted fw-normal">({{ aset.nama_aset_barang }})</span></div>
+                  <span class="badge fs-6 text-bg-dark rounded-pill me-2">{{ aset.expand.sumber_aset.nama_sumber }}</span>
+                  <span class="badge fs-6 text-bg-dark rounded-pill me-2">{{ aset.expand.tahun_pengadaan.tahun }}</span>
+                  <span class="badge fs-6 text-bg-dark rounded-pill text-uppercase">{{ aset.triwulan }}</span>
+                </div>
+
+                <div class="card-footer bg-transparent border-0 d-grid gap-2">
+                  <button @click="setModalBarang(aset)" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#rincian"><i class="bi bi-arrow-up-right-square"></i> Lihat</button>
+                  <NuxtLink v-if="role == 'sarpras'" :to="`/inventaris/aset/edit/${aset.id}`" class="btn btn-outline-dark btn-lg"><i class="bi bi-pencil square"></i> Edit</NuxtLink>
+                </div>
+
+              </div>
             </div>
-            <div class="ms-2 me-auto">
-              <span v-if="aset.kondisi == 'RR'" class="badge fs-6 text-bg-warning rounded-pill mb-2"><i class="bi bi-tag"></i> Rusak Ringan</span>
-              <span v-else-if="aset.kondisi == 'RB'" class="badge fs-6 text-bg-warning rounded-pill mb-2"><i class="bi bi-tag"></i> Rusak Berat</span>
-              <span v-else-if="aset.kondisi == 'Hilang'" class="badge fs-6 text-bg-danger rounded-pill mb-2"><i class="bi bi-tag"></i> Hilang</span>
-
-              <div class="text-muted">Nama Barang</div>
-              <div class="fs-5 fw-bold text-muted mb-2">{{ aset.expand.rincian_aset.nama_barang }} <span class="text-muted fw-normal">({{ aset.nama_aset_barang }})</span></div>
-
-              <div class="text-muted">Unit Kerja</div>
-              <div class="fw-bold text-muted mb-2">{{ aset.expand.unit_kerja.ruangan }}</div>
-
-              <button @click="setModalBarang(aset)" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#rincian"><i class="bi bi-arrow-up-right-square"></i> Lihat</button>
-              <NuxtLink v-if="role == 'sarpras'" :to="`/inventaris/aset/edit/${aset.id}`" class="btn btn-dark ms-2"><i class="bi bi-pencil square"></i> Edit</NuxtLink>
-            </div>
-
-            <span class="badge fs-6 text-bg-dark rounded-pill me-2">{{ aset.expand.sumber_aset.nama_sumber }}</span>
-            <span class="badge fs-6 text-bg-dark rounded-pill me-2">{{ aset.expand.tahun_pengadaan.tahun }}</span>
-            <span class="badge fs-6 text-bg-dark rounded-pill text-uppercase">{{ aset.triwulan }}</span>
-          </li>
-        </ol>
-      </div>
+        </div>
 
       <!-- <div v-else class="table-responsive sticky-top"> -->
       <!--   <table class="table table-hover"> -->
@@ -90,7 +170,7 @@
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
           <div class="modal-content">
             <div class="modal-header fw-bold text-muted">
-              <span v-if="asset?.kondisi == 'Hilang'" class="text-danger">[Hilanag] &nbsp;</span>
+              <span v-if="asset?.kondisi == 'Hilang'" class="text-danger">[Hilang] &nbsp;</span>
               <span v-if="!asset?.lengkap" class="text-danger">Tidak lengkap &nbsp;</span>
               {{ asset?.nama_aset_barang }} &nbsp; <span class="text-muted fw-normal">({{ asset?.expand?.rincian_aset.nama_barang }})</span>
               <button class="btn-close" label="Close" data-bs-dismiss="modal"></button>
@@ -152,11 +232,11 @@
                     <label>Volume</label>
                     <div class="fw-bold">{{ asset?.volume }}</div>
                   </div>
-                  <div class="mb-3">
+                  <div v-if="role == 'sarpras'" class="mb-3">
                     <label>Harga Satuan</label>
                     <div class="fw-bold">{{ asset?.harga_satuan || 0 }}</div>
                   </div>
-                  <div class="mb-3">
+                  <div v-if="role == 'sarpras'" class="mb-3">
                     <label>Nilai Perolehan</label>
                     <div class="fw-bold">{{ asset?.nilai_perolehan || 0 }}</div>
                   </div>
@@ -201,8 +281,10 @@
         </div>
       </div>
 
+      <LoadingPlaceholder v-if="isMovingPage" :col="12" :n="5" />
+
       <div v-if="!isLoading" class="text-center">
-        <button v-if="assets.totalItems" :disabled="isMovingPage || assets.page >= assets.totalPages" @click="loadMore(currentFilter, true)" class="btn btn-primary">
+        <button v-if="assets.totalItems" :disabled="isMovingPage || assets.page >= assets.totalPages" @click="loadMore(currentFilter, false)" class="btn btn-primary">
           <span v-if="assets.page >= assets.totalPages">Semua sudah dimuat</span>
           <span v-else>Muat lagi <i class="bi bi-arrow-down"></i></span>
         </button>
@@ -234,12 +316,19 @@ const user = usePbUser();
 const role = user?.user.value.role;
 const route = useRoute()
 const isLoading = ref(true)
-const perPage = 30
+const perPage = 40
 const assets = ref([])
 const isMovingPage = ref(false)
 const isActiveSearch = ref(false)
 const currentFilter = ref()
 const asset = ref({})
+
+// default tampilan item: Grid
+const display_type = ref('grid')
+
+function switchDisplayType(currType) {
+  display_type.value = currType
+}
 
 async function fetchData(filter="") {
   isLoading.value = true
