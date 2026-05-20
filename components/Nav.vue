@@ -57,11 +57,23 @@
               <NuxtLink class="nav-link" :activeClass="activeClass" to="/bast"><i class="bi bi-envelope"></i> BAST</NuxtLink>
             </li>
 
-            <li class="nav-item">
+            <li v-if="role == 'unit'" class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" :activeClass="activeClass" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="bi bi-handbag"></i> PEMINJAMAN</a>
+              <div class="dropdown-menu mt-3 rounded-0">
+                <NuxtLink class="nav-link" :activeClass="activeClass" to="/laporan/aset"><i class="bi bi-box2"></i> Barang</NuxtLink>
+                <NuxtLink class="nav-link" :activeClass="activeClass" to="/laporan/bahan"><i class="bi bi-buildings"></i> Ruangan</NuxtLink>
+              </div>
+            </li>
+
+            <li v-if="role == 'sarpras'" class="nav-item">
+              <NuxtLink class="nav-link" :activeClass="activeClass" to="/stiker"><i class="bi bi-emoji-smile"></i> STIKER</NuxtLink>
+            </li>
+
+            <li v-if="role == 'sarpras'" class="nav-item">
               <NuxtLink class="nav-link" :activeClass="activeClass" to="/kib"><i class="bi bi-card-text"></i> KIB</NuxtLink>
             </li>
 
-            <li class="nav-item">
+            <li v-if="role == 'sarpras'" class="nav-item">
               <NuxtLink class="nav-link" :activeClass="activeClass" to="/pengguna"><i class="bi bi-people"></i> PENGGUNA</NuxtLink>
             </li>
 
