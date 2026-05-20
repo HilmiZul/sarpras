@@ -1,7 +1,7 @@
 <template>
   <div class="card mt-2">
     <div class="card-header fw-bold bg-transparent">
-      <span class="fs-5">BERITA ACARA</span>
+      <span class="fs-5 text-muted">{{ route.path.toUpperCase().replace('/', ' ') }}</span>
       <span v-if="role == 'sarpras'" class="float-end">
         <button class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#baru-ba"><i class="bi bi-plus"></i> Buat baru</button>
       </span>
@@ -81,5 +81,6 @@ useHead({
 
 const user = usePbUser()
 const role = user?.user.value.role
+const route = useRoute()
 
 </script>

@@ -1,7 +1,7 @@
 <template>
   <div class="card mt-2">
     <div class="card-header fw-bold bg-transparent">
-      <span class="fs-5">{{ route.path.toUpperCase().replace('/', ' ') }}</span>
+      <span class="fs-5 text-muted">{{ route.path.toUpperCase().replace('/', ' ') }}</span>
       <span class="float-end">
         <button @click="() => isSuccess = false" class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#tambah"><i class="bi bi-plus"></i> Tambah</button>
       </span>
@@ -105,8 +105,12 @@
 
       <!-- display list item disini -->
       <div v-else>
-        <ul v-for="(item, i) in items.items" :key="item.id" class="list-group list-group-flush">
+        <ul v-for="item in items.items" :key="item.id" class="list-group list-group-flush">
           <li @click="setModalItem(item)" data-bs-toggle="modal" data-bs-target="#update" class="list-group-item d-flex justify-content-between align-items-start hand">
+            <div v-if="item.avatar" class="mb-3 thumb-avatar-container">
+              <img @click="setModalPreview(item)" :src="`${host}/api/files/_pb_users_auth_/${item.id}/${item.avatar}`" :alt="user?.user.nama" class="thumb-avatar" data-bs-toggle="modal" data-bs-target="#preview-avatar" />
+            </div>
+
             <div class="ms-2 me-auto">
               <div v-if="item?.expand.unit_kerja" class="text-muted">Unit Kerja</div>
               <div class="fs-5 fw-bold text-muted mb-2">{{ item.username }}</div>
@@ -155,7 +159,7 @@
 
                 <div class="mb-4">
                   <label for="update_unit_kerja" class="fw-bold mb-2">Unit Kerja</label>
-                  <select v-model="formUpdate.unit_kerja" class="form-select form-select-lg" name="update_unit_kerja" id="unit_kerja" required>
+                  <select v-model="formUpdate.unit_kerja" class="form-select form-select-lg" name="update_unit_kerja" id="update_unit_kerja" required>
                     <option value="">Pilih Unit Kerja</option>
                     <option v-for="item in list_unit_kerja" :key="item.id" :value="item.id">{{ item.ruangan }}</option>
                   </select>
@@ -165,6 +169,21 @@
                 <button type="button" class="btn btn-outline-dark ms-2 float-end" data-bs-dismiss="modal">Tutup</button>
               </form>
 
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- preview avatar -->
+      <div class="modal" id="preview-avatar" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button class="btn-close" label="Close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+              <img v-if="avatarPreview?.avatar" :src="`${host}/api/files/_pb_users_auth_/${avatarPreview?.id}/${avatarPreview?.avatar}`" :alt="user?.user.nama" class="thumb-preview-avatar"/>
             </div>
           </div>
         </div>
@@ -205,6 +224,8 @@ useHead({
   desc: "Applikasi Inventaris Aset dan Bahan — SMKN 4 Tasikmalaya."
 })
 
+let config = useRuntimeConfig()
+let host = config.public.apiBaseUrl + ":" + config.public.apiPort
 const route = useRoute()
 const client = usePbClient()
 const user = usePbUser()
@@ -218,6 +239,7 @@ const items = ref([])
 const perPage = 10
 const id_item = ref()
 const list_unit_kerja = ref([])
+const avatarPreview = ref()
 
 if(role != 'sarpras') navigateTo('/')
 
@@ -313,6 +335,10 @@ function setModalItem(item) {
   id_item.value = item.id
   formUpdate.value.username = item.username
   formUpdate.value.unit_kerja = item.unit_kerja
+}
+
+function setModalPreview(avatar) {
+  avatarPreview.value = avatar
 }
 
 async function updateItem() {

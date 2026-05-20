@@ -1,7 +1,7 @@
 <template>
   <div class="card mt-2">
     <div class="card-header fw-bold bg-transparent">
-      <span class="fs-5">{{ route.path.toUpperCase().replace('/', ' ').replace('-', ' ') }}</span>
+      <span class="fs-5 text-muted">{{ route.path.toUpperCase().replace('/', ' ').replace('-', ' ') }}</span>
       <div class="fw-normal text-muted">Penanggung Jawab & Pengurus Barang</div>
     </div>
 
