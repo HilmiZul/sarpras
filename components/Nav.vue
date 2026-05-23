@@ -41,21 +41,21 @@
               </div>
             </li>
 
-            <!-- <li class="nav-item dropdown"> -->
-            <!--   <a class="nav-link dropdown-toggle" :activeClass="activeClass" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">BAST</a> -->
-            <!--   <div class="dropdown-menu mt-3 rounded-0"> -->
-            <!--     <NuxtLink class="nav-link" :activeClass="activeClass" to="/bast/penyaluran-aset">Penyaluran Aset</NuxtLink> -->
-            <!--     <NuxtLink class="nav-link" :activeClass="activeClass" to="/bast/stock-opname">Stock Opname</NuxtLink> -->
-            <!--   </div> -->
-            <!-- </li> -->
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" :activeClass="activeClass" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="bi bi-envelope-fill"></i> BAST</a>
+              <div class="dropdown-menu mt-3 rounded-0">
+                <NuxtLink class="nav-link" :activeClass="activeClass" to="/bast/penyaluran-aset"><i class="bi bi-box-arrow-in-up-right"></i> Penyaluran Aset</NuxtLink>
+                <NuxtLink class="nav-link" :activeClass="activeClass" to="/bast/stock-opname"><i class="bi bi-stack"></i> Stock Opname</NuxtLink>
+              </div>
+            </li>
 
             <!-- <li class="nav-item"> -->
             <!--   <a class="nav-link" href="#">PETA</a> -->
             <!-- </li> -->
 
-            <li class="nav-item">
-              <NuxtLink class="nav-link" :activeClass="activeClass" to="/bast"><i class="bi bi-envelope-fill"></i> BAST</NuxtLink>
-            </li>
+            <!-- <li class="nav-item"> -->
+            <!--   <NuxtLink class="nav-link" :activeClass="activeClass" to="/bast"><i class="bi bi-envelope-fill"></i> BAST</NuxtLink> -->
+            <!-- </li> -->
 
             <li v-if="role == 'unit'" class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" :activeClass="activeClass" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="bi bi-handbag-fill"></i> PEMINJAMAN</a>
@@ -71,6 +71,10 @@
 
             <li v-if="role == 'sarpras'" class="nav-item">
               <NuxtLink class="nav-link" :activeClass="activeClass" to="/kib"><i class="bi bi-card-text"></i> KIB</NuxtLink>
+            </li>
+
+            <li class="nav-item">
+              <NuxtLink class="nav-link" :activeClass="activeClass" to="/issue"><i class="bi bi-bug-fill"></i> ISSUE</NuxtLink>
             </li>
 
             <li v-if="role == 'sarpras'" class="nav-item">
