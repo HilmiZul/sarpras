@@ -29,6 +29,7 @@ html, body {
   width: 100%;
   font-family: "Quicksand", serif;
   font-size: 12.5px !important;
+  background-color: #fff;
 }
 
 .martop {
@@ -209,5 +210,9 @@ label {
 
 .thumb-overlay-container .thumb-overlay:hover {
   background-color: transparent;
+}
+
+a {
+  text-decoration: none;
 }
 </style>
