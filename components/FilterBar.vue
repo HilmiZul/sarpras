@@ -41,8 +41,8 @@
 
       <div class="col-md-2">
         <!-- <button @click="terapkanFilter" :disabled="!hasActiveFilters" class="btn btn-dark">terapkan</button> -->
-        <button @click="handleReset" class="btn btn-dark ms-1">
-          reset
+        <button :disabled="filters.tahun.length < 1 && filters.triwulan.length < 1 && filters.sumber.length < 1 && filters.unit_kerja.length < 1 && filters.lokasi.length < 1" @click="handleReset" class="btn btn-dark ms-1">
+          <i class="bi bi-x-lg"></i> reset
         </button>
       </div>
 
