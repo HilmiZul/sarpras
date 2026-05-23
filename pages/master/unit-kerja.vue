@@ -47,6 +47,29 @@
                   <input v-model="form.jabatan_unit_kerja" type="text" id="jabatan" class="form-control form-control-lg" placeholder="contoh: Kabeng RPL" required />
                 </div>
 
+                <div class="mb-4">
+                  <label for="pangkat" class="fw-bold mb-2">Pangkat</label>
+                  <select v-model="form.pangkat" class="form-select form-select-lg" name="pangkat_pengurus_barang" id="pangkat" required>
+                    <option value="">Pilih Pangkat</option>
+                    <option value="III">III</option>
+                    <option value="IV">IV</option>
+                    <option value="IX">IX</option>
+                  </select>
+                </div>
+
+                <div class="mb-4">
+                  <label for="golongan" class="fw-bold mb-2">Golongan</label>
+                  <select v-model="form.golongan" class="form-select form-select-lg" name="golongan_pengurus_barang" id="golongan" required>
+                    <option value="">Pilih Golong</option>
+                    <option value="a">a</option>
+                    <option value="b">b</option>
+                    <option value="c">c</option>
+                    <option value="d">d</option>
+                    <option value="e">e</option>
+                    <option value="IX">IX</option>
+                  </select>
+                </div>
+
                 <button class="btn btn-primary"><i class="bi bi-save"></i> Simpan</button>
                 <button @click="() => isSuccess = false" type="button" class="btn btn-outline-dark ms-2 float-end" data-bs-dismiss="modal">Tutup</button>
               </form>
@@ -162,6 +185,29 @@
                     <input v-model="formUpdate.jabatan_unit_kerja" type="text" id="update_jabatan" class="form-control form-control-lg" placeholder="contoh: Kabeng RPL" required />
                   </div>
 
+                  <div class="mb-4">
+                    <label for="update_pangkat" class="fw-bold mb-2">Pangkat</label>
+                    <select v-model="formUpdate.pangkat" class="form-select form-select-lg" name="pangkat_pengurus_barang" id="pangkat_pengurus_barang" required>
+                      <option value="">Pilih Pangkat</option>
+                      <option value="III">III</option>
+                      <option value="IV">IV</option>
+                      <option value="IX">IX</option>
+                    </select>
+                  </div>
+
+                  <div class="mb-4">
+                    <label for="update_golongan" class="fw-bold mb-2">Golongan</label>
+                    <select v-model="formUpdate.golongan" class="form-select form-select-lg" name="golongan_pengurus_barang" id="update_golongan" required>
+                      <option value="">Pilih Golong</option>
+                      <option value="a">a</option>
+                      <option value="b">b</option>
+                      <option value="c">c</option>
+                      <option value="d">d</option>
+                      <option value="e">e</option>
+                      <option value="IX">IX</option>
+                    </select>
+                  </div>
+
                   <button class="btn btn-primary"><i class="bi bi-save"></i> Simpan</button>
                   <button @click="() => isSuccess = false" type="button" class="btn btn-outline-dark ms-2 float-end" data-bs-dismiss="modal">Tutup</button>
                 </form>
@@ -254,7 +300,9 @@ const form = ref({
   "ruangan": "",
   "pemegang": "",
   "jabatan_unit_kerja": "",
-  "nip_unit_kerja": ""
+  "nip_unit_kerja": "",
+  "pangkat": "",
+  "golongan": ""
 })
 
 const formUpdate = ref({
@@ -262,7 +310,9 @@ const formUpdate = ref({
   "ruangan": "",
   "pemegang": "",
   "jabatan_unit_kerja": "",
-  "nip_unit_kerja": ""
+  "nip_unit_kerja": "",
+  "pangkat": "",
+  "golongan": ""
 })
 
 if(role != 'sarpras') navigateTo('/')
