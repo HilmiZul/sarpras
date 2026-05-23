@@ -12,7 +12,7 @@
       </div>
 
       <div v-if="props.role == 'sarpras'" class="col-md-1">
-        <label for="unit_kerja" class="fw-bold mb-1">Unit Kerja</label>
+        <label for="unit_kerja" class="fw-bold">Unit Kerja</label>
         <select v-model="filters.unit_kerja" id="unit_kerja" class="form-select">
           <option value="">Pilih</option>
           <option v-for="(unit, i) in unit_kerja" :key="i" :value="unit.ruangan">{{ unit.ruangan }}</option>
