@@ -1,3 +1,7 @@
+## v0.4.1-dev (23  Mei 2026)
+
+- Bug fix: duplicate composable
+
 ## v0.4-dev (23  Mei 2026)
 
 - New component: FilterBar for BAST
