@@ -1,3 +1,19 @@
+## dev (23  Mei 2026)
+
+- New component: FilterBar for BAST
+- New composable: Filter BAST
+- New layout printable for BAST Penyaluran Aset
+- BAST Penyaluran Aset, more readable:
+  - Filtering
+  - List view
+  - Print
+  - Edit
+  - Create new
+  - Upload archive
+- Separate BAST: Penyaluran Aset and other
+- New issue page (soon)
+- Remove component BASarpras
+
 ## dev (20  Mei 2026)
 
 - Switch display type: List / Grid (Inventaris Aset)
