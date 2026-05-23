@@ -3,7 +3,7 @@
 - New component: FilterBar for BAST
 - New composable: Filter BAST
 - New layout printable for BAST Penyaluran Aset
-- BAST Penyaluran Aset, more readable:
+- BAST Penyaluran Aset, more readable and interactive:
   - Filtering
   - List view
   - Print
