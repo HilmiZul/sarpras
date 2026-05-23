@@ -13,11 +13,11 @@
       <FilterBar :role :assets @filter-change="handleFilterChange" />
 
       <div class="mb-3">
-        <button @click="switchDisplayType('list')" v-if="display_type == 'grid'" class="btn btn-light">
+        <button @click="switchViewType('list')" v-if="view_type == 'grid'" class="btn btn-dark">
           <i class="bi bi-list"></i> List
         </button>
 
-        <button @click="switchDisplayType('grid')" v-else class="btn btn-light">
+        <button @click="switchViewType('grid')" v-else class="btn btn-dark">
           <i class="bi bi-grid"></i> Grid
         </button>
       </div>
@@ -66,7 +66,7 @@
       <!--   </ol> -->
 
         <div v-else class="row mb-3 justify-content-center">
-            <ol v-if="display_type == 'list'" v-for="aset in assets.items" :key="aset.id" class="list-group list-group-flush">
+            <ol v-if="view_type == 'list'" v-for="aset in assets.items" :key="aset.id" class="list-group list-group-flush">
               <li class="list-group-item d-flex justify-content-between align-items-start py-4">
                 <div class="thumb-container">
                   <a @click="setModalBarang(aset)" data-bs-toggle="modal" data-bs-target="#rincian" class="hand">
@@ -324,10 +324,10 @@ const currentFilter = ref()
 const asset = ref({})
 
 // default tampilan item: Grid
-const display_type = ref('grid')
+const view_type = ref('grid')
 
-function switchDisplayType(currType) {
-  display_type.value = currType
+function switchViewType(currType) {
+  view_type.value = currType
 }
 
 async function fetchData(filter="") {
