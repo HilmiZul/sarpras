@@ -1,13 +1,13 @@
 import { ref, computed } from 'vue'
 
-export interface ItemFilters {
+export interface ItemFilter {
   tgl_sppb?: string | null
   tgl_ba_spj?: string | null
   unit_kerja?: string | null
 }
 
-export function useItemFilters() {
-  const filters = ref<ItemFilters>({
+export function useItemFiltersBast() {
+  const filters = ref<ItemFilter>({
     tgl_sppb: "",
     tgl_ba_spj: "",
     unit_kerja: "",

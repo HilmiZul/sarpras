@@ -17,7 +17,7 @@
 
             <div class="modal-body">
               <div v-if="isSuccess" class="alert alert-success alert-dismissible">
-                <button @click="isSuccess = false" type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                <button @click="() => isSuccess = false" class="btn-close" data-bs-dismiss="alert"></button>
                 Berhasil ditambahkan!
               </div>
 
@@ -241,7 +241,7 @@ async function getItems(loading=true) {
 
   let res_items = await client.collection('rincian_aset').getList(1, perPage, {
     filter: filter,
-    sort: `created, kode_barang`
+    sort: `-created, kode_barang`
   })
 
   if(res_items) {
@@ -254,6 +254,7 @@ async function loadMore(page, loading=true) {
   isLoading.value = loading
   isMovingPage.value = true
   isActiveSearch.value = false
+  let currPage = items.value.page + 1
 
   let filter = ``
   if(keyword.value) {
@@ -261,7 +262,7 @@ async function loadMore(page, loading=true) {
     isActiveSearch.value = true
   }
 
-  let res_items = await client.collection('rincian_aset').getList(page, perPage, {
+  let res_items = await client.collection('rincian_aset').getList(currPage, perPage, {
     filter: filter,
     sort: `created, kode_barang`
   })

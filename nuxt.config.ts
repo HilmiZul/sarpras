@@ -35,8 +35,7 @@ export default defineNuxtConfig({
 		},
 	},
   vite: {
-    assetsInclude: ['**/*.xlsx'], // xlsx file should be treated as assets
-
+    // assetsInclude: ['**/*.xlsx'],
     // plugins: [
     //   {
     //     name: "vite-sheet",
@@ -49,4 +48,5 @@ export default defineNuxtConfig({
     //   },
     // ],
   },
+  experimental: { appManifest: false },
 })

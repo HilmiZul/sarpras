@@ -35,11 +35,10 @@
 
 <script setup>
 const client = usePbClient()
-const { filters, queryFilter, hasActiveFilters, resetFilters } = useItemFilters()
+const { filters, queryFilter, hasActiveFilters, resetFilters } = useItemFiltersBast()
 const emit = defineEmits(['filter-change'])
 
 const props = defineProps(['role', 'bast'])
-const role = props.role
 
 const unit_kerja = ref([])
 
