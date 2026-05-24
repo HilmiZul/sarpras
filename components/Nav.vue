@@ -74,7 +74,7 @@
             </li>
 
             <li class="nav-item">
-              <NuxtLink class="nav-link" :activeClass="activeClass" to="/issue"><i class="bi bi-bug-fill"></i> ISSUE</NuxtLink>
+              <NuxtLink class="nav-link" :activeClass="activeClass" to="/isu"><i class="bi bi-bug-fill"></i> ISU</NuxtLink>
             </li>
 
             <li v-if="role == 'sarpras'" class="nav-item">
