@@ -2,7 +2,7 @@
   <div class="card mt-2">
     <div class="card-header fw-bold bg-transparent">
       <span class="fs-5 text-muted">{{ route.path.toUpperCase().replace('/', ' ') }}</span>
-      <div class="fw-normal text-muted">Kartu Inventaris Barang</div>
+      <div class="fw-normal text-muted">Daftar Kerusakan Aset/Barang</div>
     </div>
 
     <div class="card-body">
@@ -19,7 +19,7 @@ definePageMeta({
 })
 
 useHead({
-  title: "Issue Aset/Barang — Sarpras SMKN 4 Tasikmalaya.",
+  title: "Isu Aset/Barang — Sarpras SMKN 4 Tasikmalaya.",
   desc: "Applikasi Inventaris Aset dan Bahan — SMKN 4 Tasikmalaya."
 })
 
