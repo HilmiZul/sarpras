@@ -1,3 +1,8 @@
+## v0.5.0-dev (24  Mei 2026)
+
+- Add new dependency: compress image
+- Improvement
+
 ## v0.4.1-dev (23  Mei 2026)
 
 - Bug fix: duplicate composable
