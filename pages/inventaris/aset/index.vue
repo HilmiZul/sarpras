@@ -414,7 +414,7 @@ async function loadMore(filter="", loading=false) {
   let res = await client.collection('aset').getList(page, perPage, {
     filter: filter,
     expand: `tahun_pengadaan, sumber_aset, rincian_aset, satuan_aset, unit_kerja`,
-    sort: `-tahun_pengadaan.tahun, triwulan`
+    sort: `-tahun_pengadaan.tahun, triwulan, unit_kerja.ruangan`
   })
 
   if(res) {
