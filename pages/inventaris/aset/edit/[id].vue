@@ -126,13 +126,6 @@
           <div class="col-md-4">
             <div class="mb-4">
               <label for="nama_barang" class="fw-bold">Kode Barang (rincian barang)</label>
-              <!-- <select v-model="form.rincian_aset" class="form-select" name="rincian_aset" id="rincian_aset" required> -->
-              <!--   <option value="">Pilih Kode/Nama Barang</option> -->
-              <!--   <option v-for="rincian_aset in list_rincian_aset" :key="rincian_aset.id" :value="`${rincian_aset.id}`"> -->
-              <!--     {{ rincian_aset.kode_barang }} /  -->
-              <!--     {{ rincian_aset.nama_barang }} -->
-              <!--   </option> -->
-              <!-- </select> -->
               <div>
                 {{ list_rincian_aset?.find(list_rincian => list_rincian.id === form.rincian_aset)?.kode_barang }}
               </div>
@@ -280,6 +273,8 @@
 </template>
 
 <script setup>
+import Compressor from 'compressorjs'
+
 definePageMeta({
   middleware: 'auth'
 })
@@ -301,7 +296,6 @@ const list_sumber_aset = ref([])
 const list_rincian_aset = ref([])
 const list_satuan_aset = ref([])
 const list_unit_kerja = ref([])
-const pejabat_penandatangan = ref()
 
 const isSending = ref(false)
 const isSuccess = ref(false)
@@ -412,7 +406,18 @@ async function fetchByCollection(collection) {
 
 function compressFile(e) {
   let file = e.target.files[0]
-  form.value.foto_barang = file
+  if (!file) return;
+  new Compressor(file, {
+    convertTypes: ['image/webp'],
+    mimeType: 'auto',
+    quality: 0.4,
+    success(result) {
+      form.value.foto_barang = result
+    },
+    error(err) {
+      console.error(err.message)
+    }
+  })
 }
 
 

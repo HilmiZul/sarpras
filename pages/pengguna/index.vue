@@ -220,7 +220,7 @@ definePageMeta({
 })
 
 useHead({
-  title: "KIB — Sarpras SMKN 4 Tasikmalaya.",
+  title: "Pengguna — Sarpras SMKN 4 Tasikmalaya.",
   desc: "Applikasi Inventaris Aset dan Bahan — SMKN 4 Tasikmalaya."
 })
 

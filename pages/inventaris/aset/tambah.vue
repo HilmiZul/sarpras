@@ -116,7 +116,7 @@
                 id="nama_barang"
                 placeholder="Pilih satu"
                 required>
-                <template v-slot:singleLabel="{ option }">{{ option.kode_barang }}</template>
+                <template v-slot:singleLabel="{ option }">{{ option.kode_barang }} / {{ option.nama_barang }}</template>
               </multiselect>
             </div>
 
@@ -217,6 +217,7 @@
 
 <script setup>
 import { navigateTo } from 'nuxt/app'
+import Compressor from 'compressorjs'
 
 definePageMeta({
   middleware: 'auth'
@@ -337,7 +338,18 @@ async function fetchByCollection(collection) {
 
 function compressFile(e) {
   let file = e.target.files[0]
-  form.value.foto_barang = file
+  if (!file) return;
+  new Compressor(file, {
+    convertTypes: ['image/webp'],
+    mimeType: 'auto',
+    quality: 0.4,
+    success(result) {
+      form.value.foto_barang = result
+    },
+    error(err) {
+      console.error(err.message)
+    }
+  })
 }
 
 

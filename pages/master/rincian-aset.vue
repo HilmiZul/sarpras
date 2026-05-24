@@ -24,7 +24,7 @@
               <form @submit.prevent="addNewItem">
                 <div class="mb-4">
                   <label for="kode_barang" class="mb-2">Kode Barang</label>
-                  <input v-model="form.kode_barang" type="text" id="kode_barang" class="form-control form-control-lg" placeholder="contoh: 1.234.567..." autofocus required />
+                  <input v-model="form.kode_barang" type="text" id="kode_barang" class="form-control form-control-lg" placeholder="contoh: 1.234.567..." required />
                 </div>
 
                 <div class="mb-4">
@@ -134,7 +134,7 @@
                 <form @submit.prevent="updateItem">
                   <div class="mb-4">
                     <label for="update_kode_barang" class="mb-2 fw-bold">Kode Barang</label>
-                    <input v-model="formUpdate.kode_barang" type="text" id="update_kode_barang" class="form-control form-control-lg" placeholder="contoh: 1.234.567..." autofocus required />
+                    <input v-model="formUpdate.kode_barang" type="text" id="update_kode_barang" class="form-control form-control-lg" placeholder="contoh: 1.234.567..." required />
                   </div>
 
                   <div class="mb-4">
@@ -254,7 +254,6 @@ async function loadMore(page, loading=true) {
   isLoading.value = loading
   isMovingPage.value = true
   isActiveSearch.value = false
-  let currPage = items.value.page + 1
 
   let filter = ``
   if(keyword.value) {
@@ -262,9 +261,9 @@ async function loadMore(page, loading=true) {
     isActiveSearch.value = true
   }
 
-  let res_items = await client.collection('rincian_aset').getList(currPage, perPage, {
+  let res_items = await client.collection('rincian_aset').getList(page, perPage, {
     filter: filter,
-    sort: `created, kode_barang`
+    sort: `-created, kode_barang`
   })
 
   if(res_items) {

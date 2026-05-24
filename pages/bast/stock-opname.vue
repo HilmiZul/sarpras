@@ -61,8 +61,7 @@
     </div>
 
     <div class="card-body">
-      <BASarpras v-if="role == 'sarpras'" />
-      <BAUmum v-else />
+      body konten
     </div>
 
   </div>

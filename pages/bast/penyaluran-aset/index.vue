@@ -223,7 +223,7 @@
             <div class="modal-content">
               <div class="modal-header fw-bold">
                 Edit: Berita Acara
-                <button @click="closeModalCreateBA" class="btn-close" data-bs-dismiss="modal" label="Close"></button>
+                <button @click="() => isSuccess = false" class="btn-close" data-bs-dismiss="modal" label="Close"></button>
               </div>
 
               <div class="modal-body">
@@ -413,12 +413,14 @@ async function fetchUnitKerja() {
 function closeModalCreateBA() {
   form.value.tgl_ba_spj = ""
   form.value.unit_kerja = ""
+  isSuccess.value = false
 }
 
 function closeModalUploadArsip() {
   formUpdate.value.arsip = ""
   isLoadingUpload.value = false
   isUploaded.value = false
+  isSuccess.value = false
 }
 
 async function fetchBA(filter="") {
