@@ -110,10 +110,11 @@
                     <div class="text-muted">Unit Kerja</div>
                     <div class="fw-bold text-muted fs-6 mb-2">{{ ba?.expand?.unit_kerja.ruangan }}</div>
 
-                    <button @click="setModalItemEdit(ba)" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit">Edit</button>
+                    <button @click="setModalItemEdit(ba)" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit"><i class="bi bi-pencil"></i> Edit</button>
+                    <button @click="fetchAsetBySpj(ba.unit_kerja, ba.tgl_ba_spj)" class="btn btn-primary ms-2" data-bs-toggle="modal" data-bs-target="#pratinjau-aset-by-ba"><i class="bi bi-eye"></i> Intip Aset</button>
                     <NuxtLink :to="`/bast/penyaluran-aset/cetak?ba=${ba.id}&uk=${ba.unit_kerja}&tgl_spj=${ba.tgl_ba_spj}`" target="_blank" class="btn btn-dark ms-2"><i class="bi bi-printer"></i> Cetak</NuxtLink>
                     <button v-if="ba.arsip" @click="pratinjauArsip(ba)" class="btn btn-dark ms-2" data-bs-toggle="modal" data-bs-target="#pratinjau-arsip"><i class="bi bi-eye"></i> Lihat Arsip</button>
-                    <button v-else @click="setModalUpload(ba.id)" class="btn btn-outline-dark ms-2" data-bs-toggle="modal" data-bs-target="#unggah-ba"><i class="bi bi-upload"></i> Unggah Arsip</button>
+                    <button @click="setModalUpload(ba.id)" class="btn btn-outline-dark ms-2" data-bs-toggle="modal" data-bs-target="#unggah-ba"><i class="bi bi-upload"></i> Unggah Arsip</button>
                   </div>
 
                   <button @click="() => id_item = ba.id" data-bs-toggle="modal" data-bs-target="#hapus-item" class="btn btn-danger"><i class="bi bi-trash"></i> Hapus</button>
@@ -184,6 +185,40 @@
               </div>
               <div class="modal-body">
                 <iframe v-if="pratinjau" :src="`${host}/api/files/${pratinjau?.collectionId}/${pratinjau?.id}/${pratinjau?.arsip}`" width="100%" height="100%"></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- single modal: lihat assets berdasarkan Tanggal BA SPJ dan Unit Kerja -->
+        <div class="modal" id="pratinjau-aset-by-ba" tabindex="-1">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header fw-bold">
+                Daftar aset pada BA ini
+                <button class="btn-close" data-bs-dismiss="modal" label="Close"></button>
+              </div>
+
+              <div class="modal-body">
+                <LoadingPlaceholder v-if="isLoadingAssets" :col="12" :n="3" />
+
+                <div v-else>
+                  <div class="text-center text-muted">{{ assets?.length }} items</div>
+                  <ul v-for="(asset, i) in assets" :key="i" class="list-group list-group-flush">
+                    <li class="list-group-item">
+                      <div class="text-muted fw-bold">
+                        {{ asset.nama_aset_barang }}
+                      </div>
+                      <div class="text-muted">
+                        {{ asset?.expand?.rincian_aset.nama_barang }} / {{ asset?.expand?.tahun_pengadaan.tahun }} / {{ asset?.triwulan.toUpperCase() }}
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="modal-footer border-0">
+                <button class="btn btn-dark" data-bs-dismiss="modal">Tutup</button>
               </div>
             </div>
           </div>
@@ -382,12 +417,19 @@ async function fetchTahun() {
   }
 }
 
-async function fetchAsetBySpj() {
+async function fetchAsetBySpj(unit_kerja="", tgl_ba_spj="") {
   isLoadingAssets.value = true
+
+  let filter = ``
+  if(unit_kerja && tgl_ba_spj) {
+    filter = `tgl_ba_spj~"${tgl_ba_spj}" && unit_kerja="${unit_kerja}"`
+  } else {
+    filter = `tgl_ba_spj~"${form.value.tgl_ba_spj}" && unit_kerja="${form.value.unit_kerja}"`
+  }
 
   if(form.value.tgl_ba_spj && form.value.unit_kerja) {
     let res = await client.collection('aset').getFullList({
-      filter: `tgl_ba_spj~"${form.value.tgl_ba_spj}" && unit_kerja="${form.value.unit_kerja}"`
+      filter: filter
     })
 
     if(res) {
@@ -395,8 +437,17 @@ async function fetchAsetBySpj() {
       isLoadingAssets.value = false
     }
   }
-  else {
-    isLoadingAssets.value = false
+
+  if(unit_kerja && tgl_ba_spj) {
+    let res = await client.collection('aset').getFullList({
+      expand: `rincian_aset, tahun_pengadaan`,
+      filter: filter
+    })
+
+    if(res) {
+      assets.value = res
+      isLoadingAssets.value = false
+    }
   }
 }
 
@@ -496,6 +547,7 @@ async function loadMore(filter="", loading=false) {
   let res = await client.collection('bast').getList(page, perPage, {
     expand: `unit_kerja`,
     filter: filter,
+    sort: `-tgl_sppb`
   })
 
   if(res) {
@@ -544,7 +596,9 @@ async function uploadArsip() {
   isUploaded.value = false
   isLoadingUpload.value = true
 
-  let res = await client.collection('bast').update(id_update.value, formUpdate.value)
+  let res = await client.collection('bast').update(id_update.value, {
+    "arsip": formUpdate.value.arsip
+  })
 
   if(res) {
     fetchBA()
