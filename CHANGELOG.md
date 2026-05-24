@@ -2,6 +2,7 @@
 
 - Add new dependency: compress image
 - Improvement
+- Compress file when Add new and edit asset
 
 ## v0.4.1-dev (23  Mei 2026)
 
