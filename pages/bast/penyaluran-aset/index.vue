@@ -122,47 +122,6 @@
               </ul>
             </div>
 
-            <!-- <table v-else class="table table-hover"> -->
-            <!--   <thead> -->
-            <!--     <tr> -->
-            <!--       <th width="3%">#</th> -->
-            <!--       <th>NOMOR BA</th> -->
-            <!--       <th width="10%">TANGGAL SPPB</th> -->
-            <!--       <th width="10%">TANGGAL SPJ</th> -->
-            <!--       <th width="10%">UNIT KERJA</th> -->
-            <!--       <th width="8%">ARSIP</th> -->
-            <!--       <th width="10%">UNGGAH</th> -->
-            <!--       <th width="8%">CETAK</th> -->
-            <!--     </tr> -->
-            <!--   </thead> -->
-            <!---->
-            <!--   <tbody> -->
-            <!--     <tr v-for="(ba, i) in bast.items" :key="i"> -->
-            <!--       <td>{{ i+1 }}.</td> -->
-            <!--       <td> -->
-            <!--         <a data-bs-toggle="modal" data-bs-target="#edit" class="hand text-dark"> -->
-            <!--           {{ ba.no_ba }} -->
-            <!--         </a> -->
-            <!--       </td> -->
-            <!--       <td>{{ ba.tgl_sppb }}</td> -->
-            <!--       <td>{{ ba.tgl_ba_spj }}</td> -->
-            <!--       <td>{{ ba?.expand?.unit_kerja.ruangan }}</td> -->
-            <!--       <td> -->
-            <!--         <button v-if="ba?.arsip" @click="pratinjauArsip(ba)" class="btn btn-default btn-sm" data-bs-toggle="modal" data-bs-target="#pratinjau-arsip"> -->
-            <!--           <i class="bi bi-eye-fill"></i> Lihat -->
-            <!--         </button> -->
-            <!--         <span v-else>&#8212;</span> -->
-            <!--       </td> -->
-            <!--       <td> -->
-            <!--         <button @click="setModalUpload(ba.id)" class="btn btn-dark btn-sm" data-bs-toggle="modal" data-bs-target="#unggah-ba"><i class="bi bi-upload"></i> Unggah BA</button> -->
-            <!--       </td> -->
-            <!--       <td> -->
-            <!--         <NuxtLink :to="`/bast/penyaluran-aset/cetak?ba=${ba.id}&uk=${ba.unit_kerja}&tgl_spj=${ba.tgl_ba_spj}`" target="_blank" class="btn btn-dark btn-sm"><i class="bi bi-printer"></i> Cetak</NuxtLink> -->
-            <!--       </td> -->
-            <!--     </tr> -->
-            <!--   </tbody> -->
-            <!-- </table> -->
-
           </div>
         </div>
 
