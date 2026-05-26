@@ -100,9 +100,8 @@
                     <div class="text-muted">Nomor Berita Acara</div>
                     <div class="fw-bold text-muted fs-6 mb-2">{{ ba.no_ba }}</div>
 
-                    <div class="text-muted">SPPB</div>
-                    <div class="fw-bold text-muted fs-6">{{ ba.tgl_sppb }}</div>
-                    <div class="fw-bold text-muted fs-6 mb-2">{{ ba.no_sppb }}</div>
+                    <div class="text-muted">Tahun SPPB</div>
+                    <div class="fw-bold text-muted fs-6 mb-2">{{ ba.tgl_sppb }}</div>
 
                     <div class="text-muted">SPJ</div>
                     <div class="fw-bold text-muted fs-6 mb-2">{{ ba.tgl_ba_spj }}</div>
@@ -471,6 +470,7 @@ async function fetchBA(filter="") {
       let raw_tgl_sppb = new Date(res.items[i].tgl_sppb)
       bast.value.items[i].tgl_ba_spj = raw_tgl_ba_spj.toISOString().split('T')[0]
       bast.value.items[i].tgl_sppb = raw_tgl_sppb.toISOString().split('T')[0]
+      bast.value.items[i].tgl_sppb = raw_tgl_ba_spj.getFullYear()
     }
 
     isLoading.value = false

@@ -141,8 +141,8 @@ SMK Negeri 4 Tasikmalaya yang bertanda tangan dibawah ini:
                   <br>
                   <br>
                   <br>
-                  {{ unit_kerja?.pemegang }} <br>
-                  <span class="border-top border-2 border-dark">NIP. {{ unit_kerja?.nip_unit_kerja }}</span>
+                  <span class="border-bottom border-2 border-dark">{{ unit_kerja?.pemegang }}</span> <br>
+                  NIP. {{ unit_kerja?.nip_unit_kerja }}
                 </span>
               </td>
 
@@ -156,8 +156,8 @@ SMK Negeri 4 Tasikmalaya yang bertanda tangan dibawah ini:
                   <br>
                   <br>
                   <br>
-                  {{ pj_tt?.pengurus_barang }} <br>
-                  <span class="border-top border-2 border-dark">NIP. {{ pj_tt?.nip_pengurus_barang }}</span>
+                  <span class="border-bottom border-2 border-dark">{{ pj_tt?.pengurus_barang }}</span> <br>
+                  NIP. {{ pj_tt?.nip_pengurus_barang }}
                 </span>
               </td>
             </tr>

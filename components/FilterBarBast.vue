@@ -3,7 +3,11 @@
     <div class="row mb-3 pb-3">
       <div class="col-md-1">
         <label for="tgl_sppb" class="fw-bold">SPPB</label>
-        <input v-model="filters.tgl_sppb" class="form-control" id="tgl_sppb" type="date" required />
+        <!-- <input v-model="filters.tgl_sppb" class="form-control" id="tgl_sppb" type="date" required /> -->
+        <select v-model="filters.tgl_sppb" id="tgl_sppb" class="form-select">
+          <option value="">Pilih</option>
+          <option v-for="(tahun, i) in list_tahun" :key="i" :value="tahun.tahun">{{ tahun.tahun }}</option>
+        </select>
       </div>
 
       <div class="col-md-1">
@@ -41,6 +45,7 @@ const emit = defineEmits(['filter-change'])
 const props = defineProps(['role', 'bast'])
 
 const unit_kerja = ref([])
+const list_tahun = ref([])
 
 const handleReset = () => {
   resetFilters()
@@ -62,7 +67,19 @@ async function fetchUnitKerja() {
   }
 }
 
+async function fetchTahunPengadaan() {
+  client.autoCancellation(false)
+  let res = await client.collection('tahun_pengadaan').getFullList({
+    sort: `-tahun`
+  })
+
+  if(res) {
+    list_tahun.value = res
+  }
+}
+
 onMounted(() => {
   fetchUnitKerja()
+  fetchTahunPengadaan()
 })
 </script>
