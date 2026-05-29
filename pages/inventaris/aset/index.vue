@@ -35,36 +35,6 @@
       </div>
 
       <!-- display list items -->
-      <!-- <div v-else class="mb-3"> -->
-      <!--   <ol v-for="aset in assets.items" :key="aset.id" class="list-group list-group-flush"> -->
-      <!--     <li class="list-group-item d-flex justify-content-between align-items-start py-4"> -->
-      <!--       <div class="thumb-container"> -->
-      <!--         <a @click="setModalBarang(aset)" data-bs-toggle="modal" data-bs-target="#rincian" class="hand"> -->
-      <!--           <img v-if="aset.foto_barang" :src="`${host}/api/files/${aset.collectionId}/${aset.id}/${aset.foto_barang}`" :alt="aset.id" class="thumb-aset" /> -->
-      <!--           <img v-else src="~/assets/img/placeholder.jpg" alt="thumb" class="thumb-aset" /> -->
-      <!--         </a> -->
-      <!--       </div> -->
-      <!--       <div class="ms-2 me-auto"> -->
-      <!--         <span v-if="aset.kondisi == 'RR'" class="badge fs-6 text-bg-warning rounded-pill mb-2"><i class="bi bi-tag"></i> Rusak Ringan</span> -->
-      <!--         <span v-else-if="aset.kondisi == 'RB'" class="badge fs-6 text-bg-warning rounded-pill mb-2"><i class="bi bi-tag"></i> Rusak Berat</span> -->
-      <!--         <span v-else-if="aset.kondisi == 'Hilang'" class="badge fs-6 text-bg-danger rounded-pill mb-2"><i class="bi bi-tag"></i> Hilang</span> -->
-      <!---->
-      <!--         <div class="text-muted">Nama Barang</div> -->
-      <!--         <div class="fs-5 fw-bold text-muted mb-2">{{ aset.expand.rincian_aset.nama_barang }} <span class="text-muted fw-normal">({{ aset.nama_aset_barang }})</span></div> -->
-      <!---->
-      <!--         <div class="text-muted">Unit Kerja</div> -->
-      <!--         <div class="fw-bold text-muted mb-2">{{ aset.expand.unit_kerja.ruangan }}</div> -->
-      <!---->
-      <!--         <button @click="setModalBarang(aset)" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#rincian"><i class="bi bi-arrow-up-right-square"></i> Lihat</button> -->
-      <!--         <NuxtLink v-if="role == 'sarpras'" :to="`/inventaris/aset/edit/${aset.id}`" class="btn btn-outline-dark ms-2"><i class="bi bi-pencil square"></i> Edit</NuxtLink> -->
-      <!--       </div> -->
-      <!---->
-      <!--       <span class="badge fs-6 text-bg-dark rounded-pill me-2">{{ aset.expand.sumber_aset.nama_sumber }}</span> -->
-      <!--       <span class="badge fs-6 text-bg-dark rounded-pill me-2">{{ aset.expand.tahun_pengadaan.tahun }}</span> -->
-      <!--       <span class="badge fs-6 text-bg-dark rounded-pill text-uppercase">{{ aset.triwulan }}</span> -->
-      <!--     </li> -->
-      <!--   </ol> -->
-
         <div v-else class="row mb-3 justify-content-center">
             <ol v-if="view_type == 'list'" v-for="aset in assets.items" :key="aset.id" class="list-group list-group-flush">
               <li class="list-group-item d-flex justify-content-between align-items-start py-4">
