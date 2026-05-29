@@ -1,3 +1,9 @@
+## v0.5.1-dev (29  Mei 2026)
+
+- Add new dependency angka/tanggal terbilang for convert date to terbilang
+- Create new composable: tanggalTerbilang
+- Improvement
+
 ## v0.5.0-dev (24  Mei 2026)
 
 - Add new dependency: compress image
