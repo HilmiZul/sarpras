@@ -7,6 +7,17 @@
 
     <div class="card-body">
       <FilterBar :role :assets />
+
+      <PrintableArea>
+        <h1 class="text-2xl font-bold mb-6">Judul Dokumen</h1>
+        <div class="row">
+          <div class="col-md-3">KIB</div>
+          <div class="col-md-3">KIB</div>
+          <div class="col-md-3">KIB</div>
+          <div class="col-md-3">KIB</div>
+          <div class="col-md-3">KIB</div>
+        </div>
+      </PrintableArea>
     </div>
   </div>
 </template>
