@@ -5,7 +5,7 @@
         <label for="tgl_sppb" class="fw-bold">SPPB</label>
         <!-- <input v-model="filters.tgl_sppb" class="form-control" id="tgl_sppb" type="date" required /> -->
         <select v-model="filters.tgl_sppb" id="tgl_sppb" class="form-select">
-          <option value="">Pilih</option>
+          <option value="">Tahun</option>
           <option v-for="(tahun, i) in list_tahun" :key="i" :value="tahun.tahun">{{ tahun.tahun }}</option>
         </select>
       </div>
