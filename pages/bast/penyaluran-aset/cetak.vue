@@ -33,7 +33,7 @@
         </div>
 
         <p class="mt-3 justify smallest">
-          Pada hari ini Senin tanggal Sembilan belas bulan Mei tahun Dua Ribu Dua Puluh Lima bertempat di
+          Pada hari ini {{ tanggal_terbilang }} bertempat di
 SMK Negeri 4 Tasikmalaya yang bertanda tangan dibawah ini:
         </p>
 
@@ -260,6 +260,11 @@ useHead({
   desc: "Applikasi Inventaris Aset dan Bahan — SMKN 4 Tasikmalaya.",
 })
 
+const { formatTanggalTerbilang } = useTanggalTerbilang()
+
+let raw_tanggal_sekarang = new Date()
+let format_tanggal_sekarang = new Intl.DateTimeFormat('id-ID', { dateStyle: 'full' }).format(raw_tanggal_sekarang)
+let tanggal_terbilang = formatTanggalTerbilang(format_tanggal_sekarang)
 let client = usePbClient()
 let route = useRoute()
 let config = useRuntimeConfig()
