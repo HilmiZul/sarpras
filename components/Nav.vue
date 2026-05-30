@@ -60,8 +60,8 @@
             <li v-if="role == 'unit'" class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" :activeClass="activeClass" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="bi bi-handbag-fill"></i> PEMINJAMAN</a>
               <div class="dropdown-menu mt-3 rounded-0">
-                <NuxtLink class="nav-link" :activeClass="activeClass" to="/laporan/aset"><i class="bi bi-box2"></i> Barang</NuxtLink>
-                <NuxtLink class="nav-link" :activeClass="activeClass" to="/laporan/bahan"><i class="bi bi-buildings"></i> Ruangan</NuxtLink>
+                <NuxtLink class="nav-link" :activeClass="activeClass" to="/peminjaman/barang"><i class="bi bi-box2"></i> Barang</NuxtLink>
+                <NuxtLink class="nav-link" :activeClass="activeClass" to="/peminjaman/ruang"><i class="bi bi-buildings"></i> Ruangan</NuxtLink>
               </div>
             </li>
 
@@ -75,6 +75,10 @@
 
             <li class="nav-item">
               <NuxtLink class="nav-link" :activeClass="activeClass" to="/isu"><i class="bi bi-bug-fill"></i> ISU</NuxtLink>
+            </li>
+
+            <li class="nav-item">
+              <NuxtLink class="nav-link" :activeClass="activeClass" to="/pengajuan"><i class="bi bi-send-fill"></i> PENGAJUAN</NuxtLink>
             </li>
 
             <li v-if="role == 'sarpras'" class="nav-item">
