@@ -7,6 +7,8 @@
         <li>statistik assets</li>
         <li>realtime total belanja tahun ini (Rp)</li>
         <li>daftar issue</li>
+        <li>statistik unit kerja</li>
+        <li>daftar pengajuan dari unit kerja (tampilkan top 5 terbaru)</li>
       </ul>
     </div>
   </div>
