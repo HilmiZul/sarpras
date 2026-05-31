@@ -262,6 +262,8 @@ useHead({
 
 const { formatTanggalTerbilang } = useTanggalTerbilang()
 
+let user = usePbUser()
+let role = user?.user.value.role
 let raw_tanggal_sekarang = new Date()
 let format_tanggal_sekarang = new Intl.DateTimeFormat('id-ID', { dateStyle: 'full' }).format(raw_tanggal_sekarang)
 let tanggal_terbilang = formatTanggalTerbilang(format_tanggal_sekarang)
@@ -277,6 +279,7 @@ let unit_kerja = ref('')
 let assets = ref([])
 let ba = ref('')
 
+if(role != 'sarpras') navigateTo('/bast/penyaluran-aset')
 
 async function fetchBAbyId() {
   let res = await client.collection('bast').getOne(route.query.ba, {
