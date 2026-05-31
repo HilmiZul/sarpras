@@ -72,7 +72,7 @@
 
             <button :disabled="isLoading || isSaving" class="btn btn-primary">
               <span v-if="isSaving">Sedang menyimpan</span>
-              <span v-else>Simpan</span>
+              <span v-else><i class="bi bi-save"></i> Simpan</span>
             </button>
           </div>
         </div>

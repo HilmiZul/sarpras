@@ -66,7 +66,7 @@
                 </div>
 
                 <button class="btn btn-primary"><i class="bi bi-save"></i> Simpan</button>
-                <button type="button" class="btn btn-outline-dark ms-2 float-end" data-bs-dismiss="modal">Tutup</button>
+                <NuxtLink type="button" class="text-dark fw-bold ms-3" data-bs-dismiss="modal">Tutup</NuxtLink>
               </form>
             </div>
           </div>
@@ -166,7 +166,7 @@
                 </div>
 
                 <button class="btn btn-primary"><i class="bi bi-save"></i> Simpan</button>
-                <button type="button" class="btn btn-outline-dark ms-2 float-end" data-bs-dismiss="modal">Tutup</button>
+                <NuxtLink type="button" class="text-dark fw-bold ms-3" data-bs-dismiss="modal">Tutup</NuxtLink>
               </form>
 
             </div>

@@ -64,7 +64,8 @@
                     <input v-model="form.tgl_sppb" class="form-control form-control-lg" id="tgl_sppb" type="date" required />
                   </div>
 
-                  <button class="btn btn-primary btn-lg">Buat</button>
+                  <button class="btn btn-primary"><i class="bi bi-save"></i> Buat</button>
+                  <NuxtLink to="/inventaris/aset" class="text-dark fw-bold ms-3">Batal</NuxtLink>
                 </div>
               </form>
             </div>
@@ -101,7 +102,7 @@
                     <div class="fw-bold text-muted fs-6 mb-2">{{ ba.no_ba }}</div>
 
                     <div class="text-muted">Tahun SPPB</div>
-                    <div class="fw-bold text-muted fs-6 mb-2">{{ ba.tgl_sppb }}</div>
+                    <div class="fw-bold text-muted fs-6 mb-2">{{ new Date(ba.tgl_sppb).getFullYear() }}</div>
 
                     <div class="text-muted">SPJ</div>
                     <div class="fw-bold text-muted fs-6 mb-2">{{ ba.tgl_ba_spj }}</div>
@@ -174,10 +175,6 @@
                   </ul>
                 </div>
               </div>
-
-              <div class="modal-footer border-0">
-                <button class="btn btn-dark" data-bs-dismiss="modal">Tutup</button>
-              </div>
             </div>
           </div>
         </div>
@@ -194,16 +191,16 @@
                 <div v-if="isUploaded" class="alert alert-success">Berkas berhasil diunggah!</div>
 
                 <form @submit.prevent="uploadArsip">
-                  <div class="mb-3">
+                  <div class="mb-4">
                     <label for="file" class="mb-2">Berkas .PDF <span class="text-danger">(1 Mb)</span></label>
                     <input @change="compressFile" class="form-control form-control-lg" id="file" type="file" accept="application/pdf" required />
                   </div>
 
                   <button :disabled="isLoadingUpload" class="btn btn-primary">
                     <span v-if="isLoadingUpload">Sedang mengirim</span>
-                    <span v-else>Kirim</span>
+                    <span v-else><i class="bi bi-send"></i> Kirim</span>
                   </button>
-                  <button @click="closeModalUploadArsip" type="button" class="btn btn-outline-dark ms-2" data-bs-dismiss="modal">Tutup</button>
+                  <NuxtLink @click="closeModalUploadArsip" type="button" class="text-dark fw-bold ms-3" data-bs-dismiss="modal">Tutup</NuxtLink>
                 </form>
               </div>
             </div>
@@ -240,7 +237,7 @@
                     <input v-model="formUpdate.tgl_sppb" class="form-control form-control-lg" id="update_tgl_sppb" type="date" required />
                   </div>
 
-                  <button class="btn btn-primary">Simpan</button>
+                  <button class="btn btn-primary"><i class="bi bi-save"></i> Simpan</button>
                 </form>
               </div>
             </div>
@@ -470,7 +467,7 @@ async function fetchBA(filter="") {
       let raw_tgl_sppb = new Date(res.items[i].tgl_sppb)
       bast.value.items[i].tgl_ba_spj = raw_tgl_ba_spj.toISOString().split('T')[0]
       bast.value.items[i].tgl_sppb = raw_tgl_sppb.toISOString().split('T')[0]
-      bast.value.items[i].tgl_sppb = raw_tgl_ba_spj.getFullYear()
+      // bast.value.items[i].tgl_sppb = raw_tgl_ba_spj.getFullYear()
     }
 
     isLoading.value = false

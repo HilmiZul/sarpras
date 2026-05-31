@@ -261,9 +261,9 @@
           <div class="col-md-8">
             <button :disabled="isSending" class="btn btn-primary">
               <span v-if="isSending">Sedang menyimpan</span>
-              <span v-else>Simpan</span>
+              <span v-else><i class="bi bi-save"></i> Simpan</span>
             </button>
-            <NuxtLink to="/inventaris/aset" class="btn btn-outline-dark ms-2">Kembali</NuxtLink>
+            <NuxtLink to="/inventaris/aset" class="text-dark fw-bold ms-3">Kembali</NuxtLink>
           </div>
         </div>
       </form>

@@ -35,7 +35,7 @@
                   <input :disabled="isLoading" v-model="form.nama" class="form-control form-control-lg" id="nama" type="text" placeholder="nama lengkap" required />
                 </div>
 
-                <button :disabled="isLoading" class="btn btn-primary">Simpan</button>
+                <button :disabled="isLoading" class="btn btn-primary"><i class="bi bi-save"></i> Simpan</button>
               </div>
             </div>
 
@@ -72,7 +72,7 @@
                   <input :disabled="isLoading" v-model="formPassword.passwordConfirm" class="form-control form-control-lg" id="passwordConfirm" type="password" placeholder="ketik lagi password baru" required />
                 </div>
 
-                <button :disabled="isLoading || formPassword.oldPassword.length < 8 || formPassword.password.length < 8 || formPassword.passwordConfirm.length < 8" class="btn btn-primary">Simpan</button>
+                <button :disabled="isLoading || formPassword.oldPassword.length < 8 || formPassword.password.length < 8 || formPassword.passwordConfirm.length < 8" class="btn btn-primary"><i class="bi bi-save"></i> Simpan</button>
               </form>
             </div>
 
