@@ -215,4 +215,8 @@ label {
 a {
   text-decoration: none;
 }
+
+.pengaturan-logo {
+  width: 50px
+}
 </style>
