@@ -108,7 +108,7 @@
         <ul v-for="item in items.items" :key="item.id" class="list-group list-group-flush">
           <li @click="setModalItem(item)" data-bs-toggle="modal" data-bs-target="#update" class="list-group-item d-flex justify-content-between align-items-start hand">
             <div v-if="item.avatar" class="mb-3 thumb-avatar-container">
-              <img @click="setModalPreview(item)" :src="`${host}/api/files/_pb_users_auth_/${item.id}/${item.avatar}`" :alt="user?.user.nama" class="thumb-avatar" data-bs-toggle="modal" data-bs-target="#preview-avatar" />
+              <img @click="setModalPreview(item)" :src="`${host}/api/files/_pb_users_auth_/${item.id}/${item.avatar}`" :alt="user?.user.nama" class="thumb-avatar rounded-5" data-bs-toggle="modal" data-bs-target="#preview-avatar" />
             </div>
 
             <div class="ms-2 me-auto">

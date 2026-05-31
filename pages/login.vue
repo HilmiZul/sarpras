@@ -12,7 +12,7 @@
 
             <div class="mb-4">
               <label for="pass" class="fw-bold text-muted mb-2 fs-5">Password</label>
-              <input v-model="password" :disabled="isLoading" id="pass" type="password" class="form-control form-control-lg p-3" placeholder="masukin password" required />
+              <input v-model="password" :disabled="isLoading || username.length < 3" id="pass" type="password" class="form-control form-control-lg p-3" placeholder="masukin password" required />
             </div>
 
             <div v-if="isError" class="alert alert-danger small mb-4">
@@ -21,7 +21,7 @@
             </div>
 
             <div class="d-grid gap-2 mt-5">
-              <button :disabled="isLoading" class="btn btn-primary btn-lg p-3">
+              <button :disabled="isLoading || username.length < 3 || password.length < 8" class="btn btn-primary btn-lg p-3">
                 <span v-if="isLoading">tunggu bentar</span>
                 <span v-else><i class="bi bi-send"></i> Masuk</span>
               </button>
