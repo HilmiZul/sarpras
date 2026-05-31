@@ -1,3 +1,10 @@
+## v0.6.0-dev (30  Mei 2026)
+
+- Re-organize nav Item
+- Protect some button, pages and nav item when role != SARPRAS
+- Add new pengaturan's page
+- WIP: check and auto insert KIB when add new asset item
+
 ## v0.5.1-dev (29  Mei 2026)
 
 - Add new dependency angka/tanggal terbilang for convert date to terbilang
