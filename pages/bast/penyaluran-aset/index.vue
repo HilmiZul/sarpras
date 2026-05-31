@@ -109,14 +109,14 @@
                     <div class="text-muted">Unit Kerja</div>
                     <div class="fw-bold text-muted fs-6 mb-2">{{ ba?.expand?.unit_kerja.ruangan }}</div>
 
-                    <button @click="setModalItemEdit(ba)" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit"><i class="bi bi-pencil"></i> Edit</button>
-                    <button @click="fetchAsetBySpj(ba.unit_kerja, ba.tgl_ba_spj)" class="btn btn-primary ms-2" data-bs-toggle="modal" data-bs-target="#pratinjau-aset-by-ba"><i class="bi bi-eye"></i> Intip Aset</button>
-                    <NuxtLink :to="`/bast/penyaluran-aset/cetak?ba=${ba.id}&uk=${ba.unit_kerja}&tgl_spj=${ba.tgl_ba_spj}`" target="_blank" class="btn btn-dark ms-2"><i class="bi bi-printer"></i> Cetak</NuxtLink>
+                    <button v-if="role == 'sarpras'" @click="setModalItemEdit(ba)" class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#edit"><i class="bi bi-pencil"></i> Edit</button>
+                    <button @click="fetchAsetBySpj(ba.unit_kerja, ba.tgl_ba_spj)" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pratinjau-aset-by-ba"><i class="bi bi-eye"></i> Intip Aset</button>
+                    <NuxtLink v-if="role == 'sarpras'" :to="`/bast/penyaluran-aset/cetak?ba=${ba.id}&uk=${ba.unit_kerja}&tgl_spj=${ba.tgl_ba_spj}`" target="_blank" class="btn btn-dark ms-2"><i class="bi bi-printer"></i> Cetak</NuxtLink>
                     <button v-if="ba.arsip" @click="pratinjauArsip(ba)" class="btn btn-dark ms-2" data-bs-toggle="modal" data-bs-target="#pratinjau-arsip"><i class="bi bi-eye"></i> Lihat Arsip</button>
-                    <button @click="setModalUpload(ba.id)" class="btn btn-outline-dark ms-2" data-bs-toggle="modal" data-bs-target="#unggah-ba"><i class="bi bi-upload"></i> Unggah Arsip</button>
+                    <button v-if="role == 'sarpras'" @click="setModalUpload(ba.id)" class="btn btn-outline-dark ms-2" data-bs-toggle="modal" data-bs-target="#unggah-ba"><i class="bi bi-upload"></i> Unggah Arsip</button>
                   </div>
 
-                  <button @click="() => id_item = ba.id" data-bs-toggle="modal" data-bs-target="#hapus-item" class="btn btn-danger"><i class="bi bi-trash"></i> Hapus</button>
+                  <button v-if="role == 'sarpras'" @click="() => id_item = ba.id" data-bs-toggle="modal" data-bs-target="#hapus-item" class="btn btn-danger"><i class="bi bi-trash"></i> Hapus</button>
                 </li>
               </ul>
             </div>
@@ -183,7 +183,7 @@
         </div>
 
         <!-- single modal: unggah berkas ba -->
-        <div class="modal" id="unggah-ba" tabindex="-1">
+        <div v-if="role == 'sarpras'" class="modal" id="unggah-ba" tabindex="-1">
           <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
               <div class="modal-header fw-bold">
@@ -211,7 +211,7 @@
         </div>
 
         <!-- single modal: edit -->
-        <div class="modal" id="edit" tabindex="-1">
+        <div v-if="role == 'sarpras'" class="modal" id="edit" tabindex="-1">
           <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
               <div class="modal-header fw-bold">
@@ -247,7 +247,7 @@
           </div>
         </div>
 
-        <div class="modal" id="hapus-item" tabindex="-1">
+        <div v-if="role == 'sarpras'" class="modal" id="hapus-item" tabindex="-1">
           <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
               <div class="modal-header fw-bold">
@@ -255,7 +255,7 @@
               </div>
 
               <div class="modal-body">
-                Yakin hapus: <strong>{{ formUpdate?.no_ba }}</strong> ini?
+                Yakin hapus Berita Aacara ini?
               </div>
 
               <div class="modal-footer">
@@ -540,6 +540,8 @@ function setModalUpload(id) {
 
 function setModalItemEdit(ba) {
   formUpdate.value = ba
+  // TODO: Fix later
+  // ba.tgl_sppb is full year, but form edit used date type
 }
 
 function pratinjauArsip(arsip) {
