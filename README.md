@@ -10,11 +10,16 @@ Another (mega) side-project! Semua aset dan bahan tercatat dan terkelola termasu
 - BAST
   - KCD
   - Unit Kerja
+    - Arsip
+- Stiker aset
 - KIB
 - Unit Kerja
   - Penyebaran aset ke lokasi dalam unit kerja
   - Peminjaman alat (aset)
+  - Peminjaman ruang
   - KIR
+  - Pengajuan Aset dan Bahan
+- Pengaturan Umum App. (dev.)
 
 
 ## Setup
