@@ -112,7 +112,7 @@
             </div>
 
             <div class="ms-2 me-auto">
-              <div v-if="item?.expand.unit_kerja" class="text-muted">Unit Kerja</div>
+              <div v-if="item.username" class="text-muted">Username</div>
               <div class="fs-5 fw-bold text-muted mb-2">{{ item.username }}</div>
 
               <div v-if="item?.expand.unit_kerja" class="text-muted">Unit Kerja</div>
