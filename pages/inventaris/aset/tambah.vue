@@ -204,9 +204,9 @@
           <div class="col-md-8">
             <button :disabled="isSending" class="btn btn-primary">
               <span v-if="isSending">Sedang menyimpan</span>
-              <span v-else>Simpan</span>
+              <span v-else><i class="bi bi-save"></i> Simpan</span>
             </button>
-            <NuxtLink to="/inventaris/aset" class="btn btn-outline-dark ms-2">Kembali</NuxtLink>
+            <NuxtLink to="/inventaris/aset" class="text-dark fw-bold ms-3">Kembali</NuxtLink>
           </div>
         </div>
       </form>
@@ -281,6 +281,17 @@ async function buatBaru() {
 
   let dateConvert = new Date(form.value.tgl_ba_spj)
   form.value.tgl_ba_spj = dateConvert.toISOString().split('T')[0]
+
+  // TODO: insert KIB by year: 0001...
+  // reset every new year
+  let res_asset_year = await client.collection('aset').getFullList({
+    filter: `tahun_pengadaan="${form.value.tahun_pengadaan}"`
+  })
+  if(res_asset_year) {
+    console.log(res_asset_year.length)
+    let newKib = res_asset_year.length + 1
+    console.log(String(newKib).padStart(4, '0'))
+  }
 
   isSending.value = true
   isSuccess.value = false
