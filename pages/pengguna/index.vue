@@ -246,7 +246,7 @@ if(role != 'sarpras') navigateTo('/')
 
 const form = ref({
   "email": "",
-  "emailVisibility": true,
+  "emailVisibility": false,
   "avatar": "",
   "username": "",
   "nama": "",
