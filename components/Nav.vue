@@ -85,10 +85,6 @@
               <NuxtLink class="nav-link" :activeClass="activeClass" to="/pengguna"><i class="bi bi-people-fill"></i> PENGGUNA</NuxtLink>
             </li>
 
-            <li class="nav-item">
-              <NuxtLink class="nav-link" :activeClass="activeClass" to="/personalisasi"><i class="bi bi-person-fill"></i> PERSONALISASI</NuxtLink>
-            </li>
-
             <!-- <li class="nav-item dropdown"> -->
             <!--   <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a> -->
             <!--   <div class="dropdown-menu"> -->
@@ -100,12 +96,13 @@
         </div>
 
         <div v-if="user?.isUserLoggedIn" class="d-flex">
-          <span class="text-white me-1">{{ role.toUpperCase() }} / </span>
+          <NuxtLink v-if="role == 'sarpras'" class="nav-link me-2 text-white" to="/pengaturan"><i class="bi bi-sliders"></i></NuxtLink>
+          <NuxtLink class="nav-link text-white me-2" to="/personalisasi"><i class="bi bi-person-fill"></i> {{ role.toUpperCase() }} / </NuxtLink>
           <NuxtLink to="/logout" class="nav-link text-white fw-bold">LOGOUT</NuxtLink>
         </div>
-        <div v-else class="d-flex">
-          <NuxtLink to="/login" class="nav-link text-white fw-bold">LOGIN <i class="bi bi-box-arrow-in-right"></i></NuxtLink>
-        </div>
+        <!-- <div v-else class="d-flex"> -->
+        <!--   <NuxtLink to="/login" class="nav-link text-white fw-bold">LOGIN <i class="bi bi-box-arrow-in-right"></i></NuxtLink> -->
+        <!-- </div> -->
       </div>
     </nav>
 
