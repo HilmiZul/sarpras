@@ -1,3 +1,9 @@
+## v0.6.1-dev (31  Mei 2026)
+
+- TODO: insert KIB by a year: 0001, 0002,... and reset every next year: 0001...
+- Revamp a lil bit UI
+- Improvement
+
 ## v0.6.0-dev (30  Mei 2026)
 
 - Re-organize nav Item
