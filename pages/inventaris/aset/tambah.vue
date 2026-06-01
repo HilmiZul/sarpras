@@ -265,7 +265,8 @@ const form = ref({
   "keterangan": "",
   "foto_barang": "",
   "kondisi": "B",
-  "pejabat_penandatangan": ""
+  "pejabat_penandatangan": "",
+  "kib": ""
 })
 
 if(role != 'sarpras') navigateTo('/barang')
@@ -282,27 +283,31 @@ async function buatBaru() {
   let dateConvert = new Date(form.value.tgl_ba_spj)
   form.value.tgl_ba_spj = dateConvert.toISOString().split('T')[0]
 
+  isSending.value = true
+  isSuccess.value = false
+
   // TODO: insert KIB by year: 0001...
   // reset every new year
   let res_asset_year = await client.collection('aset').getFullList({
     filter: `tahun_pengadaan="${form.value.tahun_pengadaan}"`
   })
+
   if(res_asset_year) {
-    console.log(res_asset_year.length)
-    let newKib = res_asset_year.length + 1
-    console.log(String(newKib).padStart(4, '0'))
+    let nomor_kib = res_asset_year.length + 1
+    let kib = String(nomor_kib).padStart(4, '0')
+
+    // insert before POST ke db
+    // kib --> form.value.kib
+    form.value.kib = kib
+
+    let res_insert = await client.collection('aset').create(form.value)
+    if(res_insert) {
+      isSending.value = false
+      isSuccess.value = true
+      navigateTo("/inventaris/aset")
+    }
   }
 
-  isSending.value = true
-  isSuccess.value = false
-
-  let res = await client.collection('aset').create(form.value)
-
-  if(res) {
-    isSending.value = false
-    isSuccess.value = true
-    navigateTo("/inventaris/aset")
-  }
 }
 
 async function fetchByCollection(collection) {
