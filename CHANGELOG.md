@@ -1,3 +1,8 @@
+## v0.6.2-dev (1 Juni 2026)
+
+- Set and check KIB before insert new aset
+- Display KIB in detail
+
 ## v0.6.1-dev (31  Mei 2026)
 
 - TODO: insert KIB by a year: 0001, 0002,... and reset every next year: 0001...
