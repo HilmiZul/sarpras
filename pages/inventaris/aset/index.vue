@@ -159,6 +159,10 @@
               <div class="row">
                 <div class="col-md-6">
                   <div class="mb-3">
+                    <label>KIB</label>
+                    <div class="fw-bold">{{ asset?.kib }}</div>
+                  </div>
+                  <div class="mb-3">
                     <label>No.SP2D</label>
                     <div class="fw-bold">{{ asset?.no_sp2d }}</div>
                   </div>
