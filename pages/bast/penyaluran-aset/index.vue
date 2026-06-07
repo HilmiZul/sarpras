@@ -256,7 +256,7 @@
               </div>
 
               <div class="modal-footer">
-                <button @click="deleteItem" data-bs-dismiss="modal" class="btn btn-outline-danger"><i class="bi bi-save"></i> Ya, hapus</button>
+                <button @click="deleteItem" data-bs-dismiss="modal" class="btn"><i class="bi bi-trash"></i> Ya, hapus</button>
                 <button class="btn btn-dark" data-bs-dismiss="modal">Tidak</button>
               </div>
             </div>
