@@ -59,9 +59,9 @@
                   <NuxtLink v-if="role == 'sarpras'" :to="`/inventaris/aset/edit/${aset.id}`" class="btn btn-outline-dark ms-2"><i class="bi bi-pencil square"></i> Edit</NuxtLink>
                 </div>
 
-                <span class="badge fs-6 text-bg-dark rounded-pill me-2">{{ aset.expand.sumber_aset.nama_sumber }}</span>
-                <span class="badge fs-6 text-bg-dark rounded-pill me-2">{{ aset.expand.tahun_pengadaan.tahun }}</span>
-                <span class="badge fs-6 text-bg-dark rounded-pill text-uppercase">{{ aset.triwulan }}</span>
+                <span class="badge fs-6 border border-1 border-dark text-muted rounded-pill me-2">{{ aset.expand.sumber_aset.nama_sumber }}</span>
+                <span class="badge fs-6 border border-1 border-dark text-muted rounded-pill me-2">{{ aset.expand.tahun_pengadaan.tahun }}</span>
+                <span class="badge fs-6 border border-1 border-dark text-muted rounded-pill text-uppercase">{{ aset.triwulan }}</span>
               </li>
             </ol>
 
@@ -91,9 +91,9 @@
                   <div class="text-muted small mb-2">SPJ: {{ aset?.tgl_ba_spj }}</div>
 
                   <div class="fw-bold text-muted mb-3">{{ aset.expand.rincian_aset.nama_barang }} <span class="text-muted fw-normal">({{ aset.nama_aset_barang }})</span></div>
-                  <span class="badge fs-6 text-bg-dark rounded-pill me-2">{{ aset.expand.sumber_aset.nama_sumber }}</span>
-                  <span class="badge fs-6 text-bg-dark rounded-pill me-2">{{ aset.expand.tahun_pengadaan.tahun }}</span>
-                  <span class="badge fs-6 text-bg-dark rounded-pill text-uppercase">{{ aset.triwulan }}</span>
+                  <span class="badge fs-6 border border-1 border-dark text-muted rounded-pill me-2">{{ aset.expand.sumber_aset.nama_sumber }}</span>
+                  <span class="badge fs-6 border border-1 border-dark text-muted rounded-pill me-2">{{ aset.expand.tahun_pengadaan.tahun }}</span>
+                  <span class="badge fs-6 border border-1 border-dark text-muted rounded-pill text-uppercase">{{ aset.triwulan }}</span>
                 </div>
 
                 <div class="card-footer bg-transparent border-0 d-grid gap-2">
