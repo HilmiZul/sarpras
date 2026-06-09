@@ -65,7 +65,6 @@
                   </div>
 
                   <button class="btn btn-primary"><i class="bi bi-save"></i> Buat</button>
-                  <NuxtLink to="/inventaris/aset" class="text-dark fw-bold ms-3">Batal</NuxtLink>
                 </div>
               </form>
             </div>

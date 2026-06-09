@@ -236,12 +236,12 @@
                     <div class="fw-bold white-space">{{ asset?.spesifikasi }}</div>
                   </div>
 
-                  <div class="thumb-container">
-                    <div class="thumb-aset">
-                      <img v-if="asset?.foto_barang" :src="`${host}/api/files/${asset?.collectionId}/${asset?.id}/${asset?.foto_barang}`" :alt="asset?.id" class="thumb-aset" />
+                  <!-- <div class="thumb-container"> -->
+                    <!-- <div class="thumb-aset"> -->
+                      <img v-if="asset?.foto_barang" :src="`${host}/api/files/${asset?.collectionId}/${asset?.id}/${asset?.foto_barang}`" :alt="asset?.id" class="thumb-rincian-aset" />
                       <img v-else src="~/assets/img/placeholder.jpg" alt="thumb" class="thumb-aset" />
-                    </div>
-                  </div>
+                    <!-- </div> -->
+                  <!-- </div> -->
                 </div>
               </div>
 
