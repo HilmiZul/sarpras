@@ -2,7 +2,7 @@
   <div class="row mt-5 justify-content-center">
     <div class="col-md-3">
 
-      <div class="card rounded-4">
+      <div class="card">
         <div class="card-body p-4">
           <form @submit.prevent="handleLogin">
             <div class="mb-4">
