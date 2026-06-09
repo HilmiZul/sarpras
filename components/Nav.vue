@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav class="navbar navbar-expand-lg fixed-top bg-primary rounded-pill mx-1" data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg fixed-top bg-primary mx-2" data-bs-theme="dark">
       <div class="container-fluid">
         <NuxtLink to="/" class="navbar-brand border border-1 border-white px-2 rounded-pill bg-white text-dark fw-bold">SarpraS</NuxtLink>
         <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
@@ -144,5 +144,10 @@ a.nav-item-active {
 .dropdown-menu a.nav-link:hover,
 .dropdown-menu a.nav-item-active {
   border-bottom: 0;
+}
+
+.navbar {
+  border-bottom-right-radius: 15px;
+  border-bottom-left-radius: 15px;
 }
 </style>
