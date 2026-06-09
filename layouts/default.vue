@@ -231,4 +231,8 @@ a {
 .pengaturan-logo {
   width: 50px
 }
+
+.logo-sticker {
+  width: 100%;
+}
 </style>
