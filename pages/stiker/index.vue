@@ -31,7 +31,7 @@
       <div v-if="filters.unit_kerja && filters.tgl_ba_spj">
         <LoadingPlaceholder v-if="isLoading" :col="12" :n="7" />
 
-        <PrintableAreaSticker v-else-if="!isLoading && assets.length > 0" :assets :setting />
+        <PratinjauStiker v-else-if="!isLoading && assets.length > 0" :assets :setting />
 
         <div v-else class="p-5 text-center text-muted fw-bold">
           <i class="bi bi-search fs-2"></i>
