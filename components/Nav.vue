@@ -1,8 +1,8 @@
 <template>
   <div>
-    <nav class="navbar navbar-expand-lg fixed-top bg-primary" data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg fixed-top bg-primary rounded-pill mx-1" data-bs-theme="dark">
       <div class="container-fluid">
-        <NuxtLink to="/" class="navbar-brand border border-1 border-white px-2 rounded-2 bg-white text-dark fw-bold"> sarpras<sup class="text-warning">&bull;</sup></NuxtLink>
+        <NuxtLink to="/" class="navbar-brand border border-1 border-white px-2 rounded-pill bg-white text-dark fw-bold">SarpraS</NuxtLink>
         <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
           <i class="bi bi-list-nested"></i>
         </button>
@@ -66,11 +66,15 @@
             </li>
 
             <li v-if="role == 'sarpras'" class="nav-item">
+              <NuxtLink class="nav-link" :activeClass="activeClass" to="/kir"><i class="bi bi-card-checklist"></i> KIR</NuxtLink>
+            </li>
+
+            <li v-if="role == 'sarpras'" class="nav-item">
               <NuxtLink class="nav-link" :activeClass="activeClass" to="/stiker"><i class="bi bi-emoji-smile-fill"></i> STIKER</NuxtLink>
             </li>
 
             <li v-if="role == 'sarpras'" class="nav-item">
-              <NuxtLink class="nav-link" :activeClass="activeClass" to="/kib"><i class="bi bi-card-text"></i> KIB</NuxtLink>
+              <NuxtLink class="nav-link" :activeClass="activeClass" to="/kib"><i class="bi bi-box-seam-fill"></i> KIB</NuxtLink>
             </li>
 
             <li class="nav-item">
@@ -129,6 +133,7 @@ a.nav-item-active {
   background-color: #fff;
   border-color: #158cba;
   box-shadow: #158cba 3px 3px 0 !important;
+  border-radius: 10px !important;
 }
 
 .dropdown-menu a.nav-link {
