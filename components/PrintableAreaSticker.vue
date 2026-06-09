@@ -1,15 +1,11 @@
 <template>
   <div class="print-container">
-    <div class="mb-3">
-      <select v-model="selectedSize" class="form-select">
-        <option value="a4">A4 (210 × 297 mm)</option>
-        <option value="f4">F4 (210 × 330 mm)</option>
-      </select>
-      <button @click="print" class="btn btn-dark">🖨️ Cetak Sekarang</button>
-    </div>
-
-    <div :class="['printable-paper', selectedSize]">
-      <slot></slot>
+    <div v-if="props.assets" :class="['printable-paper', selectedSize]">
+      <div class="row">
+        <div v-for="(asset, i) in assets" :key="i" class="col-md-6 border border-1 border-dark">
+          {{ asset }}
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -18,10 +14,9 @@
 import { ref } from 'vue'
 
 const selectedSize = ref('a4')
-
-const print = () => {
-  window.print()
-}
+const props = defineProps({
+  assets: Array | null
+})
 </script>
 
 <style scoped>
