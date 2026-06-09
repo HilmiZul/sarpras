@@ -71,11 +71,11 @@ html, body {
 }
 
 .martop {
-  margin-top: 50px;
+  margin-top: 60px;
 }
 
 .card {
-  border-radius: 0;
+  border-radius: 15px;
   border-color: rgba(127, 127, 127);
   box-shadow: rgba(127, 127, 127) 3px 3px 0 !important;
 }
@@ -98,9 +98,15 @@ table.table thead th {
 .form-control:focus {
   border-color: rgba(127, 127, 127);
   box-shadow: rgba(127, 127, 127) 3px 3px 0 !important;
+  border-radius: 10px;
 }
 
 .login-logo {
   width: 10%;
+}
+
+.btn,
+.form-control {
+  border-radius: 10px;
 }
 </style>

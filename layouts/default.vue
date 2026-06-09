@@ -33,11 +33,11 @@ html, body {
 }
 
 .martop {
-  margin-top: 50px;
+  margin-top: 60px;
 }
 
 .card {
-  border-radius: 0;
+  border-radius: 15px;
   border-color: rgba(127, 127, 127);
   box-shadow: rgba(127, 127, 127) 3px 3px 0 !important;
 }
@@ -63,10 +63,11 @@ table.table thead th {
 
 .btn {
   text-transform: initial;
+  border-radius: 10px;
 }
 
 .modal .modal-dialog .modal-content {
-  border-radius: 0 !important;
+  border-radius: 15px !important;
   border-color: rgba(127, 127, 127) !important;
   box-shadow: rgba(127, 127, 127) 3px 3px 0 !important;
 }
@@ -75,6 +76,7 @@ table.table thead th {
 .form-control:focus,
 .form-select,
 .form-select:focus {
+  border-radius: 10px;
   border-color: rgba(127, 127, 127);
   box-shadow: rgba(127, 127, 127) 3px 3px 0 !important;
   /* border-color: #158cba; */
@@ -126,11 +128,18 @@ textarea {
   height: 100px;
 }
 
+.thumb-rincian-aset {
+  width: 100%;
+  border-radius: 15px;
+}
+
 .thumb-container .thumb-aset,
 .thumb-avatar-container .thumb-avatar {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
 }
 
 .thumb-preview-avatar {
@@ -165,7 +174,7 @@ label {
 
 .unit-kerja-container .unit-kerja {
   position: absolute;
-  bottom: 0;
+  bottom: -5px;
   right: 0;
   padding: 7px;
   background-color: rgba(0, 0, 0, .7);
@@ -178,6 +187,7 @@ label {
   top: 0;
   left: 0;
   border-radius: 0;
+  border-top-left-radius: 15px;
   padding: 7px;
   color: #fff;
   z-index: 1;
@@ -197,6 +207,8 @@ label {
   top: 0;
   background-color: rgba(0, 0, 0, .3);
   transition: .2s all ease-in-out;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
 }
 
 .thumb-overlay-container .thumb-overlay-hilang {
