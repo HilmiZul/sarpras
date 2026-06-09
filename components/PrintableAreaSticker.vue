@@ -1,9 +1,61 @@
 <template>
   <div class="print-container">
+    <div class="text-center text-muted fw-bold fs-2 mb-3">
+      Prantinjau
+      <NuxtLink v-if="assets.length > 0" to="/" class="btn btn-primary"><i class="bi bi-printer"></i> Cetak</NuxtLink>
+    </div>
+
     <div v-if="props.assets" :class="['printable-paper', selectedSize]">
-      <div class="row">
+      <div class="row fw-bold">
+
+        <!-- loop dulu jumlah aset lalu nomor reg by volume aset -->
         <div v-for="(asset, i) in assets" :key="i" class="col-md-6 border border-1 border-dark">
-          {{ asset }}
+          <!-- loop dulu nomor reg -->
+          <div v-for="(reg, j) in asset.volume" :key="j" class="row p-2">
+            <div class="col-md-4 border border-1 border-dark">
+              <div class="row border-bottom border-1 border-dark">
+                <div class="col-md-12 p-3">
+                  <img v-if="props.setting" :src="`${host}/api/files/${props.setting.collectionId}/${props.setting.id}/${props.setting.logo_provinsi}`" alt="logo provinsi" class="logo-sticker">
+                </div>
+              </div>
+              <div class="row border-bottom border-1 border-dark">
+                <div class="col-md-12 py-1">
+                  No.Reg: {{ j+1 }}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12 py-1">
+                  No.KIB: {{ asset.kib }}
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-8 border border-1 border-dark text-center text-uppercase">
+              <div class="row border-bottom border-1 border-dark py-3">
+                <div class="col-md-12">
+                  <div class="text-muted">Kode Lokasi</div>
+                  {{ asset?.expand?.unit_kerja.kode_lokasi }}
+                </div>
+              </div>
+              <div class="row border-bottom border-1 border-dark py-2">
+                <div class="col-md-12">
+                  <div class="text-muted">Kode Barang</div>
+                  {{ asset?.expand?.rincian_aset.kode_barang }}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 border-end border-1 border-dark py-3">
+                  <div class="text-muted">Sumber</div>
+                  {{ asset?.expand?.sumber_aset.nama_sumber }}
+                </div>
+                <div class="col-md-6 py-3">
+                  <div class="text-muted">Tahun</div>
+                  {{ asset?.expand?.tahun_pengadaan.tahun }}
+                </div>
+              </div>
+            </div>
+
+          </div>
         </div>
       </div>
     </div>
@@ -13,9 +65,12 @@
 <script setup>
 import { ref } from 'vue'
 
+const config = useRuntimeConfig()
+const host = config.public.apiBaseUrl + `:` + config.public.apiPort
 const selectedSize = ref('a4')
 const props = defineProps({
-  assets: Array | null
+  assets: Array | null,
+  setting: String | null,
 })
 </script>
 
