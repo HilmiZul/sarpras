@@ -1,3 +1,14 @@
+## v0.7.0-dev (7 Juni 2026)
+
+- Improvement
+- Generate sticker by Unit and SPJ
+- Rounded components
+- Add new page: KIR (Kartu Inventaris Ruang)
+  - Fetch Unit Kerja
+  - Preview assets by Unit Kerja
+- Fetch assets by tahun and BA date, then throw results to Printable Sticker
+- Render assets from parent by filtered
+
 ## v0.6.2-dev (1 Juni 2026)
 
 - Set and check KIB before insert new aset
