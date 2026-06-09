@@ -18,7 +18,7 @@
                   <img v-if="props.setting" :src="`${host}/api/files/${props.setting.collectionId}/${props.setting.id}/${props.setting.logo_provinsi}`" alt="logo provinsi" class="logo-sticker">
                 </div>
               </div>
-              <div class="row border-bottom border-1 border-dark">
+              <div class="row">
                 <div class="col-md-12 py-1">
                   No.Reg: {{ j+1 }}
                 </div>
@@ -31,20 +31,20 @@
             </div>
 
             <div class="col-md-8 border border-1 border-dark text-center text-uppercase">
-              <div class="row border-bottom border-1 border-dark py-3">
+              <div class="row py-3">
                 <div class="col-md-12">
                   <div class="text-muted">Kode Lokasi</div>
                   {{ asset?.expand?.unit_kerja.kode_lokasi }}
                 </div>
               </div>
-              <div class="row border-bottom border-1 border-dark py-2">
+              <div class="row py-2">
                 <div class="col-md-12">
                   <div class="text-muted">Kode Barang</div>
                   {{ asset?.expand?.rincian_aset.kode_barang }}
                 </div>
               </div>
               <div class="row">
-                <div class="col-md-6 border-end border-1 border-dark py-3">
+                <div class="col-md-6 py-3">
                   <div class="text-muted">Sumber</div>
                   {{ asset?.expand?.sumber_aset.nama_sumber }}
                 </div>
