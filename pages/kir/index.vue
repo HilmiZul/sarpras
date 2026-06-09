@@ -85,7 +85,7 @@ const isLoading = ref(true)
 const isLoadingAsset = ref(false)
 
 const perPage = 30
-const perPageAset = 1
+const perPageAset = 30
 
 const unit_kerja = ref()
 const nama_unit = ref()
