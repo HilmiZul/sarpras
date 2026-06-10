@@ -2,7 +2,7 @@
   <div>
     <nav class="navbar navbar-expand-lg fixed-top bg-primary mx-2" data-bs-theme="dark">
       <div class="container-fluid">
-        <NuxtLink to="/" class="navbar-brand border border-1 border-white px-2 rounded-pill bg-white text-dark fw-bold">SarpraS</NuxtLink>
+        <NuxtLink to="/" class="navbar-brand border border-1 border-white px-2 rounded-4 bg-white text-dark fw-bold">SarpraS</NuxtLink>
         <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
           <i class="bi bi-list-nested"></i>
         </button>

@@ -47,7 +47,7 @@
       </div>
 
       <div v-if="props.assets?.items" class="col-md">
-        <div class="text-end text-muted fw-bold">{{ props.assets?.items?.length }} / {{ props.assets?.totalItems }}</div>
+        <div class="text-end text-muted fw-bold">{{ props.assets?.items?.length }} / {{ props.assets?.totalItems }} item(s)</div>
       </div>
     </div>
   </div>
