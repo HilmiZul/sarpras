@@ -117,6 +117,8 @@
 
               <div v-if="item?.expand.unit_kerja" class="text-muted">Unit Kerja</div>
               <div v-if="item?.expand?.unit_kerja" class="fs-5 fw-bold text-muted mb-2">{{ item?.expand?.unit_kerja.ruangan }}</div>
+
+              <button data-bs-toggle="modal" data-bs-target="#reset-password" class="btn btn-primary"><i class="bi bi-lock"></i> Reset Password</button>
             </div>
 
             <!-- <button data-bs-toggle="modal" data-bs-target="#hapus-item" class="btn btn-danger float-end"><i class="bi bi-trash"></i> Hapus</button> -->
@@ -208,6 +210,31 @@
         </div>
       </div>
 
+      <div class="modal" id="reset-password" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header fw-bold">
+              Reset password
+              <button class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+              <div v-if="isSuccess" class="alert alert-success">Password berhasil di reset.</div>
+
+              <form @submit.prevent="handleResetPassword">
+                <label for="password" class="fw-bold mb-2">Password</label>
+                <input v-model="formReset.password" type="password" id="password" class="form-control form-control-lg mb-4" placeholder="password baru" required>
+
+                <label for="reset-password-confirm" class="fw-bold mb-2">Konfirmasi Password</label>
+                <input v-model="formReset.passwordConfirm" type="password" id="reset-password-confirm" class="form-control form-control-lg mb-4" placeholder="ketik ulang password baru" required>
+
+                <button class="btn btn-primary"><i class="bi bi-save"></i> Simpan</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
 
   </div>
@@ -259,6 +286,11 @@ const form = ref({
 const formUpdate = ref({
   "username": "",
   "unit_kerja": "",
+})
+
+const formReset = ref({
+  password: "",
+  passwordConfirm: ""
 })
 
 const getItems = async () => {
@@ -337,6 +369,10 @@ function setModalItem(item) {
   formUpdate.value.unit_kerja = item.unit_kerja
 }
 
+function setIdItemToReset(id) {
+  id_item.value = id
+}
+
 function setModalPreview(avatar) {
   avatarPreview.value = avatar
 }
@@ -371,6 +407,18 @@ function resetItem() {
 
 function deleteItem() {
   console.log("hello! haha")
+}
+
+async function handleResetPassword() {
+  isSuccess.value = false
+  isLoading.value = true
+
+  let res = await client.collection(`users`).update(id_item.value, formReset.value)
+
+  if(res) {
+    isSuccess.value = true
+    isLoading.value = false
+  }
 }
 
 
