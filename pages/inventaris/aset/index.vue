@@ -267,7 +267,7 @@
 
     <div class="card-footer bg-transparent">
       <div v-if="assets?.items" class="text-center">
-        <span class="float-end text-muted fw-bold">{{ assets.items.length }} / {{ assets.totalItems }}</span>
+        <span class="float-end text-muted fw-bold">{{ assets.items.length }} / {{ assets.totalItems }} item(s)</span>
       </div>
     </div>
   </div>
