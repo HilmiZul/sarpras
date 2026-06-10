@@ -1,3 +1,8 @@
+## v0.8.0-dev (11 Juni 2026)
+
+- Reset password user list 
+- Improvement
+
 ## v0.7.0-dev (7 Juni 2026)
 
 - Improvement
