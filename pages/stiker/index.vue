@@ -13,7 +13,7 @@
             <label for="unit_kerja" class="fw-bold">Unit Kerja</label>
             <select @change="fetchItems" v-if="unit_kerja.length > 0" v-model="filters.unit_kerja" class="form-select">
               <option value="">Pilih</option>
-              <option v-for="(unit, i) in unit_kerja" :key="i" :value="unit.ruangan">{{ unit.ruangan }}</option>
+              <option v-for="(unit, i) in unit_kerja" :key="i" :value="unit.id">{{ unit.ruangan }}</option>
             </select>
           </div>
 
@@ -22,7 +22,8 @@
             <input @change="fetchItems" :disabled="!filters.unit_kerja" v-model="filters.tgl_ba_spj" class="form-control" id="tgl_ba_spj" type="date" />
           </div>
 
-          <div class="col-md-1 pt-4">
+          <div class="col-md-3 pt-4">
+            <NuxtLink v-if="assets.length > 0" :to="`/stiker/cetak?uk=${filters.unit_kerja}&spj=${filters.tgl_ba_spj}`" target="_blank" class="btn btn-primary me-2"><i class="bi bi-printer"></i> Cetak</NuxtLink>
             <button @click="handleFilterReset" v-if="filters.unit_kerja || filters.tgl_ba_spj" class="btn btn-dark">reset</button>
           </div>
         </div>
@@ -31,7 +32,7 @@
       <div v-if="filters.unit_kerja && filters.tgl_ba_spj">
         <LoadingPlaceholder v-if="isLoading" :col="12" :n="7" />
 
-        <PratinjauStiker v-else-if="!isLoading && assets.length > 0" :assets :setting />
+        <PratinjauStiker v-else-if="!isLoading && assets.length > 0" :assets :setting :unit_kerja="filters.unit_kerja" :tgl_ba_spj="filters.tgl_ba_spj" />
 
         <div v-else class="p-5 text-center text-muted fw-bold">
           <i class="bi bi-search fs-2"></i>
@@ -97,8 +98,8 @@ async function fetchItems() {
     isLoading.value = true
 
     let res = await client.collection('aset').getFullList({
-    expand: `unit_kerja, rincian_aset, sumber_aset, tahun_pengadaan`,
-      filter: `tgl_ba_spj~"${filters.value.tgl_ba_spj}" && unit_kerja.ruangan="${filters.value.unit_kerja}"`
+      expand: `unit_kerja, rincian_aset, sumber_aset, tahun_pengadaan`,
+      filter: `tgl_ba_spj~"${filters.value.tgl_ba_spj}" && unit_kerja="${filters.value.unit_kerja}"`
     })
 
     if(res) {
