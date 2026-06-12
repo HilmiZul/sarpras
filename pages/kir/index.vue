@@ -55,7 +55,7 @@
                       <th>SUMBER</th>
                       <th>TAHUN</th>
                       <th>VOLUME</th>
-                      <th>RUANG</th>
+                      <th>LOKASI</th>
                       <th>KONDISI</th>
                     </tr>
                   </thead>
@@ -68,7 +68,7 @@
                       <td>{{ asset.expand.sumber_aset.nama_sumber }}</td>
                       <td>{{ asset.expand.tahun_pengadaan.tahun }}</td>
                       <td>{{ asset.volume }} {{ asset.expand.satuan_aset.nama_satuan }}</td>
-                      <td>{{ asset.expand.unit_kerja.ruangan }}</td>
+                      <td>{{ asset.expand.lokasi_unit_kerja?.nama_lokasi || "-" }}</td>
                       <td>
                         <span v-if="asset.kondisi == 'B'">Baik</span>
                         <span v-else-if="asset.kondisi == 'RR'">Rusak Ringan</span>
@@ -77,6 +77,15 @@
                     </tr>
                   </tbody>
                 </table>
+
+                <LoadingPlaceholder v-if="isMovingPage" :col="12" :n="1" />
+
+                <div v-if="!isLoading" class="text-center mt-3">
+                  <button v-if="assets.totalItems" :disabled="isMovingPage || assets.page >= assets.totalPages" @click="loadMore(assets.page + 1, true)" class="btn btn-primary">
+                    <span v-if="assets.page >= assets.totalPages">Semua sudah dimuat</span>
+                    <span v-else>Muat lagi <i class="bi bi-arrow-down"></i></span>
+                  </button>
+                </div>
               </div>
 
             </div>
@@ -107,6 +116,8 @@ const user = usePbUser()
 const role = user?.user.value.role
 const isLoading = ref(true)
 const isLoadingAsset = ref(false)
+const isMovingPage = ref(false)
+const setIdUnit = ref()
 
 const perPage = 30
 const perPageAset = 30
@@ -133,10 +144,11 @@ async function fetchUnitKerja() {
 
 async function fetchAssetsByUnitKerja(id_unit, ruangan, kode_lokasi) {
   isLoadingAsset.value = true
+  setIdUnit.value = id_unit
 
   let res = await client.collection('aset').getList(1, perPageAset, {
-    filter: `unit_kerja="${id_unit}"`,
-    expand: `sumber_aset, unit_kerja, tahun_pengadaan, satuan_aset`,
+    filter: `unit_kerja="${setIdUnit.value}"`,
+    expand: `sumber_aset, unit_kerja, lokasi_unit_kerja, tahun_pengadaan, satuan_aset`,
     sort: `-tahun_pengadaan.tahun`
   })
 
@@ -146,6 +158,26 @@ async function fetchAssetsByUnitKerja(id_unit, ruangan, kode_lokasi) {
     kode_lokasi_unit.value = kode_lokasi
 
     isLoadingAsset.value = false
+  }
+}
+
+async function loadMore(page, loading=true) {
+  isMovingPage.value = loading
+
+  let res = await client.collection('aset').getList(page, perPageAset, {
+    filter: `unit_kerja="${setIdUnit.value}"`,
+    expand: `sumber_aset, unit_kerja, tahun_pengadaan, satuan_aset`,
+    sort: `-tahun_pengadaan.tahun`
+  })
+
+  if(res) {
+    assets.value.page = res.page
+    assets.value.perPage = res.perPage
+    assets.value.totalPages = res.totalPages
+    assets.value.totalItems = res.totalItems
+    assets.value.items = assets.value.items.concat(res.items);
+
+    isMovingPage.value = false
   }
 }
 
