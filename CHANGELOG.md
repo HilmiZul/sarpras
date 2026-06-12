@@ -1,3 +1,9 @@
+## v0.9.0-dev (12 Juni 2026)
+
+- Create initial printalb page for sticker
+- KIR detail preview: create pagination with load more
+- Disable delete button BAST when its done
+
 ## v0.8.0-dev (11 Juni 2026)
 
 - Reset password user list 
