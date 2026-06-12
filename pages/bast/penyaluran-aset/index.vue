@@ -97,6 +97,8 @@
               <ul v-for="ba in bast.items" :key="ba.id" class="list-group list-group-flush">
                 <li class="list-group-item d-flex justify-content-between align-items-start py-3">
                   <div class="ms-2 me-auto">
+                    <div v-if="ba.arsip" class="badge fs-6 rounded-pill text-bg-success mb-2">Selesai</div>
+
                     <div class="text-muted">Nomor Berita Acara</div>
                     <div class="fw-bold text-muted fs-6 mb-2">{{ ba.no_ba }}</div>
 
@@ -116,7 +118,7 @@
                     <button v-if="role == 'sarpras'" @click="setModalUpload(ba.id)" class="btn btn-outline-dark ms-2" data-bs-toggle="modal" data-bs-target="#unggah-ba"><i class="bi bi-upload"></i> Unggah Arsip</button>
                   </div>
 
-                  <button v-if="role == 'sarpras'" @click="() => id_item = ba.id" data-bs-toggle="modal" data-bs-target="#hapus-item" class="btn btn-danger"><i class="bi bi-trash"></i> Hapus</button>
+                  <button v-if="role == 'sarpras'" @click="() => id_item = ba.id" :disabled="ba.arsip != ''" data-bs-toggle="modal" data-bs-target="#hapus-item" class="btn btn-danger"><i class="bi bi-trash"></i> Hapus</button>
                 </li>
               </ul>
             </div>
