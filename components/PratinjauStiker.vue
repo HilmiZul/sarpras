@@ -2,7 +2,6 @@
   <div class="print-container">
     <div class="text-center text-muted fw-bold fs-2 mb-3">
       Prantinjau
-      <NuxtLink v-if="assets.length > 0" to="/" class="btn btn-primary"><i class="bi bi-printer"></i> Cetak</NuxtLink>
     </div>
 
     <div v-if="props.assets" :class="['printable-paper', selectedSize]">
@@ -71,7 +70,10 @@ const selectedSize = ref('a4')
 const props = defineProps({
   assets: Array | null,
   setting: String | null,
+  unit_kerja: String | null,
+  tgl_ba_spj: String | null,
 })
+
 </script>
 
 <style scoped>
