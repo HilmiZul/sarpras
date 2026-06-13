@@ -223,6 +223,10 @@
                       <span v-else-if="asset?.kondisi == 'Hilang'" class="text-danger">Hilang</span>
                     </div>
                   </div>
+                  <div v-if="asset?.catatan_isu" class="mb-3">
+                    <label>Catatan Isu/Kerusakan</label>
+                    <div class="fw-bold">{{ asset?.catatan_isu }}</div>
+                  </div>
 
                   <div v-if="asset?.keterangan" class="mb-3">
                     <label>Keterangan</label>

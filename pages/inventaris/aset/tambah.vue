@@ -175,7 +175,12 @@
 
             <div class="mb-4">
               <label for="keterangan" class="fw-bold">Keterangan (opsional)</label>
-              <textarea v-model="form.keterangan" class="form-control form-control-lg" id="keterangan" type="text" placeholder="Tulis keterngan apabila ada..."></textarea>
+              <textarea v-model="form.keterangan" class="form-control form-control-lg" id="keterangan" placeholder="Tulis keterngan apabila ada..."></textarea>
+            </div>
+
+            <div class="mb-4">
+              <label for="catatan_isu" class="fw-bold">Catatan Isu/Kerusakan (opsional)</label>
+              <textarea v-model="form.catatan_isu" class="form-control form-control-lg" id="catatan_isu" placeholder="Tulis catatan kerusakan apabila ada..."></textarea>
             </div>
 
             <div class="mb-4">
@@ -266,7 +271,8 @@ const form = ref({
   "foto_barang": "",
   "kondisi": "B",
   "pejabat_penandatangan": "",
-  "kib": ""
+  "kib": "",
+  "catatan_isu": "-",
 })
 
 if(role != 'sarpras') navigateTo('/barang')

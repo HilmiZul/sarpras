@@ -228,6 +228,11 @@
             </div>
 
             <div class="mb-4">
+              <label for="catatan_isu" class="fw-bold">Catatan Isu/Kerusakan (opsional)</label>
+              <textarea v-model="form.catatan_isu" class="form-control form-control-lg" id="catatan_isu" placeholder="Tulis catatan kerusakan apabila ada..."></textarea>
+            </div>
+
+            <div class="mb-4">
               <label for="foto_barang" class="fw-bold">Foto Barang <span class="text-danger">Maks. 5MB</span> <span class="text-muted">(opsional)</span></label>
               <input @change="compressFile" class="form-control form-control-lg" id="foto_barang" type="file" accept="image/png, image/jpeg, image/jpg" />
             </div>
@@ -324,7 +329,8 @@ const form = ref({
   "keterangan": "",
   "foto_barang": "",
   "kondisi": "B",
-  "pejabat_penandatangan": ""
+  "pejabat_penandatangan": "",
+  "catatan_isu": "",
 })
 
 if(role != 'sarpras') navigateTo('/inventaris/aset')
