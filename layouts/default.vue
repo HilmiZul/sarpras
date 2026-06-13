@@ -89,7 +89,7 @@ table.table thead th {
 }
 
 .list-group .list-group-item:hover {
-  background-color: rgba(127, 127, 127, .1);
+  background-color: rgba(127, 127, 127, .08);
 }
 
 .hand {
