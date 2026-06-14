@@ -40,8 +40,8 @@
               <li class="list-group-item d-flex justify-content-between align-items-start py-4">
                 <div class="thumb-container">
                   <a @click="setModalBarang(aset)" data-bs-toggle="modal" data-bs-target="#rincian" class="hand">
-                    <img v-if="aset.foto_barang" :src="`${host}/api/files/${aset.collectionId}/${aset.id}/${aset.foto_barang}`" :alt="aset.id" class="thumb-aset" />
-                    <img v-else src="~/assets/img/placeholder.jpg" alt="thumb" class="thumb-aset" />
+                    <img v-if="aset.foto_barang" :src="`${host}/api/files/${aset.collectionId}/${aset.id}/${aset.foto_barang}`" :alt="aset.id" class="thumb-aset-list" />
+                    <img v-else src="~/assets/img/placeholder.jpg" alt="thumb" class="thumb-aset-list" />
                   </a>
                 </div>
                 <div class="ms-2 me-auto">
@@ -315,7 +315,7 @@ async function fetchData(filter="") {
   // check role dan advance filter/search
   if(role == 'unit') {
     if(filter) {
-      filter = filter + ` && unit_kerja="${user?.user.value.unit_kerja}"` 
+      filter = filter + ` && unit_kerja="${user?.user.value.unit_kerja}"`
       isActiveSearch.value = true
     } else {
       filter = `unit_kerja="${user?.user.value.unit_kerja}"`
@@ -375,7 +375,7 @@ async function loadMore(filter="", loading=false) {
   // check role dan advance filter/search
   if(role == 'unit') {
     if(filter) {
-      filter = filter + ` && unit_kerja="${user?.user.value.unit_kerja}"` 
+      filter = filter + ` && unit_kerja="${user?.user.value.unit_kerja}"`
       isActiveSearch.value = true
     } else {
       filter = `unit_kerja="${user?.user.value.unit_kerja}"`
