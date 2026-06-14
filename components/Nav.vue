@@ -2,7 +2,7 @@
   <div>
     <nav class="navbar navbar-expand-lg fixed-top bg-primary mx-2" data-bs-theme="dark">
       <div class="container-fluid">
-        <NuxtLink to="/" class="navbar-brand border border-1 border-white px-2 rounded-4 bg-white text-dark fw-bold">SarpraS</NuxtLink>
+        <NuxtLink to="/" class="navbar-brand border border-1 border-white px-2 bg-white text-dark fw-bold">SarpraS</NuxtLink>
         <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
           <i class="bi bi-list-nested"></i>
         </button>
@@ -133,7 +133,9 @@ a.nav-item-active {
   background-color: #fff;
   border-color: #158cba;
   box-shadow: #158cba 3px 3px 0 !important;
-  border-radius: 10px !important;
+  border-end-start-radius: 32px !important;
+  border-end-end-radius: 32px !important;
+  corner-shape: squircle;
 }
 
 .dropdown-menu a.nav-link {
@@ -147,7 +149,13 @@ a.nav-item-active {
 }
 
 .navbar {
-  border-bottom-right-radius: 15px;
-  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 32px;
+  border-bottom-left-radius: 32px;
+  corner-shape: squircle;
+}
+
+.navbar-brand {
+  border-radius: 32px;
+  corner-shape: squircle;
 }
 </style>
