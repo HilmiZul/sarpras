@@ -3,7 +3,7 @@
     <div class="container-fluid martop">
       <div class="row justify-content-center">
         <div class="col-md-3">
-          <div class="text-center p-3  fw-bold bg-primary text-white rounded-4">
+          <div class="text-center p-3  fw-bold bg-primary text-white header-login">
             <LoadingPlaceholder v-if="isLoading" :col="6" :n="1" />
             <div v-else>
               <img v-if="pengaturan" :src="`${host}/api/files/${pengaturan.collectionId}/${pengaturan.id}/${pengaturan.logo_sekolah}`" :alt="pengaturan?.nama_sekolah" class="login-logo">
@@ -75,7 +75,8 @@ html, body {
 }
 
 .card {
-  border-radius: 15px;
+  border-radius: 32px;
+  corner-shape: squircle;
   border-color: rgba(127, 127, 127);
   box-shadow: rgba(127, 127, 127) 3px 3px 0 !important;
 }
@@ -95,10 +96,12 @@ table.table thead th {
 }
 
 .form-control,
-.form-control:focus {
+.form-control:focus,
+.form-control:disabled {
   border-color: rgba(127, 127, 127);
   box-shadow: rgba(127, 127, 127) 3px 3px 0 !important;
-  border-radius: 10px;
+  border-radius: 32px;
+  corner-shape: squircle;
 }
 
 .login-logo {
@@ -107,6 +110,12 @@ table.table thead th {
 
 .btn,
 .form-control {
-  border-radius: 10px;
+  border-radius: 32px;
+  corner-shape: squircle;
+}
+
+.header-login {
+  border-radius: 32px;
+  corner-shape: squircle;
 }
 </style>

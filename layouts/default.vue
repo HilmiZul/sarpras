@@ -37,9 +37,16 @@ html, body {
 }
 
 .card {
-  border-radius: 15px;
+  border-radius: 32px;
   border-color: rgba(127, 127, 127);
   box-shadow: rgba(127, 127, 127) 3px 3px 0 !important;
+  corner-shape: squircle;
+}
+
+.card .card-header {
+  border-top-left-radius: 32px;
+  border-top-right-radius: 32px;
+  corner-shape: squircle;
 }
 
 table tbody {
@@ -63,11 +70,13 @@ table.table thead th {
 
 .btn {
   text-transform: initial;
-  border-radius: 10px;
+  border-radius: 32px;
+  corner-shape: squircle;
 }
 
 .modal .modal-dialog .modal-content {
-  border-radius: 15px !important;
+  border-radius: 32px !important;
+  corner-shape: squircle;
   border-color: rgba(127, 127, 127) !important;
   box-shadow: rgba(127, 127, 127) 3px 3px 0 !important;
 }
@@ -76,7 +85,8 @@ table.table thead th {
 .form-control:focus,
 .form-select,
 .form-select:focus {
-  border-radius: 10px;
+  border-radius: 32px;
+  corner-shape: squircle;
   border-color: rgba(127, 127, 127);
   box-shadow: rgba(127, 127, 127) 3px 3px 0 !important;
   /* border-color: #158cba; */
@@ -130,7 +140,8 @@ textarea {
 
 .thumb-rincian-aset {
   width: 100%;
-  border-radius: 15px;
+  border-radius: 32px;
+  corner-shape: squircle;
 }
 
 .thumb-container .thumb-aset,
@@ -138,8 +149,17 @@ textarea {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-top-left-radius: 15px;
-  border-top-right-radius: 15px;
+  border-top-left-radius: 32px;
+  border-top-right-radius: 32px;
+  corner-shape: squircle;
+}
+
+.thumb-container .thumb-aset-list {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 32px;
+  corner-shape: squircle;
 }
 
 .thumb-preview-avatar {
@@ -151,6 +171,7 @@ textarea {
   height: 100%;
   object-fit: cover;
   border-radius: 20px;
+  corner-shape: squircle;
 }
 
 label {
@@ -167,7 +188,7 @@ label {
   font-size: 14px;
 }
 
-.unit-kerja-container, 
+.unit-kerja-container,
 .kondisi-container {
   position: relative;
 }
@@ -187,7 +208,8 @@ label {
   top: 0;
   left: 0;
   border-radius: 0;
-  border-top-left-radius: 15px;
+  corner-shape: squircle;
+  border-top-left-radius: 32px;
   padding: 7px;
   color: #fff;
   z-index: 1;
@@ -207,8 +229,9 @@ label {
   top: 0;
   background-color: rgba(0, 0, 0, .3);
   transition: .2s all ease-in-out;
-  border-top-left-radius: 15px;
-  border-top-right-radius: 15px;
+  border-top-left-radius: 32px;
+  border-top-right-radius: 32px;
+  corner-shape: squircle;
 }
 
 .thumb-overlay-container .thumb-overlay-hilang {
