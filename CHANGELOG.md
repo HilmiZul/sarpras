@@ -1,3 +1,15 @@
+## v0.11.0-dev (15 Juni 2026)
+
+- Create new page kir/unit
+  - Filter assets in unit by location if exist
+- Improvement global style in default layout
+
+## v0.10.0-dev (13 Juni 2026)
+
+- Fetch issue(s) from assets by kondisi not `B`
+- Add catatan issue in Inventaris Aset: create, update and detail
+- Unit Kerja allowed to update kondisi and catatan issue
+
 ## v0.9.0-dev (12 Juni 2026)
 
 - Create initial printalb page for sticker
