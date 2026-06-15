@@ -162,6 +162,27 @@ textarea {
   corner-shape: squircle;
 }
 
+.thumb-container-table {
+  width: 50px;
+  height: 50px;
+}
+
+.thumb-container-pratinjau-kir {
+  width: 100%;
+}
+
+.thumb-container-pratinjau-kir .thumb-aset {
+  width: 100%;
+}
+
+.thumb-container-table .thumb-aset-table {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 32px;
+  corner-shape: squircle;
+}
+
 .thumb-preview-avatar {
   width: 100%;
 }
