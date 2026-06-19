@@ -159,7 +159,7 @@
                   <input v-model="formUpdate.username" type="text" id="update_username" class="form-control form-control-lg" placeholder="masukkan nama pengguna" required />
                 </div>
 
-                <div class="mb-4">
+                <div v-if="formUpdate.role == 'unit'" class="mb-4">
                   <label for="update_unit_kerja" class="fw-bold mb-2">Unit Kerja</label>
                   <select v-model="formUpdate.unit_kerja" class="form-select form-select-lg" name="update_unit_kerja" id="update_unit_kerja" required>
                     <option value="">Pilih Unit Kerja</option>
@@ -286,6 +286,7 @@ const form = ref({
 const formUpdate = ref({
   "username": "",
   "unit_kerja": "",
+  "role": "",
 })
 
 const formReset = ref({
@@ -367,6 +368,7 @@ function setModalItem(item) {
   id_item.value = item.id
   formUpdate.value.username = item.username
   formUpdate.value.unit_kerja = item.unit_kerja
+  formUpdate.value.role = item.role
 }
 
 function setIdItemToReset(id) {
