@@ -194,7 +194,7 @@
                 <form @submit.prevent="uploadArsip">
                   <div class="mb-4">
                     <label for="file" class="mb-2">Berkas .PDF <span class="text-danger">(1 Mb)</span></label>
-                    <input @change="compressFile" class="form-control form-control-lg" id="file" type="file" accept="application/pdf" required />
+                    <input @change="compressFile" ref="berkas_arsip" class="form-control form-control-lg" id="file" type="file" accept="application/pdf" required />
                   </div>
 
                   <button :disabled="isLoadingUpload" class="btn btn-primary">
@@ -324,6 +324,7 @@ const form = ref({
 const formUpdate = ref({
   "arsip": ""
 })
+let berkas_arsip = ref(null) // untuk referensi hapus value saat tombol simpan ditekan dan berhasil!
 
 async function buatBaru() {
   // TODO: pikirin lagi urutan form input saat pembuatan berit acara
@@ -560,6 +561,7 @@ async function uploadArsip() {
   })
 
   if(res) {
+    if(berkas_arsip.value) berkas_arsip.value.value = ""
     fetchBA()
     isUploaded.value = true
     isLoadingUpload.value = false
