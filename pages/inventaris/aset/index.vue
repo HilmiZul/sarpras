@@ -206,11 +206,11 @@
                     <label>Volume</label>
                     <div class="fw-bold">{{ asset?.volume }}</div>
                   </div>
-                  <div v-if="role == 'sarpras'" class="mb-3">
+                  <div v-if="role == 'sarpras' || role == 'pimpinan'" class="mb-3">
                     <label>Harga Satuan</label>
                     <div class="fw-bold">{{ asset?.harga_satuan || 0 }}</div>
                   </div>
-                  <div v-if="role == 'sarpras'" class="mb-3">
+                  <div v-if="role == 'sarpras' || role == 'pimpinan'" class="mb-3">
                     <label>Nilai Perolehan</label>
                     <div class="fw-bold">{{ asset?.nilai_perolehan || 0 }}</div>
                   </div>
