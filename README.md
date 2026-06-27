@@ -1,7 +1,7 @@
 ## ⚠️ Under Development!
 
 Another (mega) side-project! Semua aset dan bahan tercatat dan terkelola termasuk unit kerja.
-(Kemungkinan) aplikasi ini akan menghapus project Kabeng.
+(Kemungkinan) aplikasi ini akan mengganti aplikasi Kabeng PPLG.
 
 ## Fitur
 
@@ -20,6 +20,7 @@ Another (mega) side-project! Semua aset dan bahan tercatat dan terkelola termasu
   - KIR
   - Pengajuan Aset dan Bahan
 - Pengaturan Umum App. (dev.)
+- Issue
 
 
 ## Setup
