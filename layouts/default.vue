@@ -279,4 +279,8 @@ a {
 .logo-sticker {
   width: 100%;
 }
+
+.bg-grey {
+  background-color: rgb(230, 230, 230);
+}
 </style>
