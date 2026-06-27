@@ -49,7 +49,7 @@
 
             <div class="mb-4">
               <label for="pangkat_pengurus_barang" class="fw-bold mb-2">Pangkat Pengurus Barang</label>
-              <select :disabled="isLoading || isSaving" v-model="form.pangkat_pengurus_barang" class="form-select" name="pangkat_pengurus_barang" id="pangkat_pengurus_barang" required>
+              <select :disabled="isLoading || isSaving" v-model="form.pangkat_pengurus_barang" class="form-select form-select-lg" name="pangkat_pengurus_barang" id="pangkat_pengurus_barang" required>
                 <option value="">Pilih Golong</option>
                 <option value="III">III</option>
                 <option value="IV">IV</option>
@@ -59,7 +59,7 @@
 
             <div class="mb-4">
               <label for="golongan_pengurus_barang" class="fw-bold mb-2">Golongan Pengurus Barang</label>
-              <select :disabled="isLoading || isSaving" v-model="form.golongan_pengurus_barang" class="form-select" name="golongan_pengurus_barang" id="golongan_pengurus_barang" required>
+              <select :disabled="isLoading || isSaving" v-model="form.golongan_pengurus_barang" class="form-select form-select-lg" name="golongan_pengurus_barang" id="golongan_pengurus_barang" required>
                 <option value="">Pilih Golong</option>
                 <option value="a">a</option>
                 <option value="b">b</option>
