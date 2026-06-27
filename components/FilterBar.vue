@@ -35,7 +35,7 @@
       <div v-if="role == 'unit'" class="col-md-1 mb-3">
         <select v-model="filters.lokasi" name="filterLokasi" id="filterLokasi" class="form-select">
           <option value="">Lokasi</option>
-          <option v-for="item in filterOption.lokasi" :key="item.id" :value="item.nama_lokasi">{{ item.nama_lokasi }}</option>
+          <option v-for="item in filterOption.lokasi" :key="item.id" :value="item.id">{{ item.nama_lokasi }}</option>
         </select>
       </div>
 

@@ -51,7 +51,7 @@ export function useItemFilters() {
     }
 
     if (filters.value.lokasi) {
-      conditions.push(`lokasi = '${filters.value.lokasi}'`)
+      conditions.push(`lokasi_unit_kerja = '${filters.value.lokasi}'`)
     }
 
     return conditions.length ? conditions.join(' && ') : ''
