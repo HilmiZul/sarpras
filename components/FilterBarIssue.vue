@@ -1,7 +1,7 @@
 <template>
   <div class="sticky bg-white">
     <div class="row mb-3 pb-3">
-      <div class="col-md-1">
+      <div v-if="props.role == 'sarpras' || props.role == 'pimpinan'" class="col-md-1">
         <select v-model="filters.unit_kerja" id="unit_kerja" class="form-select">
           <option value="">Unit Kerja</option>
           <option v-for="(unit, i) in unit_kerja" :key="i" :value="unit.id">{{ unit.ruangan }}</option>
