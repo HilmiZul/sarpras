@@ -23,7 +23,7 @@
         </select>
       </div>
 
-      <div class="col-md-2 align-self-end">
+      <div v-if="filters.unit_kerja || filters.tgl_ba_spj || filters.tgl_sppb" class="col-md-2 align-self-end">
         <!-- <button @click="terapkanFilter" :disabled="!hasActiveFilters" class="btn btn-dark">terapkan</button> -->
         <button @click="handleReset" class="btn btn-dark ms-1 mt-4">
           <i class="bi bi-x-lg"></i> reset
