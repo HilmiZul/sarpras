@@ -1,3 +1,11 @@
+## v0.12.0-dev (27 Juni 2026)
+
+- Update and improvement filter bar
+- Reset input file when update is success
+  - BAST Penyaluran Aset
+  - Issues
+- Create issue page and fetch based on NOT "B" condition
+
 ## v0.11.0-dev (15 Juni 2026)
 
 - Create new page kir/unit
