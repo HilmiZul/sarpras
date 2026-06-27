@@ -40,7 +40,10 @@
     </div>
 
     <div class="card-body">
-      body konten
+      <div class="text-center text-muted p-5">
+        <i class="bi bi-cone-striped fs-2"></i>
+        <div class="fs-5 fw-bold">Sedang dalam pengembangan.</div>
+      </div>
     </div>
 
   </div>
