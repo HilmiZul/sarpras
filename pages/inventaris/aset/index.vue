@@ -55,8 +55,9 @@
                   <div class="text-muted">Unit Kerja</div>
                   <div class="fw-bold text-muted mb-2">{{ aset.expand.unit_kerja.ruangan }}</div>
 
-                  <button @click="setModalBarang(aset)" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#rincian"><i class="bi bi-arrow-up-right-square"></i> Lihat</button>
-                  <NuxtLink v-if="role == 'sarpras'" :to="`/inventaris/aset/edit/${aset.id}`" class="btn btn-outline-dark ms-2"><i class="bi bi-pencil square"></i> Edit</NuxtLink>
+                  <NuxtLink v-if="role == 'sarpras'" :to="`/inventaris/aset/edit/${aset.id}`" class="btn btn-primary me-2"><i class="bi bi-pencil square"></i> Edit</NuxtLink>
+                  <button v-if="(role == 'sarpras' || role == 'unit') && aset.kondisi == 'B'" @click="setModalBarang(aset)" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#buat-isu"><i class="bi bi-bug"></i> Buat Isu</button>
+                  <NuxtLink v-if="(role == 'sarpras' || role == 'unit') && aset.kondisi != 'B'" to="/isu" class="btn btn-outline-dark">Lihat Daftar Isu <i class="bi bi-arrow-up-right-square"></i></NuxtLink>
                 </div>
 
                 <span class="badge fs-6 border border-1 border-dark text-muted rounded-pill me-2">{{ aset.expand.sumber_aset.nama_sumber }}</span>
@@ -97,8 +98,9 @@
                 </div>
 
                 <div class="card-footer bg-transparent border-0 d-grid gap-2">
-                  <button @click="setModalBarang(aset)" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#rincian"><i class="bi bi-arrow-up-right-square"></i> Lihat</button>
-                  <NuxtLink v-if="role == 'sarpras'" :to="`/inventaris/aset/edit/${aset.id}`" class="btn btn-outline-dark btn-lg"><i class="bi bi-pencil square"></i> Edit</NuxtLink>
+                  <NuxtLink v-if="role == 'sarpras'" :to="`/inventaris/aset/edit/${aset.id}`" class="btn btn-primary btn-lg"><i class="bi bi-pencil square"></i> Edit</NuxtLink>
+                  <button v-if="(role == 'sarpras' || role == 'unit') && aset.kondisi == 'B'" @click="setModalBarang(aset)" class="btn btn-outline-danger btn-lg" data-bs-toggle="modal" data-bs-target="#buat-isu"><i class="bi bi-bug"></i> Buat Isu</button>
+                  <NuxtLink v-if="(role == 'sarpras' || role == 'unit') && aset.kondisi != 'B'" to="/isu" class="btn btn-outline-dark btn-lg">Lihat Daftar Isu <i class="bi bi-arrow-up-right-square"></i></NuxtLink>
                 </div>
 
               </div>
@@ -135,6 +137,49 @@
       <!--     </tbody> -->
       <!--   </table> -->
       <!-- </div> -->
+
+      <!-- modal buat isu -->
+      <div class="modal" id="buat-isu" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header fw-bold text-muted">
+              Buat Isu:&nbsp; <span>{{ asset?.nama_aset_barang }}</span>
+              <button class="btn-close" label="Close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+              <form @submit.prevent="handleCreateIssue">
+                <div class="mb-4">
+                  <label for="kondisi_barang" class="fw-bold">Kondisi</label>
+                  <multiselect
+                    v-model="form.kondisi"
+                    :options="['B', 'RR', 'RB', 'Mutasi ke OPD Lain', 'Pencatatan Ganda', 'Hilang']"
+                    :modelValue="String"
+                    :clear-on-select="false"
+                    id="kondisi_barang"
+                    placeholder="Pilih satu"
+                    required>
+                    <template v-slot:singleLabel="{ option }">{{ option }}</template>
+                  </multiselect>
+                </div>
+
+                <div class="mb-4">
+                  <label for="catatan_isu" class="fw-bold">Catatan</label>
+                  <textarea v-model="form.catatan_isu" class="form-control form-control-lg" id="catatan_isu" type="text" placeholder="Jelaskan kerusakan/kendala pada barang..."></textarea>
+                </div>
+
+                <div class="mb-4">
+                  <label for="foto_isu" class="fw-bold">Foto Isu (opsional)</label>
+                  <button v-if="form?.foto_isu" @click="() => form.foto_isu = ''" class="btn btn-outline-danger btn-sm ms-2">hapus foto</button>
+                  <input @change="compressFile" ref="foto_isu" class="form-control form-control-lg" id="foto_isu" type="file" accept="image/png, image/jpeg, image/jpg" />
+                </div>
+
+                <button class="btn btn-primary" data-bs-dismiss="modal"><i class="bi bi-save"></i> Simpan</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <div v-if="asset" class="modal" id="rincian" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
@@ -278,6 +323,8 @@
 </template>
 
 <script setup>
+import Compressor from 'compressorjs';
+
 definePageMeta({
   middleware: "auth",
 });
@@ -303,6 +350,13 @@ const asset = ref({})
 
 // default tampilan item: Grid
 const view_type = ref('grid')
+
+const form = ref({
+  kondisi: "",
+  catatan_isu: "",
+  foto_isu: ""
+})
+let foto_isu = ref(null) // untuk referensi hapus value saat tombol simpan ditekan dan berhasil!
 
 function switchViewType(currType) {
   view_type.value = currType
@@ -438,10 +492,43 @@ const handleFilterChange = (filterStr) => {
 
 function setModalBarang(aset) {
   asset.value = aset
+  form.value.kondisi = aset.kondisi
+  form.value.catatan_isu = aset.catatan_isu
+  form.value.foto_isu = aset.foto_isu
+}
+
+async function handleCreateIssue() {
+  let res = await client.collection('aset').update(asset?.value.id, form.value)
+
+  if(res) {
+    if(foto_isu.value) foto_isu.value.value = ""
+  }
+}
+function compressFile(e) {
+  let file = e.target.files[0]
+  if (!file) return;
+  new Compressor(file, {
+    convertTypes: ['image/webp'],
+    mimeType: 'auto',
+    quality: 0.4,
+    success(result) {
+      form.value.foto_isu = result
+    },
+    error(err) {
+      console.error(err.message)
+    }
+  })
 }
 
 onMounted(() => {
   fetchData()
+
+  // Terpaksa kami pake realtime update based on all record lalu fetch ulang. kampret wkwkw!
+  client.collection('aset').subscribe('*', function(e) {
+    if(e.action == 'update') {
+      fetchData('')
+    }
+  }, {})
 })
 </script>
 
