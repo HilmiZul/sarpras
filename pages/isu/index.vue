@@ -52,12 +52,10 @@
             <div class="text-muted">Nama Barang</div>
             <div class="fs-5 fw-bold text-muted mb-2">{{ aset.expand.rincian_aset.nama_barang }} <span class="text-muted fw-normal">({{ aset.nama_aset_barang }})</span></div>
 
-            <div class="text-muted">Unit Kerja</div>
-            <div class="fw-bold text-muted mb-2">{{ aset.expand.unit_kerja.ruangan }}</div>
-
             <button v-if="role == 'sarpras' || role == 'unit'" @click="setModalBarang(aset, index)" data-bs-toggle="modal" data-bs-target="#update-isu" class="btn btn-primary"><i class="bi bi-pencil square"></i> Perbaharui kondisi</button>
           </div>
 
+          <span class="badge fs-6 border border-1 border-dark text-muted rounded-pill me-2">{{ aset.expand.unit_kerja.ruangan }}</span>
           <span class="badge fs-6 border border-1 border-dark text-muted rounded-pill me-2">{{ aset.expand.sumber_aset.nama_sumber }}</span>
           <span class="badge fs-6 border border-1 border-dark text-muted rounded-pill me-2">{{ aset.expand.tahun_pengadaan.tahun }}</span>
           <span class="badge fs-6 border border-1 border-dark text-muted rounded-pill text-uppercase">{{ aset.triwulan }}</span>
@@ -74,7 +72,7 @@
       </div>
 
       <div v-if="asset" class="modal" id="rincian" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
           <div class="modal-content">
             <div class="modal-header fw-bold text-muted">
               <span v-if="asset?.kondisi == 'Hilang'" class="text-danger">[Hilang] &nbsp;</span>
