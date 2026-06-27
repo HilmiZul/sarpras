@@ -39,7 +39,7 @@
         </select>
       </div>
 
-      <div class="col-md-2">
+      <div v-if="filters.lokasi || filters.unit_kerja || filters.triwulan || filters.sumber || filters.tahun" class="col-md-2">
         <!-- <button @click="terapkanFilter" :disabled="!hasActiveFilters" class="btn btn-dark">terapkan</button> -->
         <button :disabled="filters.tahun.length < 1 && filters.triwulan.length < 1 && filters.sumber.length < 1 && filters.unit_kerja.length < 1 && filters.lokasi.length < 1" @click="handleReset" class="btn btn-dark ms-1">
           <i class="bi bi-x-lg"></i> reset
