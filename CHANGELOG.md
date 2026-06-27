@@ -5,6 +5,9 @@
   - BAST Penyaluran Aset
   - Issues
 - Create issue page and fetch based on NOT "B" condition
+- Create issue button in Inventaris Asset
+- Fix query filter Asset
+- Fix call function in realtime and default items when role is unit
 
 ## v0.11.0-dev (15 Juni 2026)
 
