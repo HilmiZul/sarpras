@@ -11,7 +11,7 @@
       <div class="card mb-2 bg-grey">
         <div class="card-body">
           <div class="fw-bold"><i class="bi bi-info-circle"></i> Info</div>
-          <p class="mb-0">Barang dengan kondisi Rusak akan tampil disini.<br> Apabila ada aset/barang dengan kondisi rusak, silahkan <span class="fw-bold">Edit</span> pada daftar 
+          <p class="mb-0">Barang dengan kondisi Rusak akan tampil disini.<br> Untuk menampilkan daftar isu, silahkan <span class="fw-bold">Buat Isu</span> pada daftar 
             <NuxtLink class="fw-bold text-dark border-bottom border-bottom-1 border-dark" to="/inventaris/aset">Inventaris Aset</NuxtLink>.
           </p>
         </div>
