@@ -231,7 +231,7 @@ async function fetchItems(filter="") {
       filter = filter + ` && kondisi!="B" && unit_kerja="${user?.user.value.unit_kerja}"`
       isActiveSearch.value = true
     } else {
-      filter = `kondisi!="B"`
+      filter = `kondisi!="B" && unit_kerja="${user?.user.value.unit_kerja}"`
       isActiveSearch.value = false
     }
   } else {
@@ -389,7 +389,9 @@ onMounted(() => {
 
   // Terpaksa kami pake realtime update based on all record lalu fetch ulang. kampret wkwkw!
   client.collection('aset').subscribe('*', function(e) {
-    if(e.action == 'update') fetchItems()
+    if(e.action == 'update') {
+      fetchItems('')
+    }
   }, {})
 })
 </script>
