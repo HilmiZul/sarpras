@@ -72,7 +72,7 @@
       </div>
 
       <div v-if="asset" class="modal" id="rincian" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
           <div class="modal-content">
             <div class="modal-header fw-bold text-muted">
               <span v-if="asset?.kondisi == 'Hilang'" class="text-danger">[Hilang] &nbsp;</span>
@@ -82,50 +82,10 @@
             </div>
 
             <div class="modal-body text-muted">
-              <div class="row mb-3">
-                <div class="col-md-12">
-                  <span class="badge fs-6 text-bg-dark rounded-pill me-2">{{ asset?.expand?.sumber_aset.nama_sumber }}</span>
-                  <span class="badge fs-6 text-bg-dark rounded-pill me-2">{{ asset?.expand?.tahun_pengadaan.tahun }}</span>
-                  <span class="badge fs-6 text-bg-dark rounded-pill text-uppercase me-2">{{ asset?.triwulan }}</span>
-                  <span class="badge fs-6 text-bg-dark rounded-pill">{{ asset?.expand?.unit_kerja.ruangan }}</span>
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="col-md-8">
-                  <div class="mb-3">
-                    <label>Kondisi</label>
-                    <div class="fw-bold">
-                      <span v-if="asset?.kondisi == 'B'">Baik</span>
-                      <span v-else-if="asset?.kondisi == 'RR'" class="text-warning">Rusak Ringan</span>
-                      <span v-else-if="asset?.kondisi == 'RB'" class="text-warning">Rusak Berat</span>
-                      <span v-else-if="asset?.kondisi == 'Hilang'" class="text-danger">Hilang</span>
-                    </div>
-                  </div>
-                  <div class="mb-3">
-                    <label>Catatan Isu/Kerusakan</label>
-                    <div class="fw-bold">
-                      <span v-if="asset?.catatan_isu">{{ asset?.catatan_isu }}</span>
-                      <span v-else>&#8212;</span>
-                    </div>
-                  </div>
-
-                  <div v-if="asset?.keterangan" class="mb-3">
-                    <label>Keterangan</label>
-                    <div class="fw-bold">{{ asset?.keterangan }}</div>
-                  </div>
-                </div>
-
-                <div class="col-md-4">
-                  <!-- <div class="thumb-container"> -->
-                    <!-- <div class="thumb-aset"> -->
-                      <img v-if="asset?.foto_isu" :src="`${host}/api/files/${asset?.collectionId}/${asset?.id}/${asset?.foto_isu}`" :alt="asset?.id" class="thumb-rincian-aset" />
-                      <img v-else src="~/assets/img/placeholder.jpg" alt="thumb" class="thumb-aset" />
-                    <!-- </div> -->
-                  <!-- </div> -->
-                </div>
-              </div>
+              <img v-if="asset?.foto_isu" :src="`${host}/api/files/${asset?.collectionId}/${asset?.id}/${asset?.foto_isu}`" :alt="asset?.id" class="thumb-rincian-isu" />
+              <img v-else src="~/assets/img/placeholder.jpg" alt="thumb" class="thumb-isu" />
             </div>
+
             <div class="modal-footer">
               <div class="mb-2 text-muted fst-italic">diperbaharui {{ asset?.updated }}</div>
             </div>
