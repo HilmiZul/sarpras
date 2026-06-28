@@ -283,4 +283,9 @@ a {
 .bg-grey {
   background-color: rgb(230, 230, 230);
 }
+
+.thumb-rincian-isu,
+.thumb-isu {
+  width: 100%;
+}
 </style>
