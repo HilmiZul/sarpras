@@ -1,15 +1,18 @@
 <template>
-  <div class="card mt-2">
+  <div class="card mt-2 pb-4">
     <div class="card-body">
-      <h5>hola, <strong>{{ nama }}</strong>!</h5>
+      <OverviewStatisticCard />
 
-      <ul>
-        <li>statistik assets</li>
-        <li>realtime total belanja tahun ini (Rp)</li>
-        <li>daftar issue</li>
-        <li>statistik unit kerja</li>
-        <li>daftar pengajuan dari unit kerja (tampilkan top 5 terbaru)</li>
-      </ul>
+      <div class="row">
+        <div class="col-md-6">
+          <OverviewIssues />
+        </div>
+
+        <div class="col-md-6">
+          <OverviewPengajuan />
+        </div>
+      </div>
+
     </div>
   </div>
 </template>
@@ -25,8 +28,6 @@ useHead({
 })
 
 const user = usePbUser()
-const nama = user?.user.value.nama
-const role = user?.user.value.role
 </script>
 
 
