@@ -1,6 +1,10 @@
 <template>
   <div class="card mt-2 pb-4">
     <div class="card-body">
+      <div class="alert alert-secondary fs-4 fw-bold text-muted px-4 py-5 mb-5">
+        Hallo, {{ nama }}!
+      </div>
+
       <OverviewStatisticCard />
 
       <div class="row">
@@ -28,6 +32,7 @@ useHead({
 })
 
 const user = usePbUser()
+const nama = user?.user.value.nama
 </script>
 
 
