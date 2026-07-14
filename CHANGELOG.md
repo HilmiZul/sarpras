@@ -1,3 +1,9 @@
+## v0.13.0-dev (14 Juli 2026)
+
+- Create components and call on the dashboard (first page)
+- Sum nilai perolehan per unit kerja and/or sarpras
+- Create page lokasi penyimpanan (sub unit kerja)
+
 ## v0.12.0-dev (27 Juni 2026)
 
 - Update and improvement filter bar
