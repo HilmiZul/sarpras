@@ -36,6 +36,11 @@ html, body {
   margin-top: 60px;
 }
 
+.alert {
+  border-radius: 32px;
+  corner-shape: squircle;
+}
+
 .card {
   border-radius: 32px;
   border-color: rgba(127, 127, 127);
@@ -66,6 +71,11 @@ table.table thead th {
 .link {
   border-bottom: 1.5px solid #000;
   padding-bottom: 2px;
+}
+
+.btn-ghost {
+  text-decoration: none;
+  color: rgb(127, 127, 127);
 }
 
 .btn {
