@@ -9,15 +9,16 @@
 
         <div class="collapse navbar-collapse" id="navbarColor01">
           <ul class="navbar-nav fw-bold me-auto">
-            <li v-if="role == 'sarpras'" class="nav-item dropdown">
+            <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" :activeClass="activeClass" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="bi bi-collection-fill"></i> MASTER</a>
               <div class="dropdown-menu mt-3 rounded-0">
-                <NuxtLink class="nav-link" :activeClass="activeClass" to="/master/tahun-pengadaan"><i class="bi bi-calendar3"></i> Tahun Pengadaan</NuxtLink>
-                <NuxtLink class="nav-link" :activeClass="activeClass" to="/master/unit-kerja"><i class="bi bi-person-workspace"></i> Unit Kerja</NuxtLink>
-                <NuxtLink class="nav-link" :activeClass="activeClass" to="/master/rincian-aset"><i class="bi bi-archive"></i> Rincian Aset</NuxtLink>
-                <NuxtLink class="nav-link" :activeClass="activeClass" to="/master/sumber-aset"><i class="bi bi-bank"></i> Sumber Aset</NuxtLink>
-                <NuxtLink class="nav-link" :activeClass="activeClass" to="/master/satuan-aset"><i class="bi bi-box-seam"></i> Satuan</NuxtLink>
-                <NuxtLink class="nav-link" :activeClass="activeClass" to="/master/pejabat"><i class="bi bi-person"></i> Pejabat</NuxtLink>
+                <NuxtLink v-if="role == 'sarpras'" class="nav-link" :activeClass="activeClass" to="/master/tahun-pengadaan"><i class="bi bi-calendar3"></i> Tahun Pengadaan</NuxtLink>
+                <NuxtLink v-if="role == 'sarpras'" class="nav-link" :activeClass="activeClass" to="/master/unit-kerja"><i class="bi bi-person-workspace"></i> Unit Kerja</NuxtLink>
+                <NuxtLink v-if="role == 'unit'" class="nav-link" :activeClass="activeClass" to="/master/lokasi-penyimpanan"><i class="bi bi-person-workspace"></i> Lokasi Penyimpanan</NuxtLink>
+                <NuxtLink v-if="role == 'sarpras'" class="nav-link" :activeClass="activeClass" to="/master/rincian-aset"><i class="bi bi-archive"></i> Rincian Aset</NuxtLink>
+                <NuxtLink v-if="role == 'sarpras'" class="nav-link" :activeClass="activeClass" to="/master/sumber-aset"><i class="bi bi-bank"></i> Sumber Aset</NuxtLink>
+                <NuxtLink v-if="role == 'sarpras'" class="nav-link" :activeClass="activeClass" to="/master/satuan-aset"><i class="bi bi-box-seam"></i> Satuan</NuxtLink>
+                <NuxtLink v-if="role == 'sarpras'" class="nav-link" :activeClass="activeClass" to="/master/pejabat"><i class="bi bi-person"></i> Pejabat</NuxtLink>
               </div>
             </li>
 
@@ -140,7 +141,7 @@ a.nav-item-active {
 
 .dropdown-menu a.nav-link {
   color: RGBA(var(--bs-dark-rgb), var(--bs-bg-opacity, 1));
-  width: 150px
+  width: 180px
 }
 
 .dropdown-menu a.nav-link:hover,

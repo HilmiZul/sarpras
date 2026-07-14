@@ -41,7 +41,7 @@
             </span>
           </div>
         </NuxtLink>
-        <span v-else>
+        <NuxtLink to="/master/lokasi-penyimpanan" v-else>
           <div class="alert alert-secondary">
             <span v-if="isLoadingUnit">
               <LoadingPlaceholder :n="1" :col="2" />
@@ -49,13 +49,10 @@
             </span>
             <span v-else>
               <div class="fw-bold fs-2">{{ count_unit_or_lokasi }}</div>
-              <div class="fs-5">
-                <span v-if="role == 'unit'">Lokasi Penyimpanan</span>
-                <span v-else>Unit Kerja</span>
-              </div>
+              <div class="fs-5">Lokasi Penyimpanan <i class="bi bi-arrow-up-right-square small"></i></div>
             </span>
           </div>
-        </span>
+        </NuxtLink>
       </div>
 
       <div class="col-md-6">
