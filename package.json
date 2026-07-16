@@ -2,7 +2,6 @@
   "name": "sarpras",
   "version": "0.13.0-dev",
   "author": "Zul Hilmi",
-  "type": "module",
   "private": true,
   "scripts": {
     "build": "nuxt build",
