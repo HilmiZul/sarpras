@@ -33,6 +33,11 @@
                 </div>
 
                 <div class="mb-4">
+                  <label for="keterangan" class="mb-2">Keterangan <span class="fw-normal text-muted">(opsional)</span></label>
+                  <textarea v-model="form.keterangan" id="keterangan" class="form-control form-control-lg" placeholder="tulis keterangan apabila ada unit/ruang yang sama namun berbeda keperluan (opsional)"></textarea>
+                </div>
+
+                <div class="mb-4">
                   <label for="pemegang" class="mb-2">Pemegang</label>
                   <input v-model="form.pemegang" type="text" id="pemegang" class="form-control form-control-lg" placeholder="nama lengkap pemegang" required />
                 </div>
@@ -173,6 +178,11 @@
                   </div>
 
                   <div class="mb-4">
+                    <label for="update_keterangan" class="fw-bold mb-2">Keterangan <span class="fw-normal text-muted">(opsional)</span></label>
+                    <textarea v-model="formUpdate.keterangan" id="update_keterangan" class="form-control form-control-lg" placeholder="tulis keterangan apabila ada unit/ruang yang sama namun berbeda keperluan (opsional)"></textarea>
+                  </div>
+
+                  <div class="mb-4">
                     <label for="update_pemegang" class="fw-bold mb-2">Pemegang</label>
                     <input v-model="formUpdate.pemegang" type="text" id="update_pemegang" class="form-control form-control-lg" placeholder="nama lengkap pemegang" required />
                   </div>
@@ -306,7 +316,8 @@ const form = ref({
   "jabatan_unit_kerja": "",
   "nip_unit_kerja": "",
   "pangkat": "",
-  "golongan": ""
+  "golongan": "",
+  "keterangan": ""
 })
 
 const formUpdate = ref({
@@ -316,7 +327,8 @@ const formUpdate = ref({
   "jabatan_unit_kerja": "",
   "nip_unit_kerja": "",
   "pangkat": "",
-  "golongan": ""
+  "golongan": "",
+  "keterangan": ""
 })
 
 if(role != 'sarpras') navigateTo('/')
@@ -387,6 +399,7 @@ async function addNewItem() {
     form.value.pemegang = ''
     form.value.jabatan_unit_kerja = ''
     form.value.nip_unit_kerja = ''
+    form.value.keterangan = ''
 
     getItems(false)
   }
