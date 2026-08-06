@@ -1,3 +1,9 @@
+## v0.14-dev (5 Agustus 2026)
+
+- Add new options: Gol and Pangkat on the Unit Kerja
+- Add new field Keterangan on the Unit Kerja
+- Show Keterangan on KIR unit page
+
 ## v0.13.0-dev (14 Juli 2026)
 
 - Create components and call on the dashboard (first page)
