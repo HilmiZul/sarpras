@@ -14,6 +14,12 @@
       <LoadingPlaceholder v-if="isLoadingPejabat" :col="2" :n="1" />
 
       <div v-else class="row mb-3">
+        <div v-if="unit_kerja?.keterangan" class="col-md-12">
+          <div class="card bg-grey mb-3">
+            <div class="card-body"><i class="bi bi-info-circle"></i> {{ unit_kerja?.keterangan }}</div>
+          </div>
+        </div>
+
         <div class="col-md-3">
           <div class="text-muted">Pemegang</div>
           <div class="text-muted fw-bold">{{ unit_kerja?.pemegang }} &#8212; {{ unit_kerja?.jabatan_unit_kerja }}</div>
@@ -43,7 +49,7 @@
         <div class="fs-5">Belum tersedia</div>
       </div>
 
-      <div v-else >
+      <div v-else class="table-responsive">
         <!-- Total {{ assets?.items?.length }} dari {{ assets?.totalItems }} items -->
         <table class="table table-striped">
           <thead>
