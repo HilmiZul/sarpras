@@ -20,6 +20,19 @@
       </div>
     </div>
 
+    <div v-if="isMovingPage">
+      <LoadingPlaceholder :col="1" :n="1" />
+      <LoadingPlaceholder :col="5" :n="4" />
+      <hr>
+    </div>
+
+    <div v-if="!isLoading" class="text-center mb-3">
+      <button v-if="unit_kerja.totalItems" :disabled="isMovingPage || unit_kerja.page >= unit_kerja.totalPages" @click="loadMore(unit_kerja.page + 1, false)" class="btn btn-primary">
+        <span v-if="unit_kerja.page >= unit_kerja.totalPages">Semua sudah dimuat</span>
+        <span v-else>Muat lagi <i class="bi bi-arrow-down"></i></span>
+      </button>
+    </div>
+
   </div>
 </template>
 
@@ -39,6 +52,7 @@ const client = usePbClient()
 const user = usePbUser()
 const role = user?.user.value.role
 const isLoading = ref(true)
+const isMovingPage = ref(false)
 
 const perPage = 30
 
@@ -54,6 +68,26 @@ async function fetchUnitKerja() {
   if(res) {
     unit_kerja.value = res
     isLoading.value = false
+  }
+}
+
+async function loadMore(page, loading=true) {
+  isLoading.value = loading
+  isMovingPage.value = true
+
+  let res = await client.collection('unit_kerja').getList(page, perPage, {
+    sort: `ruangan`
+  })
+
+  if(res) {
+    unit_kerja.value.page = res.page
+    unit_kerja.value.perPage = res.perPage
+    unit_kerja.value.totalPages = res.totalPages
+    unit_kerja.value.totalItems = res.totalItems
+    unit_kerja.value.items = unit_kerja.value.items.concat(res.items)
+
+    isLoading.value = false
+    isMovingPage.value = false
   }
 }
 
