@@ -1,3 +1,7 @@
+## v0.15-dev (13 Agustus 2026)
+
+- Custom titimangsa Berita Acara sebelum dicetak
+
 ## v0.14-dev (5 Agustus 2026)
 
 - Add new options: Gol and Pangkat on the Unit Kerja
