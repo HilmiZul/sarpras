@@ -1,7 +1,7 @@
 <template>
   <footer class="text-center text-muted m-4 p-2">
     <div>v{{ version }}</div>
-    &copy; 2026 - {{ currYear }}. Cooked by {{ author }}.
+    &copy; 2026 - {{ currYear }}.
   </footer>
 </template>
 
