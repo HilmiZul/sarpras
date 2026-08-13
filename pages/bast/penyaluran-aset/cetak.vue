@@ -264,9 +264,6 @@ const { formatTanggalTerbilang } = useTanggalTerbilang()
 
 let user = usePbUser()
 let role = user?.user.value.role
-let raw_tanggal_sekarang = new Date()
-let format_tanggal_sekarang = new Intl.DateTimeFormat('id-ID', { dateStyle: 'full' }).format(raw_tanggal_sekarang)
-let tanggal_terbilang = formatTanggalTerbilang(format_tanggal_sekarang)
 let client = usePbClient()
 let route = useRoute()
 let config = useRuntimeConfig()
@@ -278,6 +275,10 @@ let pj_tt = ref('')
 let unit_kerja = ref('')
 let assets = ref([])
 let ba = ref('')
+
+let raw_tanggal_sekarang = new Date(route.query.titimangsa)
+let format_tanggal_sekarang = new Intl.DateTimeFormat('id-ID', { dateStyle: 'full' }).format(raw_tanggal_sekarang)
+let tanggal_terbilang = formatTanggalTerbilang(format_tanggal_sekarang)
 
 if(role != 'sarpras') navigateTo('/bast/penyaluran-aset')
 
