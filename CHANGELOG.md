@@ -1,6 +1,11 @@
-## v0.15-dev (13 Agustus 2026)
+## v0.16-dev (13 Agustus 2026)
 
 - Custom titimangsa Berita Acara sebelum dicetak
+- Create close button in archive preview
+- Create button: lokasi penyimpanan aset pada unit kerja
+- Create load more unit kerja pada KIR
+- Bug fix load image placeholder KIR
+- Remove author from Footer
 
 ## v0.14-dev (5 Agustus 2026)
 
