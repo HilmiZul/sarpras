@@ -147,6 +147,10 @@
               <div class="modal-body">
                 <iframe v-if="pratinjau" :src="`${host}/api/files/${pratinjau?.collectionId}/${pratinjau?.id}/${pratinjau?.arsip}`" width="100%" height="100%"></iframe>
               </div>
+
+              <div class="modal-footer">
+                <button class="btn btn-dark btn-lg" data-bs-dismiss="modal">Tutup</button>
+              </div>
             </div>
           </div>
         </div>
