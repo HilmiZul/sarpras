@@ -113,7 +113,8 @@
 
                     <button v-if="role == 'sarpras'" @click="setModalItemEdit(ba)" class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#edit"><i class="bi bi-pencil"></i> Edit</button>
                     <button @click="fetchAsetBySpj(ba.unit_kerja, ba.tgl_ba_spj)" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pratinjau-aset-by-ba"><i class="bi bi-eye"></i> Intip Aset</button>
-                    <NuxtLink v-if="role == 'sarpras'" :to="`/bast/penyaluran-aset/cetak?ba=${ba.id}&uk=${ba.unit_kerja}&tgl_spj=${ba.tgl_ba_spj}`" target="_blank" class="btn btn-dark ms-2"><i class="bi bi-printer"></i> Cetak</NuxtLink>
+                    <!-- <NuxtLink v-if="role == 'sarpras'" :to="`/bast/penyaluran-aset/cetak?ba=${ba.id}&uk=${ba.unit_kerja}&tgl_spj=${ba.tgl_ba_spj}`" target="_blank" class="btn btn-dark ms-2"><i class="bi bi-printer"></i> Cetak</NuxtLink> -->
+                    <button v-if="role == 'sarpras'" @click="setModalTitimangsaBa(ba)" data-bs-toggle="modal" data-bs-target="#titimangsa-ba" class="btn btn-dark ms-2"><i class="bi bi-printer"></i> Cetak</button>
                     <button v-if="ba.arsip" @click="pratinjauArsip(ba)" class="btn btn-dark ms-2" data-bs-toggle="modal" data-bs-target="#pratinjau-arsip"><i class="bi bi-eye"></i> Lihat Arsip</button>
                     <button v-if="role == 'sarpras'" @click="setModalUpload(ba.id)" class="btn btn-outline-dark ms-2" data-bs-toggle="modal" data-bs-target="#unggah-ba"><i class="bi bi-upload"></i> Unggah Arsip</button>
                   </div>
@@ -203,6 +204,27 @@
                   </button>
                   <NuxtLink @click="closeModalUploadArsip" type="button" class="text-dark fw-bold ms-3" data-bs-dismiss="modal">Tutup</NuxtLink>
                 </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- single modal: titimangsa ba -->
+        <div v-if="role == 'sarpras'" class="modal" id="titimangsa-ba" tabindex="-1">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header fw-bold">
+                Tanggal Berita Acara
+                <button @click="closeModalUploadArsip" class="btn-close" data-bs-dismiss="modal" label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div class="mb-4">
+                  <label for="titimangsa" class="mb-2">Tanggal</label>
+                  <input v-model="formTitimangsa" class="form-control form-control-lg" id="titimangsa" type="date" required />
+                </div>
+
+                <NuxtLink v-if="role == 'sarpras' && formTitimangsa" :to="`/bast/penyaluran-aset/cetak?ba=${titimangsa_ba?.id}&uk=${titimangsa_ba?.unit_kerja}&tgl_spj=${titimangsa_ba?.tgl_ba_spj}&titimangsa=${formTitimangsa}`" target="_blank" class="btn btn-dark ms-2"><i class="bi bi-printer"></i> Cetak</NuxtLink>
+                <NuxtLink @click="closeModalUploadArsip" type="button" class="text-dark fw-bold ms-3" data-bs-dismiss="modal">Tutup</NuxtLink>
               </div>
             </div>
           </div>
@@ -310,6 +332,9 @@ const currentFilter = ref()
 const id_update = ref()
 const id_item = ref()
 const pratinjau = ref('')
+
+const titimangsa_ba = ref()
+const formTitimangsa = ref()
 
 const tahun_pengadaan = ref([])
 const form = ref({
@@ -541,6 +566,10 @@ function setModalItemEdit(ba) {
   formUpdate.value = ba
   // TODO: Fix later
   // ba.tgl_sppb is full year, but form edit used date type
+}
+
+function setModalTitimangsaBa(ba) {
+  titimangsa_ba.value = ba
 }
 
 function pratinjauArsip(arsip) {
