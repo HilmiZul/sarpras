@@ -73,7 +73,7 @@
                 <div class="thumb-container-table">
                   <a @click="() => pratinjauFoto = asset" data-bs-toggle="modal" data-bs-target="#lihat-foto" class="hand">
                     <img v-if="asset.foto_barang" :src="`${host}/api/files/${asset.collectionId}/${asset.id}/${asset.foto_barang}`" :alt="asset.id" class="thumb-aset-table" />
-                    <img v-else src="~/assets/img/placeholder.jpg" alt="thumb" class="thumb-aset-list" />
+                    <img v-else src="~/assets/img/placeholder.jpg" alt="thumb" class="thumb-aset-table" />
                   </a>
                 </div>
               </td>
@@ -102,8 +102,8 @@
 
               <div class="modal-body text-muted text-center">
                 <div class="thumb-container-pratinjau-kir">
-                  <img v-if="pratinjauFoto" :src="`${host}/api/files/${pratinjauFoto?.collectionId}/${pratinjauFoto?.id}/${pratinjauFoto?.foto_barang}`" :alt="pratinjauFoto?.id" class="thumb-aset" />
-                  <img v-else src="~/assets/img/placeholder.jpg" alt="thumb" class="thumb-aset" />
+                  <img v-if="pratinjauFoto?.foto_barang" :src="`${host}/api/files/${pratinjauFoto?.collectionId}/${pratinjauFoto?.id}/${pratinjauFoto?.foto_barang}`" :alt="pratinjauFoto?.id" class="thumb-aset" />
+                  <img v-else src="~/assets/img/placeholder.jpg" alt="thumb" class="thumb-aset-table" />
                 </div>
               </div>
             </div>
