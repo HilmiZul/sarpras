@@ -36,6 +36,8 @@
 
       <!-- display list items -->
         <div v-else class="row mb-3 justify-content-center">
+
+            <!-- list type: list view -->
             <ol v-if="view_type == 'list'" v-for="aset in assets.items" :key="aset.id" class="list-group list-group-flush">
               <li class="list-group-item d-flex justify-content-between align-items-start py-4">
                 <div class="thumb-container">
@@ -52,10 +54,17 @@
                   <div class="text-muted">Nama Barang</div>
                   <div class="fs-5 fw-bold text-muted mb-2">{{ aset.expand.rincian_aset.nama_barang }} <span class="text-muted fw-normal">({{ aset.nama_aset_barang }})</span></div>
 
-                  <div class="text-muted">Unit Kerja</div>
-                  <div class="fw-bold text-muted mb-2">{{ aset.expand.unit_kerja.ruangan }}</div>
+                  <div class="text-muted">
+                    <span v-if="role == 'sarpras'">Unit Kerja</span>
+                    <span v-else>Lokasi</span>
+                  </div>
+                  <div class="fw-bold text-muted mb-2">
+                    <span v-if="role == 'sarpras'">{{ aset.expand.unit_kerja.ruangan }}</span>
+                    <span v-else>{{ aset.expand?.lokasi_unit_kerja?.nama_lokasi || 'Unlocated'}}</span>
+                  </div>
 
                   <NuxtLink v-if="role == 'sarpras'" :to="`/inventaris/aset/edit/${aset.id}`" class="btn btn-primary me-2"><i class="bi bi-pencil square"></i> Edit</NuxtLink>
+                  <button v-if="role == 'unit'" @click="setModalBarang(aset)" class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#kelola-lokasi">Kelola Lokasi</button>
                   <button v-if="(role == 'sarpras' || role == 'unit') && aset.kondisi == 'B'" @click="setModalBarang(aset)" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#buat-isu"><i class="bi bi-bug"></i> Buat Isu</button>
                   <NuxtLink v-if="(role == 'sarpras' || role == 'unit') && aset.kondisi != 'B'" to="/isu" class="btn btn-outline-dark">Lihat Daftar Isu <i class="bi bi-arrow-up-right-square"></i></NuxtLink>
                 </div>
@@ -66,6 +75,7 @@
               </li>
             </ol>
 
+            <!-- list type: grid view -->
             <div v-else v-for="(aset, i) in assets.items" :key="i" class="col-md-3">
               <div class="card mb-4">
                 <div class="card-header thumb-container p-0 border-0">
@@ -84,7 +94,10 @@
                     </div>
                   </a>
                   <div class="unit-kerja-container">
-                    <div class="unit-kerja fw-bold mb-2">{{ aset.expand.unit_kerja.ruangan }}</div>
+                    <div class="unit-kerja fw-bold mb-2">
+                      <span v-if="role == 'sarpras'">{{ aset.expand.unit_kerja.ruangan }}</span>
+                      <span v-else>{{ aset.expand?.lokasi_unit_kerja?.nama_lokasi || 'Unlocated' }}</span>
+                    </div>
                   </div>
                 </div>
 
@@ -99,6 +112,7 @@
 
                 <div class="card-footer bg-transparent border-0 d-grid gap-2">
                   <NuxtLink v-if="role == 'sarpras'" :to="`/inventaris/aset/edit/${aset.id}`" class="btn btn-primary btn-lg"><i class="bi bi-pencil square"></i> Edit</NuxtLink>
+                  <button v-if="role == 'unit'" @click="setModalBarang(aset)" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#kelola-lokasi">Kelola Lokasi</button>
                   <button v-if="(role == 'sarpras' || role == 'unit') && aset.kondisi == 'B'" @click="setModalBarang(aset)" class="btn btn-outline-danger btn-lg" data-bs-toggle="modal" data-bs-target="#buat-isu"><i class="bi bi-bug"></i> Buat Isu</button>
                   <NuxtLink v-if="(role == 'sarpras' || role == 'unit') && aset.kondisi != 'B'" to="/isu" class="btn btn-outline-dark btn-lg">Lihat Daftar Isu <i class="bi bi-arrow-up-right-square"></i></NuxtLink>
                 </div>
@@ -181,6 +195,40 @@
         </div>
       </div>
 
+      <!-- modal kelola lokasi -->
+      <div class="modal" id="kelola-lokasi" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header fw-bold text-muted">
+              Kelola Lokasi:&nbsp; <span>{{ asset?.nama_aset_barang }}</span>
+              <button class="btn-close" label="Close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+              <div class="alert alert-secondary">Untuk menambahkan lokasi penyimpanan, silahkan ke menu <strong>Master &#8212; Lokasi Penyimpanan</strong></div>
+              <form @submit.prevent="handleKelolaLokasi()">
+                <div class="mb-4">
+                  <label for="lokasi" class="fw-bold">Lokasi</label>
+                  <multiselect
+                    v-model="formKelolaLokasi.lokasi_unit_kerja"
+                    :options="lokasi_unit_kerja"
+                    :modelValue="String"
+                    :clear-on-select="false"
+                    :custom-label="({nama_lokasi}) => `${nama_lokasi}`"
+                    id="lokasi"
+                    placeholder="Pilih satu"
+                    required>
+                    <template v-slot:singleLabel="{ option }">{{ option.nama_lokasi }}</template>
+                  </multiselect>
+                </div>
+
+                <button class="btn btn-primary" data-bs-dismiss="modal"><i class="bi bi-save"></i> Simpan</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div v-if="asset" class="modal" id="rincian" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
           <div class="modal-content">
@@ -197,7 +245,8 @@
                   <span class="badge fs-6 text-bg-dark rounded-pill me-2">{{ asset?.expand?.sumber_aset.nama_sumber }}</span>
                   <span class="badge fs-6 text-bg-dark rounded-pill me-2">{{ asset?.expand?.tahun_pengadaan.tahun }}</span>
                   <span class="badge fs-6 text-bg-dark rounded-pill text-uppercase me-2">{{ asset?.triwulan }}</span>
-                  <span class="badge fs-6 text-bg-dark rounded-pill">{{ asset?.expand?.unit_kerja.ruangan }}</span>
+                  <span class="badge fs-6 text-bg-dark rounded-pill me-2">{{ asset?.expand?.unit_kerja.ruangan }}</span>
+                  <span class="badge fs-6 text-bg-dark rounded-pill">{{ asset?.expand?.lokasi_unit_kerja?.nama_lokasi || '' }}</span>
                 </div>
               </div>
 
@@ -358,6 +407,11 @@ const form = ref({
 })
 let foto_isu = ref(null) // untuk referensi hapus value saat tombol simpan ditekan dan berhasil!
 
+const lokasi_unit_kerja = ref([])
+const formKelolaLokasi = ref({
+  lokasi_unit_kerja: ""
+})
+
 function switchViewType(currType) {
   view_type.value = currType
 }
@@ -384,7 +438,7 @@ async function fetchData(filter="") {
 
   let res = await client.collection('aset').getList(1, perPage, {
     filter: filter,
-    expand: `tahun_pengadaan, sumber_aset, rincian_aset, satuan_aset, unit_kerja`,
+    expand: `tahun_pengadaan, sumber_aset, rincian_aset, satuan_aset, unit_kerja, lokasi_unit_kerja`,
     sort: `-tahun_pengadaan.tahun, triwulan, unit_kerja.ruangan`
   })
 
@@ -445,7 +499,7 @@ async function loadMore(filter="", loading=false) {
 
   let res = await client.collection('aset').getList(page, perPage, {
     filter: filter,
-    expand: `tahun_pengadaan, sumber_aset, rincian_aset, satuan_aset, unit_kerja`,
+    expand: `tahun_pengadaan, sumber_aset, rincian_aset, satuan_aset, unit_kerja, lokasi_unit_kerja`,
     sort: `-tahun_pengadaan.tahun, triwulan, unit_kerja.ruangan`
   })
 
@@ -495,6 +549,8 @@ function setModalBarang(aset) {
   form.value.kondisi = aset.kondisi
   form.value.catatan_isu = aset.catatan_isu
   form.value.foto_isu = aset.foto_isu
+  fetchLokasiUnitKerja()
+  formKelolaLokasi.value.lokasi_unit_kerja = aset.expand?.lokasi_unit_kerja
 }
 
 async function handleCreateIssue() {
@@ -517,6 +573,23 @@ function compressFile(e) {
     error(err) {
       console.error(err.message)
     }
+  })
+}
+
+async function fetchLokasiUnitKerja() {
+  const res = await client.collection('lokasi_unit_kerja').getFullList({
+    filter: `unit_kerja="${user?.user.value.unit_kerja}"`,
+    sort: `nama_lokasi`
+  })
+
+  if(res) {
+    lokasi_unit_kerja.value = res
+  }
+}
+
+async function handleKelolaLokasi() {
+  const res = await client.collection('aset').update(asset.value.id, {
+    'lokasi_unit_kerja': formKelolaLokasi.value.lokasi_unit_kerja.id
   })
 }
 
